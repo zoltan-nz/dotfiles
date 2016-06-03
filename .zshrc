@@ -118,16 +118,16 @@ if [ -d "${PYENV_ROOT}" ]; then
 fi
 
 # Binding Alt+left and Alt+right jumping words
-bindkey -e
-if [ "$TERM" =~ "^xterm" ]; then
-  bindkey '^[^[[D' backward-word
-  bindkey '^[^[[C' forward-word
-elif [ "$TERM" =~ "^screen" ]; then
-  bindkey '^[[1;3D' backward-word
-  bindkey '^[[1;3C' forward-word
-fi
+# bindkey -e
+# if [ "$TERM" =~ "^xterm" ]; then
+#   bindkey '^[^[[D' backward-word
+#   bindkey '^[^[[C' forward-word
+# elif [ "$TERM" =~ "^screen" ]; then
+#   bindkey '^[[1;3D' backward-word
+#   bindkey '^[[1;3C' forward-word
+# fi
 
 # nvim Ctrl-H fix
-infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.$TERM.ti
-tic ~/.$TERM.ti
+# infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.$TERM.ti
+# tic ~/.$TERM.ti
 
