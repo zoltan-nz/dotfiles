@@ -1,8 +1,11 @@
 " Zoltan's vim config
-
+" http://dougblack.io/words/a-good-vimrc.html
 "
 " initialize pathogen
 execute pathogen#infect()
+
+" The leader key
+let mapleader=","
 
 " vim-scriptease - https://github.com/tpope/vim-scriptease
 " vim-sensible - https://github.com/tpope/vim-sensible
@@ -14,42 +17,54 @@ runtime bundle/vim-sensible/plugin/sensible.vim
 
 " Load plugin files and turn on indentation:
 " Sensible implements
-" filetype plugin indent on
+filetype indent on
 
 " Color - sensible implements
-" syntax on
-colorscheme Tomorrow-Night
+syntax enable
+" colorscheme Tomorrow-Night
+" https://github.com/sjl/badwolf/
+colorscheme badwolf
+" colorscheme goodwolf
 
 " Guifont
 if has('gui_running')
-  set guifont=Menlo\ Regular:h16
-  set guioptions+=c "Stop opening dialogs
+        set guifont=Menlo\ Regular:h16
+        set guioptions+=c "Stop opening dialogs
 endif
 
 " Default size - don't really need this, because limit the lines
 " set lines=40 columns=90
 " A colored column
 set colorcolumn=90
+set cursorline " highlight current line
 " Show line numbers
 set number
 
-" The leader key
-let mapleader=","
-" Remap :
-nnoremap ; :
+set showcmd " show command in bottom bar
+
+set wildmenu " visual autocomplete for command menu
+set lazyredraw " redraw only when we need to
 
 " Mouse activated
 set mouse=a
 " Save file when focus lost
 :au FocusLost * :wa
 
-set tabstop=2
+set tabstop=2 " number of visual spaces per TAB
+set softtabstop=2 " number of spaces in tab when editing
+set expandtab " tabs are spaces
+
 set noerrorbells
 set nobackup
 set noswapfile
 
 " Reload vim configuration
-map <leader>s :source ~/.vimrc<CR>
+" map <leader>s :source ~/.vimrc<CR>
+
+" edit vimrc/zshrc and load vimrc bindings
+nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>ez :vsp ~/.zshrc<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Speed up vim
 set hidden
@@ -63,7 +78,8 @@ set hlsearch
 " Turn off highlight :noh
 " Show the frist match while still typing
 set incsearch
-
+" turn off search highligh
+nnoremap <Leader><Space> :nohlsearch<CR>
 
 " switch between two files
 nnoremap <Leader><Leader> :e#<CR>
@@ -74,6 +90,31 @@ set showmatch
 " xml files will be formatted with xmllint
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
+" Folding
+set foldenable " enable folding
+set foldlevelstart=10 " open most folds by default
+set foldnestmax=10      " 10 nested fold max
+" space open/closes folds
+nnoremap <space> za
+set foldmethod=indent " fold based on indent level
+
+" Remap :
+nnoremap ; :
+" jk is escape
+inoremap jk <esc>
+
+" move to beginning/end of line
+nnoremap B ^
+nnoremap E $
+" Chaning cursor shape in different modes
+" iTerm2
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+" highlight last inserted text
+nnoremap gV `[v`]
+
 " Jumping between parenthesis, use %
 " Use [{ for jumping back
 " Use gd for local declaration.
@@ -81,3 +122,48 @@ au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 " CTRL-N auto compleat.
 " Record macro: qa -> record in register 'a', finish with type q again.
 " Repeate macro: @a
+
+" Install silver searcher
+" https://github.com/ggreer/the_silver_searcher
+" brew install the_silver_searcher
+" Download ag.vim
+" cd ~/.vim/bundle && git clone https://github.com/rking/ag.vim ag && echo
+" "set runtimepath^=~/.vim/bundle/ag" >> ~/.vimrc
+set runtimepath^=~/.vim/bundle/ag
+nnoremap <leader>a :Ag<space>
+
+" Load ctrlp
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+" CtrlP settings
+let g:ctrlp_match_window = 'bottom,order:ttb'
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+
+" toggle between number and relativenumber
+function! ToggleNumber()
+        if(&relativenumber == 1)
+                set norelativenumber
+                set number
+        else
+                set relativenumber
+        endif
+endfunc
+
+" strips trailing whitespace at the end of files.
+function! <SID>StripTrailingWhitespaces()
+        " save last search & cursor position
+        let _s=@/
+        let l = line(".")
+        let c = col(".")
+        %s/\s\+$//e
+        let @/=_s
+        call
+        cursor(l, c)
+endfunction
+
+" vim:foldmethod=marker:foldlevel=0
