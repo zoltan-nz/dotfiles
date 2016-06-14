@@ -17,7 +17,7 @@ runtime bundle/vim-sensible/plugin/sensible.vim
 
 " Load plugin files and turn on indentation:
 " Sensible implements
-filetype indent on
+filetype plugin indent on
 
 " Color - sensible implements
 syntax enable
@@ -106,12 +106,13 @@ inoremap jk <esc>
 " move to beginning/end of line
 nnoremap B ^
 nnoremap E $
-" Chaning cursor shape in different modes
+" Changing cursor shape in different modes
 " iTerm2
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-
+if $TERM_PROGRAM =~ "iTerm"
+        let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+        let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+        let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
 " highlight last inserted text
 nnoremap gV `[v`]
 
@@ -143,6 +144,42 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
+let g:ctrlp_prompt_mappings = {
+                        \ 'PrtBS()':              ['<bs>', '<c-]>'],
+                        \ 'PrtDelete()':          ['<del>'],
+                        \ 'PrtDeleteWord()':      ['<c-w>'],
+                        \ 'PrtClear()':           ['<c-u>'],
+                        \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
+                        \ 'PrtSelectMove("k")':   ['<c-i>', '<up>'],
+                        \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
+                        \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
+                        \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
+                        \ 'PrtSelectMove("d")':   ['<PageDown>', '<kPageDown>'],
+                        \ 'PrtHistory(-1)':       ['<c-n>'],
+                        \ 'PrtHistory(1)':        ['<c-p>'],
+                        \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
+                        \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
+                        \ 'AcceptSelection("t")': ['<c-t>'],
+                        \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
+                        \ 'ToggleFocus()':        ['<s-tab>'],
+                        \ 'ToggleRegex()':        ['<c-r>'],
+                        \ 'ToggleByFname()':      ['<c-d>'],
+                        \ 'ToggleType(1)':        ['<c-f>', '<c-up>'],
+                        \ 'ToggleType(-1)':       ['<c-b>', '<c-down>'],
+                        \ 'PrtExpandDir()':       ['<tab>'],
+                        \ 'PrtInsert("c")':       ['<MiddleMouse>', '<insert>'],
+                        \ 'PrtInsert()':          ['<c-\>'],
+                        \ 'PrtCurStart()':        ['<c-a>'],
+                        \ 'PrtCurEnd()':          ['<c-e>'],
+                        \ 'PrtCurLeft()':         ['<c-h>', '<left>', '<c-^>'],
+                        \ 'PrtCurRight()':        ['<c-l>', '<right>'],
+                        \ 'PrtClearCache()':      ['<F5>'],
+                        \ 'PrtDeleteEnt()':       ['<F7>'],
+                        \ 'CreateNewFile()':      ['<c-y>'],
+                        \ 'MarkToOpen()':         ['<c-z>'],
+                        \ 'OpenMulti()':          ['<c-o>'],
+                        \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
+                        \ }
 
 " toggle between number and relativenumber
 function! ToggleNumber()
@@ -166,4 +203,16 @@ function! <SID>StripTrailingWhitespaces()
         cursor(l, c)
 endfunction
 
+" NERDTree
+map <leader>n :NERDTreeFind<cr>
+map <leader>nn :NERDTreeToggle<cr>
+"
+
+" Setup shortcuts for jumping between windows
+map <A-h> <C-w>h
+map <A-j> <C-w>j
+map <A-k> <C-w>k
+map <A-l> <C-w>l
+
+"
 " vim:foldmethod=marker:foldlevel=0
