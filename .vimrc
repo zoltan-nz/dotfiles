@@ -53,10 +53,15 @@ set mouse=a
 set tabstop=2 " number of visual spaces per TAB
 set softtabstop=2 " number of spaces in tab when editing
 set expandtab " tabs are spaces
+set shiftwidth=2 " number of spaces inserted indentation
 
 set noerrorbells
 set nobackup
 set noswapfile
+
+" Default split is right and below.
+set splitright
+set splitbelow
 
 " Reload vim configuration
 " map <leader>s :source ~/.vimrc<CR>
@@ -209,10 +214,10 @@ map <leader>nn :NERDTreeToggle<cr>
 "
 
 " Setup shortcuts for jumping between windows
-map <A-h> <C-w>h
-map <A-j> <C-w>j
-map <A-k> <C-w>k
-map <A-l> <C-w>l
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
 
 "
 " vim:foldmethod=marker:foldlevel=0
