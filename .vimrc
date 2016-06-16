@@ -14,7 +14,6 @@ runtime bundle/emmet-vim/plugin/emmet.vim
 runtime bundle/vim-scriptease/plugin/scriptease.vim
 runtime bundle/vim-sensible/plugin/sensible.vim
 
-
 " Load plugin files and turn on indentation:
 " Sensible implements
 filetype plugin indent on
@@ -28,8 +27,8 @@ colorscheme badwolf
 
 " Guifont
 if has('gui_running')
-        set guifont=Menlo\ Regular:h16
-        set guioptions+=c "Stop opening dialogs
+  set guifont=Menlo\ Regular:h16
+  set guioptions+=c "Stop opening dialogs
 endif
 
 " Default size - don't really need this, because limit the lines
@@ -114,9 +113,9 @@ nnoremap E $
 " Changing cursor shape in different modes
 " iTerm2
 if $TERM_PROGRAM =~ "iTerm"
-        let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-        let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-        let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 " highlight last inserted text
 nnoremap gV `[v`]
@@ -150,74 +149,124 @@ let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 let g:ctrlp_prompt_mappings = {
-                        \ 'PrtBS()':              ['<bs>', '<c-]>'],
-                        \ 'PrtDelete()':          ['<del>'],
-                        \ 'PrtDeleteWord()':      ['<c-w>'],
-                        \ 'PrtClear()':           ['<c-u>'],
-                        \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
-                        \ 'PrtSelectMove("k")':   ['<c-i>', '<up>'],
-                        \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
-                        \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
-                        \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
-                        \ 'PrtSelectMove("d")':   ['<PageDown>', '<kPageDown>'],
-                        \ 'PrtHistory(-1)':       ['<c-n>'],
-                        \ 'PrtHistory(1)':        ['<c-p>'],
-                        \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
-                        \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
-                        \ 'AcceptSelection("t")': ['<c-t>'],
-                        \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
-                        \ 'ToggleFocus()':        ['<s-tab>'],
-                        \ 'ToggleRegex()':        ['<c-r>'],
-                        \ 'ToggleByFname()':      ['<c-d>'],
-                        \ 'ToggleType(1)':        ['<c-f>', '<c-up>'],
-                        \ 'ToggleType(-1)':       ['<c-b>', '<c-down>'],
-                        \ 'PrtExpandDir()':       ['<tab>'],
-                        \ 'PrtInsert("c")':       ['<MiddleMouse>', '<insert>'],
-                        \ 'PrtInsert()':          ['<c-\>'],
-                        \ 'PrtCurStart()':        ['<c-a>'],
-                        \ 'PrtCurEnd()':          ['<c-e>'],
-                        \ 'PrtCurLeft()':         ['<c-h>', '<left>', '<c-^>'],
-                        \ 'PrtCurRight()':        ['<c-l>', '<right>'],
-                        \ 'PrtClearCache()':      ['<F5>'],
-                        \ 'PrtDeleteEnt()':       ['<F7>'],
-                        \ 'CreateNewFile()':      ['<c-y>'],
-                        \ 'MarkToOpen()':         ['<c-z>'],
-                        \ 'OpenMulti()':          ['<c-o>'],
-                        \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
-                        \ }
+      \ 'PrtBS()':              ['<bs>', '<c-]>'],
+      \ 'PrtDelete()':          ['<del>'],
+      \ 'PrtDeleteWord()':      ['<c-w>'],
+      \ 'PrtClear()':           ['<c-u>'],
+      \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
+      \ 'PrtSelectMove("k")':   ['<c-i>', '<up>'],
+      \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
+      \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
+      \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
+      \ 'PrtSelectMove("d")':   ['<PageDown>', '<kPageDown>'],
+      \ 'PrtHistory(-1)':       ['<c-n>'],
+      \ 'PrtHistory(1)':        ['<c-p>'],
+      \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
+      \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
+      \ 'AcceptSelection("t")': ['<c-t>'],
+      \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
+      \ 'ToggleFocus()':        ['<s-tab>'],
+      \ 'ToggleRegex()':        ['<c-r>'],
+      \ 'ToggleByFname()':      ['<c-d>'],
+      \ 'ToggleType(1)':        ['<c-f>', '<c-up>'],
+      \ 'ToggleType(-1)':       ['<c-b>', '<c-down>'],
+      \ 'PrtExpandDir()':       ['<tab>'],
+      \ 'PrtInsert("c")':       ['<MiddleMouse>', '<insert>'],
+      \ 'PrtInsert()':          ['<c-\>'],
+      \ 'PrtCurStart()':        ['<c-a>'],
+      \ 'PrtCurEnd()':          ['<c-e>'],
+      \ 'PrtCurLeft()':         ['<c-h>', '<left>', '<c-^>'],
+      \ 'PrtCurRight()':        ['<c-l>', '<right>'],
+      \ 'PrtClearCache()':      ['<F5>'],
+      \ 'PrtDeleteEnt()':       ['<F7>'],
+      \ 'CreateNewFile()':      ['<c-y>'],
+      \ 'MarkToOpen()':         ['<c-z>'],
+      \ 'OpenMulti()':          ['<c-o>'],
+      \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
+      \ }
 
 " toggle between number and relativenumber
 function! ToggleNumber()
-        if(&relativenumber == 1)
-                set norelativenumber
-                set number
-        else
-                set relativenumber
-        endif
+  if(&relativenumber == 1)
+    set norelativenumber
+    set number
+  else
+    set relativenumber
+  endif
 endfunc
 
 " strips trailing whitespace at the end of files.
 function! <SID>StripTrailingWhitespaces()
-        " save last search & cursor position
-        let _s=@/
-        let l = line(".")
-        let c = col(".")
-        %s/\s\+$//e
-        let @/=_s
-        call
-        cursor(l, c)
+  " save last search & cursor position
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  let @/=_s
+  call
+  cursor(l, c)
 endfunction
 
 " NERDTree
 map <leader>n :NERDTreeFind<cr>
 map <leader>nn :NERDTreeToggle<cr>
+" Show hidden file as default
+let g:NERDTreeShowHidden=1
 "
 
 " Setup shortcuts for jumping between windows
 map <C-h> <C-w>h
 map <C-j> <C-w>j
-map <C-k> <C-w>k
+map <C-i> <C-w>k
 map <C-l> <C-w>l
 
+" vim-javascript https://github.com/pangloss/vim-javascript
+
+" Enables HTML/CSS syntax highlighting in your JavaScript file.
+let g:javascript_enable_domhtmlcss = 1
+
+
+" Handlebar, mustache support
+" git clone git://github.com/mustache/vim-mustache-handlebars.git bundle/mustache
+" mustache abbreviation on
+let g:mustache_abbreviations = 1
+
+" Polyglot - syntax highlighting
+" https://github.com/sheerun/vim-polyglot
+
+" Fugitive.vim
+" https://github.com/tpope/vim-fugitive
+
+" HTML5
+" https://github.com/othree/html5.vim
+
+" Surround
+" https://github.com/tpope/vim-surround
+
+" Syntastic
+" https://github.com/scrooloose/syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Airline
+" https://github.com/bling/vim-airline
+" https://github.com/vim-airline/vim-airline-themes
+let g:airline#extensions#tabline#enabled = 1
+
+" EditorConfig vim https://github.com/editorconfig/editorconfig-vim.git
+"
+" TODO:
+" - VIM for Javascript: vim-javascript
+" - Handlebar
+" - Ruby on Rails
+" - Git support
+"
+" Great link: http://vimawesome.com/
 "
 " vim:foldmethod=marker:foldlevel=0
