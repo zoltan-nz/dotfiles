@@ -22,8 +22,12 @@ filetype plugin indent on
 syntax enable
 " colorscheme Tomorrow-Night
 " https://github.com/sjl/badwolf/
-colorscheme badwolf
+" colorscheme badwolf
 " colorscheme goodwolf
+set background=dark
+
+let g:solarized_termcolors=256
+colorscheme solarized
 
 " Guifont
 if has('gui_running')
@@ -38,6 +42,7 @@ set colorcolumn=90
 set cursorline " highlight current line
 " Show line numbers
 set number
+set relativenumber
 
 set showcmd " show command in bottom bar
 
@@ -220,6 +225,15 @@ map <C-j> <C-w>j
 map <C-i> <C-w>k
 map <C-l> <C-w>l
 
+" Moving lines up and down with Alt-j and Alt-k. Have to use special character
+" Getting special characters, use cat in a console.
+nnoremap ∆ :m .+1<CR>==
+nnoremap ˚ :m .-2<CR>==
+inoremap ∆ <Esc>:m .+1<CR>==gi
+inoremap ˚ <Esc>:m .-2<CR>==gi
+vnoremap ∆ :m '>+1<CR>gv=gv
+vnoremap ˚ :m '<-2<CR>gv=gv
+
 " vim-javascript https://github.com/pangloss/vim-javascript
 
 " Enables HTML/CSS syntax highlighting in your JavaScript file.
@@ -236,6 +250,9 @@ let g:mustache_abbreviations = 1
 
 " Fugitive.vim
 " https://github.com/tpope/vim-fugitive
+
+" Gitgutter
+" https://github.com/airblade/vim-gitgutter
 
 " HTML5
 " https://github.com/othree/html5.vim
@@ -259,13 +276,13 @@ let g:syntastic_check_on_wq = 0
 " https://github.com/vim-airline/vim-airline-themes
 let g:airline#extensions#tabline#enabled = 1
 
+" Rails vim
+
+" youcompleteme
+" git submodule update --init --recursive
+" ./install.py --clang-completer
+
 " EditorConfig vim https://github.com/editorconfig/editorconfig-vim.git
-"
-" TODO:
-" - VIM for Javascript: vim-javascript
-" - Handlebar
-" - Ruby on Rails
-" - Git support
 "
 " Great link: http://vimawesome.com/
 "

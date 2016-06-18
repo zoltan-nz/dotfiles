@@ -96,7 +96,7 @@ alias fs="foreman start"
 alias gn="git number --column"
 alias ga="git number add"
 alias vn="git number -c vim"
-
+alias gv="fasd -e mvim"
 # On Mac, brew install coreutils
 alias ls="gls --color -ah --group-directories-first --sort=extension"
 alias lsa="gls --color -lah --group-directories-first --sort=extension"
@@ -114,7 +114,7 @@ export HOMEBREW_GITHUB_API_TOKEN=$HOMEBREW_GITHUB_API_TOKEN
 
 source /Users/szines/.brew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /Users/szines/.brew/opt/zsh-history-substring-search/zsh-history-substring-search.zsh
-# git clone git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+# git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 source /Users/szines/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ### ==== RBENV ====
@@ -134,3 +134,5 @@ fpath=(/Users/szines/.brew/share/zsh-completions /Users/szines/.oh-my-zsh/custom
 
 ### Android SDK
 export ANDROID_HOME=/Users/szines/.brew/opt/android-sdk
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
