@@ -136,3 +136,8 @@ fpath=(/Users/szines/.brew/share/zsh-completions /Users/szines/.oh-my-zsh/custom
 export ANDROID_HOME=/Users/szines/.brew/opt/android-sdk
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Binding Alt+left and Alt+right jumping words
+bindkey -e
+bindkey '^[^[[D' backward-word
+bindkey '^[^[[C' forward-word
