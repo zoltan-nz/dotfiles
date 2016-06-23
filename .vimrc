@@ -139,8 +139,8 @@ nnoremap gV `[v`]
 " Download ag.vim
 " cd ~/.vim/bundle && git clone https://github.com/rking/ag.vim ag && echo
 " "set runtimepath^=~/.vim/bundle/ag" >> ~/.vimrc
-set runtimepath^=~/.vim/bundle/ag
-nnoremap <leader>a :Ag<space>
+" set runtimepath^=~/.vim/bundle/ag
+" nnoremap <leader>a :Ag<space>
 
 " Load ctrlp
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -149,9 +149,9 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
-let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+" let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
 let g:ctrlp_prompt_mappings = {
       \ 'PrtBS()':              ['<bs>', '<c-]>'],
