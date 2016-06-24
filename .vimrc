@@ -125,6 +125,21 @@ endif
 " highlight last inserted text
 nnoremap gV `[v`]
 
+" Tab management
+nmap <c-t> :tabnew<cr>
+nmap <c-w> :close<cr>
+nmap <c-1> 1gt
+nmap <c-2> 2gt
+nmap <c-3> 3gt
+nmap <c-4> 4gt
+nmap <c-5> 5gt
+nmap <c-6> 6gt
+nmap <c-7> 7gt
+nmap <c-8> 8gt
+nmap <c-9> 9gt
+nmap <c-0> 10gt
+
+
 " Jumping between parenthesis, use %
 " Use [{ for jumping back
 " Use gd for local declaration.
@@ -153,13 +168,21 @@ let g:ctrlp_working_path_mode = 0
 
 " let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
+" Ignore files in CtrlP
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]?[\.]?(git|hg|svn|bower_components|node_modules)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+
 let g:ctrlp_prompt_mappings = {
       \ 'PrtBS()':              ['<bs>', '<c-]>'],
       \ 'PrtDelete()':          ['<del>'],
       \ 'PrtDeleteWord()':      ['<c-w>'],
       \ 'PrtClear()':           ['<c-u>'],
       \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
-      \ 'PrtSelectMove("k")':   ['<c-i>', '<up>'],
+      \ 'PrtSelectMove("k")':   ['<C-k>', '<up>'],
       \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
       \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
       \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
@@ -217,7 +240,9 @@ map <leader>n :NERDTreeFind<cr>
 map <leader>nn :NERDTreeToggle<cr>
 " Show hidden file as default
 let g:NERDTreeShowHidden=1
-"
+" Ignore
+let NERDTreeIgnore=['\.git[[dir]]', '\.idea[[dir]]']
+let NERDTreeHijackNetrw=1
 
 " Setup shortcuts for jumping between windows
 map <C-h> <C-w>h
