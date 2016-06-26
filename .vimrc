@@ -35,6 +35,10 @@ if has('gui_running')
   set guioptions+=c "Stop opening dialogs
 endif
 
+" Powerline
+let g:powerline_pycmd="py3"
+let g:powerline_pyeval="py3eval"
+
 " Default size - don't really need this, because limit the lines
 " set lines=40 columns=90
 " A colored column
@@ -52,7 +56,7 @@ set lazyredraw " redraw only when we need to
 " Mouse activated
 set mouse=a
 " Save file when focus lost
-:au FocusLost * :wa
+au FocusLost * :wa
 
 set tabstop=2 " number of visual spaces per TAB
 set softtabstop=2 " number of spaces in tab when editing
@@ -299,7 +303,7 @@ let g:syntastic_check_on_wq = 0
 " Airline
 " https://github.com/bling/vim-airline
 " https://github.com/vim-airline/vim-airline-themes
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 
 " NERDCommenter
 " https://github.com/scrooloose/nerdcommenter
