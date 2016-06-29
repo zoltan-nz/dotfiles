@@ -31,7 +31,7 @@ colorscheme solarized
 
 " Guifont
 if has('gui_running')
-  set guifont=Menlo\ Regular:h16
+  set guifont=Meslo\ Regular:h16
   set guioptions+=c "Stop opening dialogs
 endif
 
@@ -131,18 +131,8 @@ nnoremap gV `[v`]
 
 " Tab management
 nmap <c-t> :tabnew<cr>
-nmap <c-w> :close<cr>
-nmap <c-1> 1gt
-nmap <c-2> 2gt
-nmap <c-3> 3gt
-nmap <c-4> 4gt
-nmap <c-5> 5gt
-nmap <c-6> 6gt
-nmap <c-7> 7gt
-nmap <c-8> 8gt
-nmap <c-9> 9gt
-nmap <c-0> 10gt
-
+nmap tw :tabclose<cr>
+" Jump to first tab: 1gt, second tab: 2gt
 
 " Jumping between parenthesis, use %
 " Use [{ for jumping back
@@ -186,7 +176,7 @@ let g:ctrlp_prompt_mappings = {
       \ 'PrtDeleteWord()':      ['<c-w>'],
       \ 'PrtClear()':           ['<c-u>'],
       \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
-      \ 'PrtSelectMove("k")':   ['<C-k>', '<up>'],
+      \ 'PrtSelectMove("k")':   ['<c-i>', '<up>'],
       \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
       \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
       \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
@@ -242,11 +232,18 @@ endfunction
 " NERDTree
 map <leader>n :NERDTreeFind<cr>
 map <leader>nn :NERDTreeToggle<cr>
+map <C-n> :NERDTreeToggle<CR>
 " Show hidden file as default
 let g:NERDTreeShowHidden=1
 " Ignore
 let NERDTreeIgnore=['\.git[[dir]]', '\.idea[[dir]]']
 let NERDTreeHijackNetrw=1
+
+" Show NERDTree automatically
+autocmd vimenter * NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Setup shortcuts for jumping between windows
 map <C-h> <C-w>h
@@ -323,11 +320,14 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
+
 " Rails vim
 
 " youcompleteme
 " git submodule update --init --recursive
 " ./install.py --clang-completer
+
+" g:ycm_server_python_interpreter = '$HOME/.pyenv/shims/python'
 
 autocmd BufWritePost *
       \ if filereadable('tags') |
