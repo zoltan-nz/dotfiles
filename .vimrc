@@ -31,7 +31,7 @@ colorscheme solarized
 
 " Guifont
 if has('gui_running')
-  set guifont=Meslo\ Regular:h16
+  set guifont=Meslo\ LG\ S\ for\ Powerline:h17
   set guioptions+=c "Stop opening dialogs
 endif
 
