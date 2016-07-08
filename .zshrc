@@ -141,3 +141,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 bindkey -e
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
+
+# After MacTeX installation
+# $ brew cask install mactex
+export PATH="/usr/local/texlive/2016/bin/x86_64-darwin:$PATH"

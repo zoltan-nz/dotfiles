@@ -73,3 +73,6 @@
 [submodule ".vim/bundle/tagbar"]
 	path = .vim/bundle/tagbar
 	url = https://github.com/majutsushi/tagbar.git
+[submodule ".vim/bundle/vim-js-context-coloring"]
+	path = .vim/bundle/vim-js-context-coloring
+	url = https://github.com/bigfish/vim-js-context-coloring.git
