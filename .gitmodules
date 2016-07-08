@@ -76,3 +76,9 @@
 [submodule ".vim/bundle/vim-js-context-coloring"]
 	path = .vim/bundle/vim-js-context-coloring
 	url = https://github.com/bigfish/vim-js-context-coloring.git
+[submodule ".vim/bundle/tern_for_vim"]
+	path = .vim/bundle/tern_for_vim
+	url = https://github.com/ternjs/tern_for_vim.git
+[submodule ".vim/bundle/ycmd"]
+	path = .vim/bundle/ycmd
+	url = https://github.com/Valloric/ycmd.git

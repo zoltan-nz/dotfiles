@@ -120,6 +120,11 @@ inoremap jk <esc>
 nnoremap B ^
 nnoremap E $
 " Changing cursor shape in different modes
+
+" Good for Putty and MobaXterm
+let &t_SI .= "\e[=1c"
+let &t_EI .= "\e[=2c"
+
 " iTerm2
 if $TERM_PROGRAM =~ "iTerm"
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -252,9 +257,9 @@ let NERDTreeIgnore=['\.git[[dir]]', '\.idea[[dir]]']
 let NERDTreeHijackNetrw=1
 
 " Show NERDTree automatically
-autocmd vimenter * NERDTree
+autocmd VimEnter * NERDTree | wincmd p
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Setup shortcuts for jumping between windows
