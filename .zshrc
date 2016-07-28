@@ -10,7 +10,7 @@ source ~/.env
 # time that oh-my-zsh is loaded.
 # ZSH_THEME="random"
 ZSH_THEME='agnoster'
-
+# ZSH_THEME='obraun'
 # obraun
 # dieter
 # philips
