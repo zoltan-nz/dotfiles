@@ -58,6 +58,12 @@ set mouse=a
 " Save file when focus lost
 au FocusLost * :wa
 
+" Save file
+map <Esc><Esc> :w<CR>
+nmap <c-s> :w<CR>
+vmap <c-s> <Esc><c-s>gv
+imap <c-s> <Esc><c-s>
+
 set tabstop=2 " number of visual spaces per TAB
 set softtabstop=2 " number of spaces in tab when editing
 set expandtab " tabs are spaces
@@ -72,7 +78,7 @@ set splitright
 set splitbelow
 
 " Reload vim configuration
-" map <leader>s :source ~/.vimrc<CR>
+map <leader>s :source ~/.vimrc<CR>
 
 " edit vimrc/zshrc and load vimrc bindings
 nnoremap <leader>ev :vsp $MYVIMRC<CR>

@@ -57,7 +57,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-completions frontend-search rails ruby bower brew compleat git-extras httpie vundle ember-cli npm nvm web-search rbenv fasd colorize colored-man-pages extract)
+plugins=(git zsh-completions frontend-search rails ruby bower brew compleat git-extras httpie vundle ember-cli npm nvm web-search rbenv fasd colorize colored-man-pages extract tmux)
 
 # User configuration
 

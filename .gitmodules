@@ -82,3 +82,6 @@
 [submodule ".vim/bundle/ycmd"]
 	path = .vim/bundle/ycmd
 	url = https://github.com/Valloric/ycmd.git
+[submodule ".vim/bundle/vim-projectionist"]
+	path = .vim/bundle/vim-projectionist
+	url = git://github.com/tpope/vim-projectionist.git
