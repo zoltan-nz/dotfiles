@@ -62,7 +62,7 @@ au FocusLost * :wa
 map <Esc><Esc> :w<CR>
 nmap <c-s> :w<CR>
 vmap <c-s> <Esc><c-s>gv
-imap <c-s> <Esc><c-s>
+imap <c-s> <Esc> :w<CR>
 
 set tabstop=2 " number of visual spaces per TAB
 set softtabstop=2 " number of spaces in tab when editing
