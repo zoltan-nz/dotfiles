@@ -1,3 +1,4 @@
+" vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker spell:
 " Zoltan's vim config
 " http://dougblack.io/words/a-good-vimrc.html
 "
@@ -6,6 +7,47 @@ execute pathogen#infect()
 
 " The leader key
 let mapleader=","
+
+" Environment {
+
+" Identify platform {
+silent function! OSX()
+return has('macunix')
+        endfunction
+        silent function! LINUX()
+        return has('unix') && !has('macunix') && !has('win32unix')
+    endfunction
+    silent function! WINDOWS()
+    return  (has('win32') || has('win64'))
+endfunction
+" }
+
+" Basics {
+set nocompatible        " Must be first line
+if !WINDOWS()
+    set shell=/bin/sh
+endif
+" }
+
+" Windows Compatible {
+" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+" across (heterogeneous) systems easier.
+if WINDOWS()
+    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+endif
+" }
+
+" Arrow Key Fix {
+" https://github.com/spf13/spf13-vim/issues/780
+if &term[:4] == "xterm" || &term[:5] == 'screen' || &term[:3] == 'rxvt'
+    inoremap <silent> <C-[>OC <RIGHT>
+endif
+" }
+
+" }
+
+
+
 
 " vim-scriptease - https://github.com/tpope/vim-scriptease
 " vim-sensible - https://github.com/tpope/vim-sensible
@@ -31,8 +73,8 @@ colorscheme solarized
 
 " Guifont
 if has('gui_running')
-  set guifont=Meslo\ LG\ S\ for\ Powerline:h17
-  set guioptions+=c "Stop opening dialogs
+    set guifont=Meslo\ LG\ S\ for\ Powerline:h17
+    set guioptions+=c "Stop opening dialogs
 endif
 
 " Powerline
@@ -55,8 +97,20 @@ set lazyredraw " redraw only when we need to
 
 " Mouse activated
 set mouse=a
+set mousehide
+scriptencoding utf-8
 " Save file when focus lost
 au FocusLost * :wa
+
+if has('clipboard')
+    if has('unnamedplus')  " When possible use + register for copy-paste
+        set clipboard=unnamed,unnamedplus
+    else         " On mac and Windows, use * register for copy-paste
+        set clipboard=unnamed
+    endif
+endif
+
+set autowrite " Automatically write when leaving a buffer
 
 " Save file
 map <Esc><Esc> :w<CR>
@@ -73,9 +127,36 @@ set noerrorbells
 set nobackup
 set noswapfile
 
+set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
+set viewoptions=folds,options,cursor,unix,slash " Better Unix / Windows compatibility
+set virtualedit=onemore             " Allow for cursor beyond last character
+
+set iskeyword-=.                    " '.' is an end of word designator
+set iskeyword-=#                    " '#' is an end of word designator
+set iskeyword-=-                    " '-' is an end of word designator
+
+" Instead of reverting the cursor to the last position in the buffer, we
+" set it to the first line when editing a git commit message
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
+
+" Restore cursor position
+function! ResCur()
+    if line("'\"") <= line("$")
+        silent! normal! g`"
+        return 1
+    endif
+endfunction
+
+augroup resCur
+    autocmd!
+    autocmd BufWinEnter * call ResCur()
+augroup END
+
 " Default split is right and below.
 set splitright
 set splitbelow
+
+set showmode
 
 " Reload vim configuration
 map <leader>s :source ~/.vimrc<CR>
@@ -117,6 +198,9 @@ set foldnestmax=10      " 10 nested fold max
 nnoremap <space> za
 set foldmethod=indent " fold based on indent level
 
+set list
+set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+
 " Remap :
 nnoremap ; :
 " jk is escape
@@ -133,9 +217,9 @@ let &t_EI .= "\e[=2c"
 
 " iTerm2
 if $TERM_PROGRAM =~ "iTerm"
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
 if &term =~ '^xterm\\|rxvt'
@@ -151,6 +235,9 @@ if &term =~ '^xterm\\|rxvt'
 endif
 " highlight last inserted text
 nnoremap gV `[v`]
+
+set scrolljump=5                " Lines to scroll when cursor leaves screen
+set scrolloff=3                 " Minimum lines to keep above and below cursor
 
 " Tab management
 nmap <c-t> :tabnew<cr>
@@ -188,68 +275,68 @@ let g:ctrlp_working_path_mode = 0
 " Ignore files in CtrlP
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/]?[\.]?(git|hg|svn|bower_components|node_modules)$',
-      \ 'file': '\v\.(exe|so|dll)$',
-      \ 'link': 'some_bad_symbolic_links',
-      \ }
+            \ 'dir':  '\v[\/]?[\.]?(git|hg|svn|bower_components|node_modules)$',
+            \ 'file': '\v\.(exe|so|dll)$',
+            \ 'link': 'some_bad_symbolic_links',
+            \ }
 
 let g:ctrlp_prompt_mappings = {
-      \ 'PrtBS()':              ['<bs>', '<c-]>'],
-      \ 'PrtDelete()':          ['<del>'],
-      \ 'PrtDeleteWord()':      ['<c-w>'],
-      \ 'PrtClear()':           ['<c-u>'],
-      \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
-      \ 'PrtSelectMove("k")':   ['<c-i>', '<up>'],
-      \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
-      \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
-      \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
-      \ 'PrtSelectMove("d")':   ['<PageDown>', '<kPageDown>'],
-      \ 'PrtHistory(-1)':       ['<c-n>'],
-      \ 'PrtHistory(1)':        ['<c-p>'],
-      \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
-      \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
-      \ 'AcceptSelection("t")': ['<c-t>'],
-      \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
-      \ 'ToggleFocus()':        ['<s-tab>'],
-      \ 'ToggleRegex()':        ['<c-r>'],
-      \ 'ToggleByFname()':      ['<c-d>'],
-      \ 'ToggleType(1)':        ['<c-f>', '<c-up>'],
-      \ 'ToggleType(-1)':       ['<c-b>', '<c-down>'],
-      \ 'PrtExpandDir()':       ['<tab>'],
-      \ 'PrtInsert("c")':       ['<MiddleMouse>', '<insert>'],
-      \ 'PrtInsert()':          ['<c-\>'],
-      \ 'PrtCurStart()':        ['<c-a>'],
-      \ 'PrtCurEnd()':          ['<c-e>'],
-      \ 'PrtCurLeft()':         ['<c-h>', '<left>', '<c-^>'],
-      \ 'PrtCurRight()':        ['<c-l>', '<right>'],
-      \ 'PrtClearCache()':      ['<F5>'],
-      \ 'PrtDeleteEnt()':       ['<F7>'],
-      \ 'CreateNewFile()':      ['<c-y>'],
-      \ 'MarkToOpen()':         ['<c-z>'],
-      \ 'OpenMulti()':          ['<c-o>'],
-      \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
-      \ }
+            \ 'PrtBS()':              ['<bs>', '<c-]>'],
+            \ 'PrtDelete()':          ['<del>'],
+            \ 'PrtDeleteWord()':      ['<c-w>'],
+            \ 'PrtClear()':           ['<c-u>'],
+            \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
+            \ 'PrtSelectMove("k")':   ['<c-i>', '<up>'],
+            \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
+            \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
+            \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
+            \ 'PrtSelectMove("d")':   ['<PageDown>', '<kPageDown>'],
+            \ 'PrtHistory(-1)':       ['<c-n>'],
+            \ 'PrtHistory(1)':        ['<c-p>'],
+            \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
+            \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
+            \ 'AcceptSelection("t")': ['<c-t>'],
+            \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
+            \ 'ToggleFocus()':        ['<s-tab>'],
+            \ 'ToggleRegex()':        ['<c-r>'],
+            \ 'ToggleByFname()':      ['<c-d>'],
+            \ 'ToggleType(1)':        ['<c-f>', '<c-up>'],
+            \ 'ToggleType(-1)':       ['<c-b>', '<c-down>'],
+            \ 'PrtExpandDir()':       ['<tab>'],
+            \ 'PrtInsert("c")':       ['<MiddleMouse>', '<insert>'],
+            \ 'PrtInsert()':          ['<c-\>'],
+            \ 'PrtCurStart()':        ['<c-a>'],
+            \ 'PrtCurEnd()':          ['<c-e>'],
+            \ 'PrtCurLeft()':         ['<c-h>', '<left>', '<c-^>'],
+            \ 'PrtCurRight()':        ['<c-l>', '<right>'],
+            \ 'PrtClearCache()':      ['<F5>'],
+            \ 'PrtDeleteEnt()':       ['<F7>'],
+            \ 'CreateNewFile()':      ['<c-y>'],
+            \ 'MarkToOpen()':         ['<c-z>'],
+            \ 'OpenMulti()':          ['<c-o>'],
+            \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
+            \ }
 
 " toggle between number and relativenumber
 function! ToggleNumber()
-  if(&relativenumber == 1)
-    set norelativenumber
-    set number
-  else
-    set relativenumber
-  endif
+    if(&relativenumber == 1)
+        set norelativenumber
+        set number
+    else
+        set relativenumber
+    endif
 endfunc
 
 " strips trailing whitespace at the end of files.
 function! <SID>StripTrailingWhitespaces()
-  " save last search & cursor position
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-  %s/\s\+$//e
-  let @/=_s
-  call
-  cursor(l, c)
+    " save last search & cursor position
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    let @/=_s
+    call
+    cursor(l, c)
 endfunction
 
 " NERDTree
@@ -353,9 +440,9 @@ let g:NERDTrimTrailingWhitespace = 1
 " g:ycm_server_python_interpreter = '$HOME/.pyenv/shims/python'
 
 autocmd BufWritePost *
-      \ if filereadable('tags') |
-      \   call system('ctags -a '.expand('%')) |
-      \ endif
+            \ if filereadable('tags') |
+            \   call system('ctags -a '.expand('%')) |
+            \ endif
 
 " Map TagbarToggle
 nmap <F8> :TagbarToggle<CR>
