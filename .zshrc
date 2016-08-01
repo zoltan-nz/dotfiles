@@ -106,6 +106,8 @@ alias lsa="gls --color -lah --group-directories-first --sort=extension"
 # Vim with v
 alias v="f -e vim"
 
+alias gsa="git submodule add "
+
 # Initialization for compinit
 autoload -U compinit && compinit
 
