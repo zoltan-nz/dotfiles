@@ -46,19 +46,24 @@ endif
 
 " }
 
-
-
-
 " vim-scriptease - https://github.com/tpope/vim-scriptease
 " vim-sensible - https://github.com/tpope/vim-sensible
 " emmet.vim
 runtime bundle/emmet-vim/plugin/emmet.vim
 runtime bundle/vim-scriptease/plugin/scriptease.vim
 runtime bundle/vim-sensible/plugin/sensible.vim
+let g:user_emmet_expandabbr_key='<Tab>'
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+
 
 " Load plugin files and turn on indentation:
 " Sensible implements
 filetype plugin indent on
+
+set omnifunc=syntaxcomplete#Complete
+
+" Update ctags
+:noremap <Leader>T :!ctags-proj.sh<CR>
 
 " Color - sensible implements
 syntax enable
@@ -181,6 +186,9 @@ set incsearch
 " turn off search highligh
 nnoremap <Leader><Space> :nohlsearch<CR>
 
+" small is case insensitive
+set smartcase
+
 " switch between two files
 nnoremap <Leader><Leader> :e#<CR>
 
@@ -212,14 +220,23 @@ nnoremap E $
 " Changing cursor shape in different modes
 
 " Good for Putty and MobaXterm
-let &t_SI .= "\e[=1c"
-let &t_EI .= "\e[=2c"
+" let &t_SI .= "\e[=1c"
+" let &t_EI .= "\e[=2c"
 
 " iTerm2
 if $TERM_PROGRAM =~ "iTerm"
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
     let &t_SR = "\<Esc>]50;CursorShape=2\x7"
     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" TMUX
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
 if &term =~ '^xterm\\|rxvt'
@@ -462,7 +479,7 @@ function! GotoFile(w)
         let pos = ""
         let fname = curword
     endif
- 
+
     " check exists file.
     if filereadable(fname)
         let fullname = fname
