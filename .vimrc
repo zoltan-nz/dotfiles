@@ -103,6 +103,11 @@ set lazyredraw " redraw only when we need to
 " Mouse activated
 set mouse=a
 set mousehide
+
+if &term =~ '^screen'
+  set ttymouse=xterm2
+endif
+
 scriptencoding utf-8
 " Save file when focus lost
 au FocusLost * :wa
@@ -447,6 +452,8 @@ let g:NERDCommentEmptyLines = 1
 " Enable trimming of trailing whitespace when uncommenting
 let g:NERDTrimTrailingWhitespace = 1
 
+" Toggle comments with CTRL-C
+map <C-c> :call NERDComment(0, "toggle")<CR>
 
 " Rails vim
 
