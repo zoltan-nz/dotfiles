@@ -1,13 +1,15 @@
-" vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker spell:
+" vim: set sw=4 ts=4 sts=4 et tw=78
 " Zoltan's vim config
 " http://dougblack.io/words/a-good-vimrc.html
 "
+
+set nocompatible        " Must be first line
+
 " initialize pathogen
 execute pathogen#infect()
 
 " The leader key
 let mapleader=","
-
 " Environment {
 
 " Identify platform {
@@ -23,7 +25,6 @@ endfunction
 " }
 
 " Basics {
-set nocompatible        " Must be first line
 if !WINDOWS()
     set shell=/bin/sh
 endif
@@ -46,6 +47,7 @@ endif
 
 " }
 
+
 " vim-scriptease - https://github.com/tpope/vim-scriptease
 " vim-sensible - https://github.com/tpope/vim-sensible
 " emmet.vim
@@ -61,6 +63,8 @@ imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 filetype plugin indent on
 
 set omnifunc=syntaxcomplete#Complete
+
+let g:syntastic_python_python_exec = 'python3'
 
 " Update ctags
 :noremap <Leader>T :!ctags-proj.sh<CR>
@@ -82,9 +86,17 @@ if has('gui_running')
     set guioptions+=c "Stop opening dialogs
 endif
 
-" Powerline
-let g:powerline_pycmd="py3"
-let g:powerline_pyeval="py3eval"
+" Powerline, this need only if powerline symlinked as a plugin
+" let g:powerline_pycmd="py3"
+" let g:powerline_pyeval="py3eval"
+
+" Using globally installed pip
+if !exists("g:pyenv")
+  silent call pyenv#activate()
+  python3 from powerline.vim import setup as powerline_setup
+  python3 powerline_setup()
+  python3 del powerline_setup
+endif
 
 " Default size - don't really need this, because limit the lines
 " set lines=40 columns=90
@@ -420,9 +432,10 @@ let g:mustache_abbreviations = 1
 
 " Syntastic
 " https://github.com/scrooloose/syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" This settings not working with powerline
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -519,5 +532,3 @@ nnoremap <C-W><C-F> :call GotoFile("new")<CR>
 " EditorConfig vim https://github.com/editorconfig/editorconfig-vim.git
 "
 " Great link: http://vimawesome.com/
-"
-" vim:foldmethod=marker:foldlevel=0

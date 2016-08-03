@@ -229,3 +229,9 @@
 [submodule ".vim/bundle/ZoomWin"]
 	path = .vim/bundle/ZoomWin
 	url = https://github.com/sh-dude/ZoomWin
+[submodule ".vim/bundle/vim-pyenv"]
+	path = .vim/bundle/vim-pyenv
+	url = https://github.com/lambdalisue/vim-pyenv
+[submodule ".vim/bundle/jedi-vim"]
+	path = .vim/bundle/jedi-vim
+	url = https://github.com/davidhalter/jedi-vim.git
