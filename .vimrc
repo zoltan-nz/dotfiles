@@ -91,12 +91,24 @@ endif
 " let g:powerline_pyeval="py3eval"
 
 " Using globally installed pip
-if !exists("g:pyenv")
-  silent call pyenv#activate()
+" if !exists("g:pyenv")
+   " silent call pyenv#activate()
+"   python3 from powerline.vim import setup as powerline_setup
+"   python3 powerline_setup()
+"   python3 del powerline_setup
+" endif
+
+function! s:initialize_powerline() abort
+  let major_version = pyenv#python#get_internal_major_version()
   python3 from powerline.vim import setup as powerline_setup
   python3 powerline_setup()
   python3 del powerline_setup
-endif
+endfunction
+augroup vim-pyenv-custom-augroup
+  autocmd! *
+  autocmd User vim-pyenv-activate-post   call s:initialize_powerline()
+  " autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
+augroup END
 
 " Default size - don't really need this, because limit the lines
 " set lines=40 columns=90
@@ -116,7 +128,7 @@ set lazyredraw " redraw only when we need to
 set mouse=a
 set mousehide
 
-if &term =~ '^screen'
+if &term =~ '^screen|^gnome.*'
   set ttymouse=xterm2
 endif
 
@@ -223,7 +235,8 @@ set foldnestmax=10      " 10 nested fold max
 nnoremap <space> za
 set foldmethod=indent " fold based on indent level
 
-set list
+" Set list shows invisible chars
+" set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 
 " Remap :
@@ -527,7 +540,7 @@ nnoremap gf :call GotoFile("")<CR>
 nnoremap <C-W>f :call GotoFile("new")<CR>
 nnoremap <C-W><C-F> :call GotoFile("new")<CR>
 
-
+au VimLeave * :!clear
 
 " EditorConfig vim https://github.com/editorconfig/editorconfig-vim.git
 "

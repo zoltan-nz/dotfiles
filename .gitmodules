@@ -76,12 +76,6 @@
 [submodule ".vim/bundle/vim-js-context-coloring"]
 	path = .vim/bundle/vim-js-context-coloring
 	url = https://github.com/bigfish/vim-js-context-coloring.git
-[submodule ".vim/bundle/tern_for_vim"]
-	path = .vim/bundle/tern_for_vim
-	url = https://github.com/ternjs/tern_for_vim.git
-[submodule ".vim/bundle/ycmd"]
-	path = .vim/bundle/ycmd
-	url = https://github.com/Valloric/ycmd.git
 [submodule ".vim/bundle/vim-projectionist"]
 	path = .vim/bundle/vim-projectionist
 	url = https://github.com/tpope/vim-projectionist.git
@@ -235,3 +229,6 @@
 [submodule ".vim/bundle/jedi-vim"]
 	path = .vim/bundle/jedi-vim
 	url = https://github.com/davidhalter/jedi-vim.git
+[submodule ".vim/bundle/delimitMate"]
+	path = .vim/bundle/delimitMate
+	url = https://github.com/Raimondi/delimitMate
