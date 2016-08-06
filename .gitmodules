@@ -79,12 +79,6 @@
 [submodule ".vim/bundle/vim-projectionist"]
 	path = .vim/bundle/vim-projectionist
 	url = https://github.com/tpope/vim-projectionist.git
-[submodule ".tmux-plugins/tmux-continuum"]
-	path = .tmux-plugins/tmux-continuum
-	url = https://github.com/tmux-plugins/tmux-continuum
-[submodule ".tmux-plugins/tmux-resurrect"]
-	path = .tmux-plugins/tmux-resurrect
-	url = https://github.com/tmux-plugins/tmux-resurrect
 [submodule ".vim/bundle/vim-obsession"]
 	path = .vim/bundle/vim-obsession
 	url = https://github.com/tpope/vim-obsession
@@ -201,7 +195,7 @@
 	url = https://github.com/jeetsukumaran/vim-buffergator
 [submodule ".vim/bundle/vim-trailing-whitespace"]
 	path = .vim/bundle/vim-trailing-whitespace
-	url = https://github.com/bronson/vim-trailing-whitespace.git
+	url = https://github.com/bronson/vim-trailing-whitespace
 [submodule ".vim/bundle/vim-json"]
 	path = .vim/bundle/vim-json
 	url = https://github.com/elzr/vim-json.git
@@ -210,10 +204,10 @@
 	url = https://github.com/tpope/vim-dispatch
 [submodule ".vim/bundle/vim-visualstar"]
 	path = .vim/bundle/vim-visualstar
-	url = https://github.com/thinca/vim-visualstar.git
+	url = https://github.com/thinca/vim-visualstar
 [submodule ".vim/bundle/vim-snippets"]
 	path = .vim/bundle/vim-snippets
-	url = https://github.com/honza/vim-snippets.git
+	url = https://github.com/honza/vim-snippets
 [submodule ".vim/bundle/vim-eunuch"]
 	path = .vim/bundle/vim-eunuch
 	url = https://github.com/tpope/vim-eunuch
@@ -228,7 +222,25 @@
 	url = https://github.com/lambdalisue/vim-pyenv
 [submodule ".vim/bundle/jedi-vim"]
 	path = .vim/bundle/jedi-vim
-	url = https://github.com/davidhalter/jedi-vim.git
+	url = https://github.com/davidhalter/jedi-vim
 [submodule ".vim/bundle/delimitMate"]
 	path = .vim/bundle/delimitMate
 	url = https://github.com/Raimondi/delimitMate
+[submodule ".oh-my-zsh/custom/plugins/zsh-completions"]
+	path = .oh-my-zsh/custom/plugins/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
+[submodule ".oh-my-zsh/custom/plugins/zsh-autosuggestions"]
+	path = .oh-my-zsh/custom/plugins/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule ".vim/bundle/vitality.vim"]
+	path = .vim/bundle/vitality.vim
+	url = https://github.com/sjl/vitality.vim
+[submodule ".vim/bundle/vim-tmux-navigator"]
+	path = .vim/bundle/vim-tmux-navigator
+	url = https://github.com/christoomey/vim-tmux-navigator
+[submodule ".oh-my-zsh/custom/plugins/zsh-history-substring-search"]
+	path = .oh-my-zsh/custom/plugins/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search
+[submodule ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
+	path = .oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git

@@ -113,7 +113,7 @@ augroup END
 " Default size - don't really need this, because limit the lines
 " set lines=40 columns=90
 " A colored column
-set colorcolumn=90
+set colorcolumn=120
 set cursorline " highlight current line
 " Show line numbers
 set number
@@ -128,13 +128,15 @@ set lazyredraw " redraw only when we need to
 set mouse=a
 set mousehide
 
-if &term =~ '^screen|^gnome.*'
+if &term =~ '^screen'
   set ttymouse=xterm2
 endif
 
 scriptencoding utf-8
 " Save file when focus lost
 au FocusLost * :wa
+
+let g:tmux_navigator_save_on_switch = 1
 
 if has('clipboard')
     if has('unnamedplus')  " When possible use + register for copy-paste
@@ -148,9 +150,6 @@ set autowrite " Automatically write when leaving a buffer
 
 " Save file
 map <Esc><Esc> :w<CR>
-nmap <c-s> :w<CR>
-vmap <c-s> <Esc><c-s>gv
-imap <c-s> <Esc> :w<CR>
 
 set tabstop=2 " number of visual spaces per TAB
 set softtabstop=2 " number of spaces in tab when editing
@@ -312,6 +311,7 @@ nmap tw :tabclose<cr>
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 " CtrlP settings
+let g:ctrlp_show_hidden = 1
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
@@ -322,10 +322,12 @@ let g:ctrlp_working_path_mode = 0
 " Ignore files in CtrlP
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\v[\/]?[\.]?(git|hg|svn|bower_components|node_modules)$',
-            \ 'file': '\v\.(exe|so|dll)$',
-            \ 'link': 'some_bad_symbolic_links',
-            \ }
+      \ 'dir': '\v[\/](node_modules|bower_components|target|dist)|(\.(swp|ico|git|svn))$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ 'link': 'some_bad_symbolic_links',
+      \ }
+
+" \ 'dir':  '\v[\/]?[\.]?(git|hg|svn|bower_components|node_modules)$',
 
 let g:ctrlp_prompt_mappings = {
             \ 'PrtBS()':              ['<bs>', '<c-]>'],
