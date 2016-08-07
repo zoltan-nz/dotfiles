@@ -135,6 +135,7 @@ endif
 scriptencoding utf-8
 " Save file when focus lost
 au FocusLost * :wa
+set autoread
 
 let g:tmux_navigator_save_on_switch = 1
 
@@ -485,9 +486,13 @@ map <C-c> :call NERDComment(0, "toggle")<CR>
 
 " Rails vim
 
-" youcompleteme
+" YouCompleteMe Settings
 " git submodule update --init --recursive
 " ./install.py --clang-completer
+" Only an older version can be compiled on Redhat 6.6
+" https://github.com/Valloric/ycmd/issues/552
+" This is the latest working tree:
+" https://github.com/Valloric/YouCompleteMe/tree/0de1c0c9bb13ce82172b472c676035cd47cf6a6a
 
 " g:ycm_server_python_interpreter = '$HOME/.pyenv/shims/python'
 

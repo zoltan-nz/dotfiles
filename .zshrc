@@ -10,7 +10,8 @@ export PATH="/Users/szines/.bin:/Users/szines/.brew/bin:/usr/local/bin:/usr/bin:
 # --- ZSH SETTINGS --- #
 ########################
 
-export ZSH=$DOTFILES/.oh-my-zsh
+export ZSH=$DOTFILES/zsh/oh-my-zsh
+export ZSH_CUSTOM=$DOTFILES/zsh/custom
 
 ZSH_THEME=${LOCAL_ZSH_THEME:-agnoster}
 HYPHEN_INSENSITIVE="true"
@@ -34,7 +35,7 @@ plugins=(git zsh-completions zsh-autosuggestions rails git-extras httpie npm nvm
 source $ZSH/oh-my-zsh.sh
 
 # https://github.com/zsh-users/zsh-history-substring-search
-source $ZSH/custom/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source $ZSH_CUSTOM/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # --- ZSH Completions plugin ---
 
@@ -98,7 +99,6 @@ export ANDROID_HOME=$HOME/.brew/opt/android-sdk
 bindkey -e
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
-
 
 export PATH="$HOME/.rbenv/bin:$PATH"
 export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"
