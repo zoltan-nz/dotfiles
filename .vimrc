@@ -10,50 +10,13 @@ execute pathogen#infect()
 
 " The leader key
 let mapleader=","
-" Environment {
-
-" Identify platform {
-silent function! OSX()
-return has('macunix')
-        endfunction
-        silent function! LINUX()
-        return has('unix') && !has('macunix') && !has('win32unix')
-    endfunction
-    silent function! WINDOWS()
-    return  (has('win32') || has('win64'))
-endfunction
-" }
-
-" Basics {
-if !WINDOWS()
-    set shell=/bin/sh
-endif
-" }
-
-" Windows Compatible {
-" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-" across (heterogeneous) systems easier.
-if WINDOWS()
-    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-endif
-" }
-
-" Arrow Key Fix {
-" https://github.com/spf13/spf13-vim/issues/780
-if &term[:4] == "xterm" || &term[:5] == 'screen' || &term[:3] == 'rxvt'
-    inoremap <silent> <C-[>OC <RIGHT>
-endif
-" }
-
-" }
-
 
 " vim-scriptease - https://github.com/tpope/vim-scriptease
 " vim-sensible - https://github.com/tpope/vim-sensible
 " emmet.vim
-runtime bundle/emmet-vim/plugin/emmet.vim
-runtime bundle/vim-scriptease/plugin/scriptease.vim
-runtime bundle/vim-sensible/plugin/sensible.vim
+" runtime bundle/emmet-vim/plugin/emmet.vim
+" runtime bundle/vim-scriptease/plugin/scriptease.vim
+" runtime bundle/vim-sensible/plugin/sensible.vim
 let g:user_emmet_expandabbr_key='<Tab>'
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
@@ -66,8 +29,20 @@ set omnifunc=syntaxcomplete#Complete
 
 let g:syntastic_python_python_exec = 'python3'
 
+"""""""""
+" LEADER
+"""""""""
+
 " Update ctags
-:noremap <Leader>T :!ctags-proj.sh<CR>
+noremap <Leader>T :!ctags-proj.sh<CR>
+" Switch between two files
+nnoremap <Leader><Leader> :e#<CR>
+" Save file
+noremap <Leader>s :update<CR>
+
+"""""""""
+" THEME
+"""""""""
 
 " Color - sensible implements
 syntax enable
@@ -75,7 +50,7 @@ syntax enable
 " https://github.com/sjl/badwolf/
 " colorscheme badwolf
 " colorscheme goodwolf
-set background=dark
+set background=light
 
 let g:solarized_termcolors=256
 colorscheme solarized
@@ -149,8 +124,6 @@ endif
 
 set autowrite " Automatically write when leaving a buffer
 
-" Save file
-map <Esc><Esc> :w<CR>
 
 set tabstop=2 " number of visual spaces per TAB
 set softtabstop=2 " number of spaces in tab when editing
@@ -218,8 +191,6 @@ nnoremap <Leader><Space> :nohlsearch<CR>
 " small is case insensitive
 set smartcase
 
-" switch between two files
-nnoremap <Leader><Leader> :e#<CR>
 
 " Show matching parenthesis
 set showmatch
@@ -287,7 +258,7 @@ set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
 
 " Tab management
-nmap <c-t> :tabnew<cr>
+" nmap <c-t> :tabnew<cr>
 nmap tw :tabclose<cr>
 " Jump to first tab: 1gt, second tab: 2gt
 
@@ -304,12 +275,12 @@ nmap tw :tabclose<cr>
 " brew install the_silver_searcher
 " Download ag.vim
 " cd ~/.vim/bundle && git clone https://github.com/rking/ag.vim ag && echo
-" "set runtimepath^=~/.vim/bundle/ag" >> ~/.vimrc
+" set runtimepath^=~/.vim/bundle/ag" >> ~/.vimrc
 " set runtimepath^=~/.vim/bundle/ag
 " nnoremap <leader>a :Ag<space>
 
 " Load ctrlp
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+" set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 " CtrlP settings
 let g:ctrlp_show_hidden = 1

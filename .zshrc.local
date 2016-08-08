@@ -1,5 +1,5 @@
 # 1. Move this file to your home folder
-# 2. Rename it to ~/.profile
+# 2. Rename it to ~/.zshrc.local
 # 3. Setup variables accordingly
 
 # The path of the cloned dotfiles repository, default is ~/projects/dotfiles
@@ -10,3 +10,8 @@ export LOCAL_ZSH_THEME=
 
 # Homebrew uses for searching packages. Without it search is limited.
 export HOMEBREW_GITHUB_API_TOKEN=
+
+### Android SDK
+export ANDROID_HOME=$HOME/.brew/opt/android-sdk
+
+ZSH_TMUX_AUTOSTART="false"
