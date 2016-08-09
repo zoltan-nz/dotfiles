@@ -88,18 +88,29 @@ export HOMEBREW_GITHUB_API_TOKEN=$HOMEBREW_GITHUB_API_TOKEN
 
 ### ==== RBENV ====
 
-[ -x rbenv ] && eval "$(rbenv init -)"
+# curl https://raw.githubusercontent.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
+export RBENV_ROOT="${HOME}/.rbenv"
+if [ -d "${RBENV_ROOT}" ]; then
+  export PATH="${RBENV_ROOT}/bin:${PATH}"
+  eval "$(rbenv init -)"
+fi
 
 ### === NVM ===
 
+# git clone https://github.com/creationix/nvm ~/.nvm
+# git clone https://github.com/sstephenson/ruby-build ~/.rbenv/plugins/ruby-build
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 ### === PYENV ===
 
-export PYENV_ROOT="$HOME/.pyenv"
-[ -s pyenv ] && eval "$(pyenv init -)"
-
+# curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+export PYENV_ROOT="${HOME}/.pyenv"
+if [ -d "${PYENV_ROOT}" ]; then
+  export PATH="~/.pyenv/bin:$PATH"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+fi
 
 # Binding Alt+left and Alt+right jumping words
 bindkey -e
@@ -111,9 +122,3 @@ elif [ "$TERM" =~ "^screen" ]; then
   bindkey '^[[1;3C' forward-word
 fi
 
-######################
-#        PATH        #
-######################
-
-export PATH="$HOME/.rbenv/bin:$PATH"
-export PATH="$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH"

@@ -36,7 +36,7 @@ let g:syntastic_python_python_exec = 'python3'
 " Update ctags
 noremap <Leader>T :!ctags-proj.sh<CR>
 " Switch between two files
-nnoremap <Leader><Leader> :e#<CR>
+nnoremap <Leader>g :e#<CR>
 " Save file
 noremap <Leader>s :update<CR>
 
@@ -46,14 +46,14 @@ noremap <Leader>s :update<CR>
 
 " Color - sensible implements
 syntax enable
-" colorscheme Tomorrow-Night
+colorscheme Tomorrow-Night
 " https://github.com/sjl/badwolf/
 " colorscheme badwolf
 " colorscheme goodwolf
-set background=light
+" set background=light
 
-let g:solarized_termcolors=256
-colorscheme solarized
+" let g:solarized_termcolors=256
+" colorscheme solarized
 
 " Guifont
 if has('gui_running')
@@ -165,17 +165,14 @@ set splitbelow
 
 set showmode
 
-" Reload vim configuration
-map <leader>s :source ~/.vimrc<CR>
-
 " edit vimrc/zshrc and load vimrc bindings
 nnoremap <leader>ev :vsp $MYVIMRC<CR>
-nnoremap <leader>ez :vsp ~/.zshrc<CR>
+nnoremap <leader>ez :vsp .zshrc<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
 " Speed up vim
 set hidden
-" set history=100
+set history=100
 
 " Remove white spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
