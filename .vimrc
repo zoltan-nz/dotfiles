@@ -1,33 +1,18 @@
 " vim: set sw=4 ts=4 sts=4 et tw=78
 " Zoltan's vim config
-" http://dougblack.io/words/a-good-vimrc.html
-"
 
-set nocompatible        " Must be first line
-
-" initialize pathogen
+set nocompatible          " Must be first line
 execute pathogen#infect()
 
-" The leader key
 let mapleader=","
 
-" vim-scriptease - https://github.com/tpope/vim-scriptease
-" vim-sensible - https://github.com/tpope/vim-sensible
-" emmet.vim
-" runtime bundle/emmet-vim/plugin/emmet.vim
-" runtime bundle/vim-scriptease/plugin/scriptease.vim
-" runtime bundle/vim-sensible/plugin/sensible.vim
 let g:user_emmet_expandabbr_key='<Tab>'
 imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
-
-" Load plugin files and turn on indentation:
-" Sensible implements
 filetype plugin indent on
+" set omnifunc=syntaxcomplete#Complete
 
-set omnifunc=syntaxcomplete#Complete
-
-let g:syntastic_python_python_exec = 'python3'
+" let g:syntastic_python_python_exec = 'python3'
 
 """""""""
 " LEADER
@@ -46,14 +31,7 @@ noremap <Leader>s :update<CR>
 
 " Color - sensible implements
 syntax enable
-colorscheme Tomorrow-Night
-" https://github.com/sjl/badwolf/
-" colorscheme badwolf
-" colorscheme goodwolf
-" set background=light
-
-" let g:solarized_termcolors=256
-" colorscheme solarized
+colorscheme Tomorrow-Night-Eighties
 
 " Guifont
 if has('gui_running')
@@ -61,43 +39,27 @@ if has('gui_running')
     set guioptions+=c "Stop opening dialogs
 endif
 
-" Powerline, this need only if powerline symlinked as a plugin
-" let g:powerline_pycmd="py3"
-" let g:powerline_pyeval="py3eval"
-
-" Using globally installed pip
-" if !exists("g:pyenv")
-   " silent call pyenv#activate()
-"   python3 from powerline.vim import setup as powerline_setup
-"   python3 powerline_setup()
-"   python3 del powerline_setup
-" endif
-
 function! s:initialize_powerline() abort
-  let major_version = pyenv#python#get_internal_major_version()
-  python3 from powerline.vim import setup as powerline_setup
-  python3 powerline_setup()
-  python3 del powerline_setup
+  if !has('nvim')
+    let major_version = pyenv#python#get_internal_major_version()
+    python3 from powerline.vim import setup as powerline_setup
+    python3 powerline_setup()
+    python3 del powerline_setup
+  endif
 endfunction
+
 augroup vim-pyenv-custom-augroup
   autocmd! *
   autocmd User vim-pyenv-activate-post   call s:initialize_powerline()
-  " autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
+  autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
 augroup END
 
-" Default size - don't really need this, because limit the lines
-" set lines=40 columns=90
-" A colored column
-set colorcolumn=120
-set cursorline " highlight current line
-" Show line numbers
-set number
+set cursorline " Highlight current line
+set number     " Show line numbers
 set relativenumber
-
-set showcmd " show command in bottom bar
-
-set wildmenu " visual autocomplete for command menu
-set lazyredraw " redraw only when we need to
+set showcmd    " Show command in bottom bar
+set wildmenu   " Visual autocomplete for command menu
+set lazyredraw " Redraw only when we need to
 
 " Mouse activated
 set mouse=a
@@ -112,6 +74,7 @@ scriptencoding utf-8
 au FocusLost * :wa
 set autoread
 
+" autosave when switch to a tmux pane
 let g:tmux_navigator_save_on_switch = 1
 
 if has('clipboard')
@@ -123,7 +86,6 @@ if has('clipboard')
 endif
 
 set autowrite " Automatically write when leaving a buffer
-
 
 set tabstop=2 " number of visual spaces per TAB
 set softtabstop=2 " number of spaces in tab when editing
@@ -188,7 +150,6 @@ nnoremap <Leader><Space> :nohlsearch<CR>
 " small is case insensitive
 set smartcase
 
-
 " Show matching parenthesis
 set showmatch
 
@@ -215,11 +176,17 @@ inoremap jk <esc>
 " move to beginning/end of line
 nnoremap B ^
 nnoremap E $
+
+" ===============
+"   CURSOR SHAPE
+" ===============
 " Changing cursor shape in different modes
 
 " Good for Putty and MobaXterm
 " let &t_SI .= "\e[=1c"
 " let &t_EI .= "\e[=2c"
+
+:let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 " iTerm2
 if $TERM_PROGRAM =~ "iTerm"
@@ -276,17 +243,11 @@ nmap tw :tabclose<cr>
 " set runtimepath^=~/.vim/bundle/ag
 " nnoremap <leader>a :Ag<space>
 
-" Load ctrlp
-" set runtimepath^=~/.vim/bundle/ctrlp.vim
-
 " CtrlP settings
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
-
-" let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_switch_buffer = 1
+let g:ctrlp_working_path_mode = 1
 
 " Ignore files in CtrlP
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
@@ -296,15 +257,13 @@ let g:ctrlp_custom_ignore = {
       \ 'link': 'some_bad_symbolic_links',
       \ }
 
-" \ 'dir':  '\v[\/]?[\.]?(git|hg|svn|bower_components|node_modules)$',
-
 let g:ctrlp_prompt_mappings = {
             \ 'PrtBS()':              ['<bs>', '<c-]>'],
             \ 'PrtDelete()':          ['<del>'],
             \ 'PrtDeleteWord()':      ['<c-w>'],
             \ 'PrtClear()':           ['<c-u>'],
             \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
-            \ 'PrtSelectMove("k")':   ['<c-i>', '<up>'],
+            \ 'PrtSelectMove("k")':   ['<c-k>', '<up>'],
             \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
             \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
             \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
@@ -399,27 +358,6 @@ let g:javascript_enable_domhtmlcss = 1
 " mustache abbreviation on
 let g:mustache_abbreviations = 1
 
-" Polyglot - syntax highlighting
-" https://github.com/sheerun/vim-polyglot
-
-" Fugitive.vim
-" https://github.com/tpope/vim-fugitive
-
-" Gitgutter
-" https://github.com/airblade/vim-gitgutter
-
-" HTML5
-" https://github.com/othree/html5.vim
-
-" Surround
-" https://github.com/tpope/vim-surround
-
-" Syntastic
-" https://github.com/scrooloose/syntastic
-" This settings not working with powerline
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -429,7 +367,7 @@ let g:syntastic_check_on_wq = 0
 " Airline
 " https://github.com/bling/vim-airline
 " https://github.com/vim-airline/vim-airline-themes
-" let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " NERDCommenter
 " https://github.com/scrooloose/nerdcommenter
@@ -464,13 +402,18 @@ map <C-c> :call NERDComment(0, "toggle")<CR>
 
 " g:ycm_server_python_interpreter = '$HOME/.pyenv/shims/python'
 
+" Use deoplete.
+if has('nvim')
+  let g:deoplete#enable_at_startup = 1
+endif
+
 autocmd BufWritePost *
             \ if filereadable('tags') |
             \   call system('ctags -a '.expand('%')) |
             \ endif
 
 " Map TagbarToggle
-nmap <F8> :TagbarToggle<CR>
+noremap <Leader>m :TagbarToggle<CR>
 
 " open file under cursor, source: https://github.com/amix/open_file_under_cursor.vim
 " ----- Emulate 'gf' but recognize :line format -----
@@ -517,6 +460,32 @@ nnoremap <C-W><C-F> :call GotoFile("new")<CR>
 
 au VimLeave * :!clear
 
+" ================
+"       NOTES
+" ================
+"
 " EditorConfig vim https://github.com/editorconfig/editorconfig-vim.git
 "
 " Great link: http://vimawesome.com/
+" http://dougblack.io/words/a-good-vimrc.html
+" Polyglot - syntax highlighting
+" https://github.com/sheerun/vim-polyglot
+
+" Fugitive.vim
+" https://github.com/tpope/vim-fugitive
+
+" Gitgutter
+" https://github.com/airblade/vim-gitgutter
+
+" HTML5
+" https://github.com/othree/html5.vim
+
+" Surround
+" https://github.com/tpope/vim-surround
+
+" Syntastic
+" https://github.com/scrooloose/syntastic
+" This settings not working with powerline
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
