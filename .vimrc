@@ -12,8 +12,6 @@ imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 filetype plugin indent on
 " set omnifunc=syntaxcomplete#Complete
 
-" let g:syntastic_python_python_exec = 'python3'
-
 """""""""
 " LEADER
 """""""""
@@ -73,6 +71,10 @@ scriptencoding utf-8
 " Save file when focus lost
 au FocusLost * :wa
 set autoread
+
+"markdown
+"https://github.com/suan/vim-instant-markdown
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " autosave when switch to a tmux pane
 let g:tmux_navigator_save_on_switch = 1
@@ -358,11 +360,11 @@ let g:javascript_enable_domhtmlcss = 1
 " mustache abbreviation on
 let g:mustache_abbreviations = 1
 
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_python_python_exec = 'python3'
 
 " Airline
 " https://github.com/bling/vim-airline

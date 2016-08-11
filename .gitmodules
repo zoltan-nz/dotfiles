@@ -253,3 +253,9 @@
 [submodule ".vim/bundle/neocomplete.vim"]
 	path = .vim/bundle/neocomplete.vim
 	url = https://github.com/Shougo/neocomplete.vim
+[submodule ".vim/bundle/syntastic-extras"]
+	path = .vim/bundle/syntastic-extras
+	url = https://github.com/myint/syntastic-extras
+[submodule ".vim/bundle/vim-instant-markdown"]
+	path = .vim/bundle/vim-instant-markdown
+	url = https://github.com/suan/vim-instant-markdown
