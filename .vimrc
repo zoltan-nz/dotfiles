@@ -62,10 +62,7 @@ set lazyredraw " Redraw only when we need to
 " Mouse activated
 set mouse=a
 set mousehide
-
-if &term =~ '^screen'
-  set ttymouse=xterm2
-endif
+set ttymouse=xterm2
 
 scriptencoding utf-8
 " Save file when focus lost
@@ -190,6 +187,9 @@ nnoremap E $
 
 :let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
+" Change cursorline highlight when enter insert mode
+au InsertEnter,InsertLeave * set cul!
+
 " iTerm2
 if $TERM_PROGRAM =~ "iTerm"
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -206,6 +206,15 @@ else
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
+" gnome-terminal v2
+if exists('term') && term =~ "^gnome-terminal"
+  if has("autocmd")
+    au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+    au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
+    au VimLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
+  endif
+endif
+
 if &term =~ '^xterm\\|rxvt'
     " solid underscore
     let &t_SI .= "\<Esc>[4 q"
@@ -217,6 +226,7 @@ if &term =~ '^xterm\\|rxvt'
     " 5 -> blinking vertical bar
     " 6 -> solid vertical bar
 endif
+
 " highlight last inserted text
 nnoremap gV `[v`]
 
