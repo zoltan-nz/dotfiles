@@ -259,3 +259,6 @@
 [submodule ".vim/bundle/vim-instant-markdown"]
 	path = .vim/bundle/vim-instant-markdown
 	url = https://github.com/suan/vim-instant-markdown
+[submodule ".vim/bundle/xml.vim"]
+	path = .vim/bundle/xml.vim
+	url = https://github.com/othree/xml.vim

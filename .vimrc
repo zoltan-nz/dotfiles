@@ -6,18 +6,16 @@ execute pathogen#infect()
 
 let mapleader=","
 
-let g:user_emmet_expandabbr_key='<Tab>'
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 filetype plugin indent on
-" set omnifunc=syntaxcomplete#Complete
+set omnifunc=syntaxcomplete#Complete
 
 """""""""
 " LEADER
 """""""""
 
 " Update ctags
-noremap <Leader>T :!ctags-proj.sh<CR>
+noremap <Leader>T :!tag-generator<CR>
 " Switch between two files
 nnoremap <Leader>g :e#<CR>
 " Save file
@@ -29,7 +27,10 @@ noremap <Leader>s :update<CR>
 
 " Color - sensible implements
 syntax enable
-colorscheme Tomorrow-Night-Eighties
+set background=dark
+" Need this for iTerm, otherwise colors would be mixed
+let g:solarized_termcolors=256
+colorscheme solarized
 
 " Guifont
 if has('gui_running')
@@ -46,7 +47,7 @@ function! s:initialize_powerline() abort
   endif
 endfunction
 
-augroup vim-pyenv-custom-augroup
+augroup vim_pyenv_custom_augroup
   autocmd! *
   autocmd User vim-pyenv-activate-post   call s:initialize_powerline()
   autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
@@ -65,8 +66,15 @@ set mousehide
 set ttymouse=xterm2
 
 scriptencoding utf-8
+
 " Save file when focus lost
-au FocusLost * :wa
+augroup auto_save
+  autocmd! *
+  au FocusLost * :wa
+  au CursorHoldI,CompleteDone * :wa
+  au CursorHold,InsertLeave * :wa
+augroup END
+
 set autoread
 
 "markdown
@@ -207,7 +215,7 @@ else
 endif
 
 " gnome-terminal v2
-if exists('term') && term =~ "^gnome-terminal"
+if $TERM_PROGRAM =~ "gnome"
   if has("autocmd")
     au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
     au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
@@ -233,29 +241,10 @@ nnoremap gV `[v`]
 set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
 
-" Tab management
-" nmap <c-t> :tabnew<cr>
-nmap tw :tabclose<cr>
-" Jump to first tab: 1gt, second tab: 2gt
+" ============
+"    CTRL-P
+" ============
 
-" Jumping between parenthesis, use %
-" Use [{ for jumping back
-" Use gd for local declaration.
-
-" CTRL-N auto compleat.
-" Record macro: qa -> record in register 'a', finish with type q again.
-" Repeate macro: @a
-
-" Install silver searcher
-" https://github.com/ggreer/the_silver_searcher
-" brew install the_silver_searcher
-" Download ag.vim
-" cd ~/.vim/bundle && git clone https://github.com/rking/ag.vim ag && echo
-" set runtimepath^=~/.vim/bundle/ag" >> ~/.vimrc
-" set runtimepath^=~/.vim/bundle/ag
-" nnoremap <leader>a :Ag<space>
-
-" CtrlP settings
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 1
@@ -305,6 +294,17 @@ let g:ctrlp_prompt_mappings = {
             \ 'OpenMulti()':          ['<c-o>'],
             \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
             \ }
+
+" ===========
+"    EMMET
+" ===========
+
+
+" Enable just for html/css/hbs
+let g:user_emmet_install_global=0
+autocmd FileType html,css,hbs EmmetInstall
+
+imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " toggle between number and relativenumber
 function! ToggleNumber()
@@ -501,3 +501,17 @@ au VimLeave * :!clear
 " set statusline+=%#warningmsg#
 " set statusline+=%{SyntasticStatuslineFlag()}
 " set statusline+=%*
+"
+" Tab management
+" nmap <c-t> :tabnew<cr>
+" nmap tw :tabclose<cr>
+" Jump to first tab: 1gt, second tab: 2gt
+
+" Jumping between parenthesis, use %
+" Use [{ for jumping back
+" Use gd for local declaration.
+
+" CTRL-N auto compleat.
+" Record macro: qa -> record in register 'a', finish with type q again.
+" Repeate macro: @a
+
