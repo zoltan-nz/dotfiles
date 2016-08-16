@@ -262,9 +262,3 @@
 [submodule ".vim/bundle/xml.vim"]
 	path = .vim/bundle/xml.vim
 	url = https://github.com/othree/xml.vim
-[submodule "tlib_vim"]
-	path = tlib_vim
-	url = https://github.com/tomtom/tlib_vim.git
-[submodule "vim-addon-mw-utils"]
-	path = vim-addon-mw-utils
-	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
