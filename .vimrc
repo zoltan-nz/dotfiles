@@ -32,6 +32,12 @@ set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
 
+set list " Shows a dot when typed
+
+" Insert a new line before or after Enter or Shift-Enter
+nmap <S-Enter> O<Esc>
+nmap <CR> o<Esc>
+
 " Guifont
 if has('gui_running')
     set guifont=Meslo\ LG\ S\ for\ Powerline:h17
@@ -69,7 +75,7 @@ scriptencoding utf-8
 
 " Save file when focus lost
 augroup auto_save
-  autocmd! *
+  " autocmd! *
   au FocusLost * :wa
   au CursorHoldI,CompleteDone * :wa
   au CursorHold,InsertLeave * :wa
@@ -146,6 +152,10 @@ set history=100
 " Remove white spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
 
+" =============
+"     SEARCH
+" =============
+
 " Highlight search
 set hlsearch
 " Turn off highlight :noh
@@ -156,6 +166,7 @@ nnoremap <Leader><Space> :nohlsearch<CR>
 
 " small is case insensitive
 set smartcase
+set ignorecase
 
 " Show matching parenthesis
 set showmatch
@@ -347,7 +358,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " Setup shortcuts for jumping between windows
 map <C-h> <C-w>h
 map <C-j> <C-w>j
-map <C-i> <C-w>k
+map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 " Moving lines up and down with Alt-j and Alt-k. Have to use special character
@@ -363,7 +374,6 @@ vnoremap ˚ :m '<-2<CR>gv=gv
 
 " Enables HTML/CSS syntax highlighting in your JavaScript file.
 let g:javascript_enable_domhtmlcss = 1
-
 
 " Handlebar, mustache support
 " git clone git://github.com/mustache/vim-mustache-handlebars.git bundle/mustache
