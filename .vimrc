@@ -34,10 +34,6 @@ colorscheme solarized
 
 set list " Shows a dot when typed
 
-" Insert a new line before or after Enter or Shift-Enter
-nmap <S-Enter> O<Esc>
-nmap <CR> o<Esc>
-
 " Guifont
 if has('gui_running')
     set guifont=Meslo\ LG\ S\ for\ Powerline:h17
@@ -77,7 +73,7 @@ scriptencoding utf-8
 augroup auto_save
   " autocmd! *
   au FocusLost * :wa
-  au CursorHoldI,CompleteDone * :wa
+  au CursorHoldI * :wa
   au CursorHold,InsertLeave * :wa
 augroup END
 
@@ -171,10 +167,19 @@ set ignorecase
 " Show matching parenthesis
 set showmatch
 
+" Setup ack as the default grep
+set grepprg=ack\ --nogroup\ --column\ $*
+set grepformat=%f:%l:%c:%m
+
+" ================
+"   FILE FORMATS
+" ================
 " xml files will be formatted with xmllint
 au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
-" Folding
+" =============
+"    FOLDING
+" =============
 set foldenable " enable folding
 set foldlevelstart=10 " open most folds by default
 set foldnestmax=10      " 10 nested fold max
@@ -249,9 +254,9 @@ endif
 " highlight last inserted text
 nnoremap gV `[v`]
 
-" duplicate the actual line
-nnoremap <C-d> Vyp
-inoremap <C-d> <esc>Vypi
+" duplicate the actual line, keeping the cursor position
+" nnoremap <C-d> mzyyp`z
+" inoremap <C-d> <esc>mzyyp`zi
 
 set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
@@ -486,6 +491,9 @@ nnoremap <C-W><C-F> :call GotoFile("new")<CR>
 
 au VimLeave * :!clear
 
+if filereadable(expand("$HOME/.vimrc.local"))
+  source $HOME/.vimrc.local
+endif
 " ================
 "       NOTES
 " ================
