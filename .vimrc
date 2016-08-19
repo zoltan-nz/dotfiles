@@ -72,11 +72,12 @@ scriptencoding utf-8
 " Save file when focus lost
 augroup auto_save
   " autocmd! *
-  au FocusLost * :wa
-  au CursorHoldI * :wa
-  au CursorHold,InsertLeave * :wa
+  au BufLeave,FocusLost * silent! wall
+  au CursorHoldI * silent! wall
+  au CursorHold,InsertLeave * silent! wall
 augroup END
 
+set autowriteall " Automatically write when leaving a buffer
 set autoread
 
 "markdown
@@ -93,8 +94,6 @@ if has('clipboard')
         set clipboard=unnamed
     endif
 endif
-
-set autowrite " Automatically write when leaving a buffer
 
 set tabstop=2 " number of visual spaces per TAB
 set softtabstop=2 " number of spaces in tab when editing
@@ -492,7 +491,7 @@ nnoremap <C-W><C-F> :call GotoFile("new")<CR>
 au VimLeave * :!clear
 
 if filereadable(expand("$HOME/.vimrc.local"))
-  source $HOME/.vimrc.local
+  silent! source $HOME/.vimrc.local
 endif
 " ================
 "       NOTES
