@@ -23,7 +23,7 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
 # --- ZSH PLUGINS ---
 
-plugins=(git zsh-completions zsh-autosuggestions rails git-extras httpie npm nvm web-search rbenv pyenv fasd colored-man-pages tmux)
+plugins=(git zsh-completions zsh-autosuggestions nvm rbenv pyenv fasd tmux)
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
@@ -33,7 +33,8 @@ plugins=(git zsh-completions zsh-autosuggestions rails git-extras httpie npm nvm
 
 source $ZSH/oh-my-zsh.sh
 
-# zsh-syntax-highlighting - https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+# zsh-syntax-highlighting - https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.msdiijjuuuuuuuuuuuuuuuuuu:q
+# fd
 source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # https://github.com/zsh-users/zsh-history-substring-search
@@ -42,7 +43,7 @@ source $ZSH_CUSTOM/plugins/zsh-history-substring-search/zsh-history-substring-se
 # --- ZSH Completions plugin ---
 
 # https://github.com/zsh-users/zsh-completions
-autoload -U compinit && compinit
+# autoload -U compinit && compinit
 
 ######################
 #        ALIAS       #
