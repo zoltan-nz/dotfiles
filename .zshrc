@@ -23,7 +23,7 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
 # --- ZSH PLUGINS ---
 
-plugins=(git zsh-completions zsh-autosuggestions nvm rbenv pyenv fasd tmux)
+plugins=(git zsh-completions zsh-autosuggestions nvm fasd tmux)
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
@@ -33,8 +33,7 @@ plugins=(git zsh-completions zsh-autosuggestions nvm rbenv pyenv fasd tmux)
 
 source $ZSH/oh-my-zsh.sh
 
-# zsh-syntax-highlighting - https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.msdiijjuuuuuuuuuuuuuuuuuu:q
-# fd
+# zsh-syntax-highlighting - https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
 source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # https://github.com/zsh-users/zsh-history-substring-search
@@ -90,6 +89,7 @@ export HOMEBREW_GITHUB_API_TOKEN=$HOMEBREW_GITHUB_API_TOKEN
 ### ==== RBENV ====
 
 # curl https://raw.githubusercontent.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
+# git clone https://github.com/sstephenson/ruby-build ~/.rbenv/plugins/ruby-build
 export RBENV_ROOT="${HOME}/.rbenv"
 if [ -d "${RBENV_ROOT}" ]; then
   export PATH="${RBENV_ROOT}/bin:${PATH}"
@@ -99,18 +99,17 @@ fi
 ### === NVM ===
 
 # git clone https://github.com/creationix/nvm ~/.nvm
-# git clone https://github.com/sstephenson/ruby-build ~/.rbenv/plugins/ruby-build
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 ### === PYENV ===
 
 # curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
-  export PATH="~/.pyenv/bin:$PATH"
+  export PATH="${PYENV_ROOT}/bin:$PATH"
   eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
+  # eval "$(pyenv virtualenv-init -)"
 fi
 
 # Binding Alt+left and Alt+right jumping words
