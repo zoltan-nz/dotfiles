@@ -262,3 +262,6 @@
 [submodule ".vim/bundle/xml.vim"]
 	path = .vim/bundle/xml.vim
 	url = https://github.com/othree/xml.vim
+[submodule ".fonts/Menlo-for-Powerline"]
+	path = .fonts/Menlo-for-Powerline
+	url = https://github.com/abertsch/Menlo-for-Powerline
