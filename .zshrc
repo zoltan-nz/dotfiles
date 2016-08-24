@@ -23,7 +23,7 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
 # --- ZSH PLUGINS ---
 
-plugins=(git zsh-completions zsh-autosuggestions nvm fasd tmux)
+plugins=(git zsh-completions zsh-autosuggestions nvm fasd)
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
@@ -48,7 +48,10 @@ source $ZSH_CUSTOM/plugins/zsh-history-substring-search/zsh-history-substring-se
 #        ALIAS       #
 ######################
 
-alias vi="vim"
+alias tmux="TERM=xterm-256color tmux"
+
+alias vi="nvim"
+alias vim="nvim"
 
 alias zshconfig="vim $DOTFILES/.zshrc"
 

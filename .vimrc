@@ -77,15 +77,15 @@ augroup auto_save
   au CursorHold,InsertLeave * silent! wall
 augroup END
 
+" autosave when switch to a tmux pane
+let g:tmux_navigator_save_on_switch = 1
+
 set autowriteall " Automatically write when leaving a buffer
 set autoread
 
 "markdown
 "https://github.com/suan/vim-instant-markdown
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
-" autosave when switch to a tmux pane
-let g:tmux_navigator_save_on_switch = 1
 
 if has('clipboard')
     if has('unnamedplus')  " When possible use + register for copy-paste
@@ -436,6 +436,8 @@ map <C-c> :call NERDComment(0, "toggle")<CR>
 if has('nvim')
   let g:deoplete#enable_at_startup = 1
 endif
+
+let g:ycm_collect_identifiers_from_tags_files = 1
 
 autocmd BufWritePost *
             \ if filereadable('tags') |
