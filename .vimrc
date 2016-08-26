@@ -55,7 +55,10 @@ augroup vim_pyenv_custom_augroup
   autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
 augroup END
 
-set cursorline " Highlight current line
+" set cursorline " Highlight current line
+" Change cursorline highlight when enter insert mode
+au InsertEnter * set cursorline
+au InsertLeave * set nocursorline
 set number     " Show line numbers
 set relativenumber
 set showcmd    " Show command in bottom bar
@@ -210,9 +213,6 @@ nnoremap E $
 
 :let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
-" Change cursorline highlight when enter insert mode
-au InsertEnter,InsertLeave * set cul!
-
 " iTerm2
 if $TERM_PROGRAM =~ "iTerm"
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
@@ -249,9 +249,6 @@ if &term =~ '^xterm\\|rxvt'
     " 5 -> blinking vertical bar
     " 6 -> solid vertical bar
 endif
-
-" highlight last inserted text
-nnoremap gV `[v`]
 
 " duplicate the actual line, keeping the cursor position
 " nnoremap <C-d> mzyyp`z
