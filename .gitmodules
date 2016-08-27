@@ -265,3 +265,6 @@
 [submodule ".fonts/Menlo-for-Powerline"]
 	path = .fonts/Menlo-for-Powerline
 	url = https://github.com/abertsch/Menlo-for-Powerline
+[submodule ".vim/bundle/vim-jsbeautify"]
+	path = .vim/bundle/vim-jsbeautify
+	url = https://github.com/maksimr/vim-jsbeautify
