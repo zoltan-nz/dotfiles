@@ -192,6 +192,7 @@ set foldmethod=indent " fold based on indent level
 " Set list shows invisible chars
 " set list
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+highlight SpecialKey term=NONE cterm=NONE ctermfg=239 ctermbg=NONE guifg=Cyan
 
 " Remap :
 nnoremap ; :

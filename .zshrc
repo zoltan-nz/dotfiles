@@ -48,10 +48,11 @@ source $ZSH_CUSTOM/plugins/zsh-history-substring-search/zsh-history-substring-se
 #        ALIAS       #
 ######################
 
+# This must have for a proper color support in old gnome-terminal!!! And don't change global TERM!!!
 alias tmux="TERM=xterm-256color tmux"
 
 alias zshconfig="vim $DOTFILES/.zshrc"
-alias vimconfig="vim $DOTFILES/.vimconfig"
+alias vimconfig="vim $DOTFILES/.vimrc"
 
 alias fs="foreman start"
 
