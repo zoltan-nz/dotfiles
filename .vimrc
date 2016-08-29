@@ -2,7 +2,11 @@
 " Zoltan's vim config
 
 set nocompatible          " Must be first line
-execute pathogen#infect()
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
+endif
+
+" execute pathogen#infect()
 
 let mapleader=","
 

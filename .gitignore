@@ -3,3 +3,6 @@ __pycache__
 init.vim
 .init.vim*
 doc
+.vim/bundle
+!.vim/bundle/Vundle.vim
+.vim/view
