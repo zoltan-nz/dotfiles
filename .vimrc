@@ -39,8 +39,8 @@ set list " Shows a dot when typed
 
 " Guifont
 if has('gui_running')
-    set guifont=Meslo\ LG\ S\ for\ Powerline:h17
-    set guioptions+=c "Stop opening dialogs
+  set guifont=Meslo\ LG\ S\ for\ Powerline:h17
+  set guioptions+=c "Stop opening dialogs
 endif
 
 function! s:initialize_powerline() abort
@@ -94,11 +94,11 @@ set autoread
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 if has('clipboard')
-    if has('unnamedplus')  " When possible use + register for copy-paste
-        set clipboard=unnamed,unnamedplus
-    else         " On mac and Windows, use * register for copy-paste
-        set clipboard=unnamed
-    endif
+  if has('unnamedplus')  " When possible use + register for copy-paste
+    set clipboard=unnamed,unnamedplus
+  else         " On mac and Windows, use * register for copy-paste
+    set clipboard=unnamed
+  endif
 endif
 
 set tabstop=2 " number of visual spaces per TAB
@@ -124,15 +124,15 @@ au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])
 
 " Restore cursor position
 function! ResCur()
-    if line("'\"") <= line("$")
-        silent! normal! g`"
-        return 1
-    endif
+  if line("'\"") <= line("$")
+    silent! normal! g`"
+    return 1
+  endif
 endfunction
 
 augroup resCur
-    autocmd!
-    autocmd BufWinEnter * call ResCur()
+  autocmd!
+  autocmd BufWinEnter * call ResCur()
 augroup END
 
 " Default split is right and below.
@@ -219,9 +219,9 @@ nnoremap E $
 
 " iTerm2
 if $TERM_PROGRAM =~ "iTerm"
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
 " TMUX
@@ -243,15 +243,15 @@ if $SSH_CALLER !~ "mac" && $TERM_PROGRAM =~ "gnome"
 endif
 
 if &term =~ '^xterm\\|rxvt'
-    " solid underscore
-    let &t_SI .= "\<Esc>[4 q"
-    " solid block
-    let &t_EI .= "\<Esc>[2 q"
-    " 1 or 0 -> blinking block
-    " 3 -> blinking underscore
-    " Recent versions of xterm (282 or above) also support
-    " 5 -> blinking vertical bar
-    " 6 -> solid vertical bar
+  " solid underscore
+  let &t_SI .= "\<Esc>[4 q"
+  " solid block
+  let &t_EI .= "\<Esc>[2 q"
+  " 1 or 0 -> blinking block
+  " 3 -> blinking underscore
+  " Recent versions of xterm (282 or above) also support
+  " 5 -> blinking vertical bar
+  " 6 -> solid vertical bar
 endif
 
 " duplicate the actual line, keeping the cursor position
@@ -279,41 +279,41 @@ let g:ctrlp_custom_ignore = {
       \ }
 
 let g:ctrlp_prompt_mappings = {
-            \ 'PrtBS()':              ['<bs>', '<c-]>'],
-            \ 'PrtDelete()':          ['<del>'],
-            \ 'PrtDeleteWord()':      ['<c-w>'],
-            \ 'PrtClear()':           ['<c-u>'],
-            \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
-            \ 'PrtSelectMove("k")':   ['<c-k>', '<up>'],
-            \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
-            \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
-            \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
-            \ 'PrtSelectMove("d")':   ['<PageDown>', '<kPageDown>'],
-            \ 'PrtHistory(-1)':       ['<c-n>'],
-            \ 'PrtHistory(1)':        ['<c-p>'],
-            \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
-            \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
-            \ 'AcceptSelection("t")': ['<c-t>'],
-            \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
-            \ 'ToggleFocus()':        ['<s-tab>'],
-            \ 'ToggleRegex()':        ['<c-r>'],
-            \ 'ToggleByFname()':      ['<c-d>'],
-            \ 'ToggleType(1)':        ['<c-f>', '<c-up>'],
-            \ 'ToggleType(-1)':       ['<c-b>', '<c-down>'],
-            \ 'PrtExpandDir()':       ['<tab>'],
-            \ 'PrtInsert("c")':       ['<MiddleMouse>', '<insert>'],
-            \ 'PrtInsert()':          ['<c-\>'],
-            \ 'PrtCurStart()':        ['<c-a>'],
-            \ 'PrtCurEnd()':          ['<c-e>'],
-            \ 'PrtCurLeft()':         ['<c-h>', '<left>', '<c-^>'],
-            \ 'PrtCurRight()':        ['<c-l>', '<right>'],
-            \ 'PrtClearCache()':      ['<F5>'],
-            \ 'PrtDeleteEnt()':       ['<F7>'],
-            \ 'CreateNewFile()':      ['<c-y>'],
-            \ 'MarkToOpen()':         ['<c-z>'],
-            \ 'OpenMulti()':          ['<c-o>'],
-            \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
-            \ }
+      \ 'PrtBS()':              ['<bs>', '<c-]>'],
+      \ 'PrtDelete()':          ['<del>'],
+      \ 'PrtDeleteWord()':      ['<c-w>'],
+      \ 'PrtClear()':           ['<c-u>'],
+      \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
+      \ 'PrtSelectMove("k")':   ['<c-k>', '<up>'],
+      \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
+      \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
+      \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
+      \ 'PrtSelectMove("d")':   ['<PageDown>', '<kPageDown>'],
+      \ 'PrtHistory(-1)':       ['<c-n>'],
+      \ 'PrtHistory(1)':        ['<c-p>'],
+      \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
+      \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
+      \ 'AcceptSelection("t")': ['<c-t>'],
+      \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
+      \ 'ToggleFocus()':        ['<s-tab>'],
+      \ 'ToggleRegex()':        ['<c-r>'],
+      \ 'ToggleByFname()':      ['<c-d>'],
+      \ 'ToggleType(1)':        ['<c-f>', '<c-up>'],
+      \ 'ToggleType(-1)':       ['<c-b>', '<c-down>'],
+      \ 'PrtExpandDir()':       ['<tab>'],
+      \ 'PrtInsert("c")':       ['<MiddleMouse>', '<insert>'],
+      \ 'PrtInsert()':          ['<c-\>'],
+      \ 'PrtCurStart()':        ['<c-a>'],
+      \ 'PrtCurEnd()':          ['<c-e>'],
+      \ 'PrtCurLeft()':         ['<c-h>', '<left>', '<c-^>'],
+      \ 'PrtCurRight()':        ['<c-l>', '<right>'],
+      \ 'PrtClearCache()':      ['<F5>'],
+      \ 'PrtDeleteEnt()':       ['<F7>'],
+      \ 'CreateNewFile()':      ['<c-y>'],
+      \ 'MarkToOpen()':         ['<c-z>'],
+      \ 'OpenMulti()':          ['<c-o>'],
+      \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
+      \ }
 
 " ===========
 "    EMMET
@@ -328,24 +328,24 @@ imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 " toggle between number and relativenumber
 function! ToggleNumber()
-    if(&relativenumber == 1)
-        set norelativenumber
-        set number
-    else
-        set relativenumber
-    endif
+  if(&relativenumber == 1)
+    set norelativenumber
+    set number
+  else
+    set relativenumber
+  endif
 endfunc
 
 " strips trailing whitespace at the end of files.
 function! <SID>StripTrailingWhitespaces()
-    " save last search & cursor position
-    let _s=@/
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    let @/=_s
-    call
-    cursor(l, c)
+  " save last search & cursor position
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  let @/=_s
+  call
+  cursor(l, c)
 endfunction
 
 " NERDTree
@@ -423,27 +423,90 @@ map <C-c> :call NERDComment(0, "toggle")<CR>
 
 " Rails vim
 
-" YouCompleteMe Settings
-" git submodule update --init --recursive
-" ./install.py --clang-completer
-" Only an older version can be compiled on Redhat 6.6
-" https://github.com/Valloric/ycmd/issues/552
-" This is the latest working tree:
-" https://github.com/Valloric/YouCompleteMe/tree/0de1c0c9bb13ce82172b472c676035cd47cf6a6a
-
-" g:ycm_server_python_interpreter = '$HOME/.pyenv/shims/python'
-
 " Use deoplete.
 if has('nvim')
   let g:deoplete#enable_at_startup = 1
 endif
 
+if !has('nvim')
+  " Use neocomplete.
+  let g:neocomplete#enable_at_startup = 1
+  " Use smartcase.
+  let g:neocomplete#enable_smart_case = 1
+  " Set minimum syntax keyword length.
+  let g:neocomplete#sources#syntax#min_keyword_length = 2
+  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+  " Define dictionary.
+  let g:neocomplete#sources#dictionary#dictionaries = {
+        \ 'default' : '',
+        \ 'vimshell' : $HOME.'/.vimshell_hist',
+        \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+  " Define keyword.
+  if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+  endif
+  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+  " Plugin key-mappings.
+  inoremap <expr><C-g>     neocomplete#undo_completion()
+  inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+  " Recommended key-mappings.
+  " <CR>: close popup and save indent.
+  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+  function! s:my_cr_function()
+    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+    " For no inserting <CR> key.
+    return pumvisible() ? "\<C-y>" : "\<CR>"
+  endfunction
+  " <TAB>: completion.
+  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+  " <C-h>, <BS>: close popup and delete backword char.
+  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+  " Close popup by <Space>.
+  "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+  " AutoComplPop like behavior.
+  "let g:neocomplete#enable_auto_select = 1
+
+  " Shell like behavior(not recommended).
+  "set completeopt+=longest
+  "let g:neocomplete#enable_auto_select = 1
+  "let g:neocomplete#disable_auto_complete = 1
+  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+  " Enable omni completion.
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType hbs,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+  " Enable heavy omni completion.
+  if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+  endif
+  "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+  "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+  "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+  " For perlomni.vim setting.
+  " https://github.com/c9s/perlomni.vim
+  let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+endif
+
+
 let g:ycm_collect_identifiers_from_tags_files = 1
 
 autocmd BufWritePost *
-            \ if filereadable('tags') |
-            \   call system('ctags -a '.expand('%')) |
-            \ endif
+      \ if filereadable('tags') |
+      \   call system('ctags -a '.expand('%')) |
+      \ endif
 
 " Map TagbarToggle
 noremap <Leader>m :TagbarToggle<CR>
@@ -451,37 +514,37 @@ noremap <Leader>m :TagbarToggle<CR>
 " open file under cursor, source: https://github.com/amix/open_file_under_cursor.vim
 " ----- Emulate 'gf' but recognize :line format -----
 function! GotoFile(w)
-    let curword = expand("<cfile>")
-    if (strlen(curword) == 0)
-        return
-    endif
-    let matchstart = match(curword, ':\d\+$')
-    if matchstart > 0
-        let pos = '+' . strpart(curword, matchstart+1)
-        let fname = strpart(curword, 0, matchstart)
-    else
-        let pos = ""
-        let fname = curword
-    endif
+  let curword = expand("<cfile>")
+  if (strlen(curword) == 0)
+    return
+  endif
+  let matchstart = match(curword, ':\d\+$')
+  if matchstart > 0
+    let pos = '+' . strpart(curword, matchstart+1)
+    let fname = strpart(curword, 0, matchstart)
+  else
+    let pos = ""
+    let fname = curword
+  endif
 
-    " check exists file.
-    if filereadable(fname)
-        let fullname = fname
-    else
-        " try find file with prefix by working directory
-        let fullname = getcwd() . '/' . fname
-        if ! filereadable(fullname)
-            " the last try, using current directory based on file opened.
-            let fullname = expand('%:h') . '/' . fname
-        endif
+  " check exists file.
+  if filereadable(fname)
+    let fullname = fname
+  else
+    " try find file with prefix by working directory
+    let fullname = getcwd() . '/' . fname
+    if ! filereadable(fullname)
+      " the last try, using current directory based on file opened.
+      let fullname = expand('%:h') . '/' . fname
     endif
+  endif
 
-   " Open new window if requested
-    if a:w == "new"
-        new
-    endif
-    " Use 'find' so path is searched like 'gf' would
-    execute 'find ' . pos . ' ' . fname
+  " Open new window if requested
+  if a:w == "new"
+    new
+  endif
+  " Use 'find' so path is searched like 'gf' would
+  execute 'find ' . pos . ' ' . fname
 endfunction
 
 set isfname+=: " include colon in filenames
