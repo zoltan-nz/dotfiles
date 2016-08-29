@@ -28,8 +28,7 @@ noremap <Leader>s :update<CR>
 " Color - sensible implements
 syntax enable
 set background=dark
-" Need this for iTerm, otherwise colors would be mixed
-let g:solarized_termcolors=256
+let g:solarized_termcolors=256 " Need this for iTerm, otherwise colors would be mixed
 colorscheme solarized
 
 set list " Shows a dot when typed
@@ -231,7 +230,7 @@ else
 endif
 
 " gnome-terminal v2
-if $TERM_PROGRAM =~ "gnome"
+if $SSH_CALLER !~ "mac" && $TERM_PROGRAM =~ "gnome"
   if has("autocmd")
     au InsertEnter * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape ibeam"
     au InsertLeave * silent execute "!gconftool-2 --type string --set /apps/gnome-terminal/profiles/Default/cursor_shape block"
