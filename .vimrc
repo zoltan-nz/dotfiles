@@ -71,7 +71,9 @@ set lazyredraw " Redraw only when we need to
 " Mouse activated
 set mouse=a
 set mousehide
-set ttymouse=xterm2
+if !has('nvim')
+  set ttymouse=xterm2
+end
 
 scriptencoding utf-8
 
@@ -391,9 +393,13 @@ let g:mustache_abbreviations = 1
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_python_exec = 'python3'
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
 " Airline
 " https://github.com/bling/vim-airline
@@ -482,9 +488,11 @@ if !has('nvim')
   " Enable omni completion.
   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
   autocmd FileType hbs,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType js,es6.js,javascript setlocal omnifunc=javascriptcomplete#CompleteJS
   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+  let g:syntastic_javascript_checkers = ['eslint']
 
   " Enable heavy omni completion.
   if !exists('g:neocomplete#sources#omni#input_patterns')
