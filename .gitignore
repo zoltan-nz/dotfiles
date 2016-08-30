@@ -3,3 +3,8 @@ __pycache__
 init.vim
 .init.vim*
 doc
+.vim/view/
+.vim/bundle/**/*
+!.vim/bunlde/Vundle.vim
+doc/tags
+tags
