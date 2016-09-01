@@ -104,6 +104,9 @@ fi
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
+# Copy the actual nvm node to system folder
+alias nvmcopysystem="n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local"
+
 ### === PYENV ===
 
 # curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
@@ -124,3 +127,6 @@ elif [ "$TERM" =~ "^screen" ]; then
   bindkey '^[[1;3C' forward-word
 fi
 
+# nvim Ctrl-H fix
+infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
+tic $TERM.ti
