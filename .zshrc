@@ -49,7 +49,7 @@ source $ZSH_CUSTOM/plugins/zsh-history-substring-search/zsh-history-substring-se
 ######################
 
 # This must have for a proper color support in old gnome-terminal!!! And don't change global TERM!!!
-alias tmux="TERM=xterm-256color tmux"
+alias tmux="TERM=xterm-256color tmux attach || tmux new"
 
 alias zshconfig="vim $DOTFILES/.zshrc"
 alias vimconfig="vim $DOTFILES/.vimrc"
@@ -128,5 +128,6 @@ elif [ "$TERM" =~ "^screen" ]; then
 fi
 
 # nvim Ctrl-H fix
-infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > $TERM.ti
-tic $TERM.ti
+infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.$TERM.ti
+tic ~/.$TERM.ti
+
