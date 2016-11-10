@@ -78,6 +78,8 @@ alias gsa="git submodule add "
 alias c="clear"
 alias x="exit"
 
+alias markd="grip; open http://localhost:6419"
+
 # Load local alias file if exists
 [ -s "$HOME/.alias" ] && source ~/.alias
 
