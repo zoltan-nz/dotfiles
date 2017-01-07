@@ -5,7 +5,7 @@
 # The path of the cloned dotfiles repository, default is ~/projects/dotfiles
 export DOTFILES=
 
-# Could be random, agnoster, obraun, jispwoso, mira. The default is agnoster.
+# Could be random, agnoster, obraun, jispwoso, mira, tjkirch_mod. The default is agnoster.
 export LOCAL_ZSH_THEME=
 
 # Homebrew uses for searching packages. Without it search is limited.
