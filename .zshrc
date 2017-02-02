@@ -69,7 +69,7 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
   alias ls="ls --color -h --group-directories-first"
 fi
 
-# Vim with v, f comes from fasd
+# Vim with v; f installed by fasd
 alias v="f -e vim"
 alias gv="fasd -e mvim"
 
@@ -109,6 +109,9 @@ fi
 # Copy the actual nvm node to system folder
 alias nvmcopysystem="n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local"
 
+# Node packages installed by Yarn
+export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
+
 ### === PYENV ===
 
 # curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
@@ -132,4 +135,3 @@ fi
 # nvim Ctrl-H fix
 # infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.$TERM.ti
 # tic ~/.$TERM.ti
-
