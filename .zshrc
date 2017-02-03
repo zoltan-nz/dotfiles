@@ -110,7 +110,7 @@ fi
 alias nvmcopysystem="n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local"
 
 # Node packages installed by Yarn
-export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
+# export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 
 ### === PYENV ===
 
