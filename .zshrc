@@ -23,7 +23,7 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
 # --- ZSH PLUGINS ---
 
-plugins=(git zsh-completions zsh-autosuggestions nvm fasd tmux)
+plugins=(grunt git zsh-completions zsh-autosuggestions nvm fasd tmux ruby rails rbenv rake)
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
@@ -100,6 +100,7 @@ if [ -d "${RBENV_ROOT}" ]; then
   eval "$(rbenv init -)"
 fi
 
+export RUBYGEMS_GEMDEPS=_
 ### === NVM ===
 
 # git clone https://github.com/creationix/nvm ~/.nvm
