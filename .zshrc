@@ -61,10 +61,10 @@ alias ga="git number add"
 alias vn="git number -c vim"
 
 # On Mac, please `brew install coreutils`
-if [ "$(uname)" == "Darwin" ]; then
+if [ "$(uname)" = "Darwin" ]; then
   alias ls="gls --color -ah --group-directories-first --sort=extension"
   alias lsa="gls --color -lah --group-directories-first --sort=extension"
-elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
   # On Linux
   alias ls="ls --color -h --group-directories-first"
 fi
