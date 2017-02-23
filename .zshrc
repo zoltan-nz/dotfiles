@@ -23,7 +23,7 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
 # --- ZSH PLUGINS ---
 
-plugins=(grunt git zsh-completions zsh-autosuggestions nvm fasd tmux ruby rails rbenv rake)
+plugins=(grunt git zsh-completions zsh-autosuggestions nvm fasd tmux ruby rails rbenv rake yarn)
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
