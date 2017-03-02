@@ -6,10 +6,7 @@ if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
 endif
 
-" execute pathogen#infect()
-
 let mapleader=","
-
 
 filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
