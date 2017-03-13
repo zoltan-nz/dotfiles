@@ -28,7 +28,7 @@ plugins=(grunt git zsh-completions zsh-autosuggestions nvm fasd tmux ruby rails 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
 # zsh-autosuggestions - git://github.com/zsh-users/zsh-autosuggestions
-# httpie - https://github.zohttps://github.com/jkbrzt/httpie
+# httpie - https://github.com/jkbrzt/httpie
 # fasd - https://github.com/clvv/fasd
 
 source $ZSH/oh-my-zsh.sh
@@ -59,6 +59,9 @@ alias fs="foreman start"
 alias gn="git number --column"
 alias ga="git number add"
 alias vn="git number -c vim"
+
+alias ws='webstorm'
+alias wstorm='webstorm'
 
 # On Mac, please `brew install coreutils`
 if [ "$(uname)" = "Darwin" ]; then
@@ -111,7 +114,7 @@ export RUBYGEMS_GEMDEPS=_
 alias nvmcopysystem="n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local"
 
 # Node packages installed by Yarn
-# export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
+export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
 
 ### === PYENV ===
 

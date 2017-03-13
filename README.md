@@ -1,7 +1,7 @@
 ### Installation
 
 ```
-git clone https://github.com/zoltan-nz/dotfiles/ ~/projects/dotfiles --recurse-submodules
+git clone git@github.com:zoltan-nz/dotfiles.git ~/projects/dotfiles --recurse-submodules
 ```
 
 Update submodules
