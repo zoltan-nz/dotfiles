@@ -23,7 +23,7 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
 # --- ZSH PLUGINS ---
 
-plugins=(grunt git zsh-completions zsh-autosuggestions nvm fasd tmux ruby rails rbenv rake yarn)
+plugins=(grunt git zsh-completions zsh-autosuggestions nvm fasd tmux)
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
@@ -81,7 +81,7 @@ alias gsa="git submodule add "
 alias c="clear"
 alias x="exit"
 
-alias markd="grip; open http://localhost:6419"
+# alias markd="(pid=\`cat /tmp/grip.pid\`;kill $pid;grip > /dev/null 2>1  &;echo $! > /tmp/grip.pid;open http://localhost:6419)"
 
 # Load local alias file if exists
 [ -s "$HOME/.alias" ] && source ~/.alias
@@ -114,7 +114,31 @@ export RUBYGEMS_GEMDEPS=_
 alias nvmcopysystem="n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local"
 
 # Node packages installed by Yarn
-export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+# export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# automatically switch to the supported node version whenever entering a directory that contains an .nvmrc file
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
 
 ### === PYENV ===
 
@@ -139,3 +163,5 @@ fi
 # nvim Ctrl-H fix
 # infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.$TERM.ti
 # tic ~/.$TERM.ti
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
