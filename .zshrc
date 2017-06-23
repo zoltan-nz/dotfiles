@@ -23,7 +23,7 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
 # --- ZSH PLUGINS ---
 
-plugins=(grunt git zsh-completions zsh-autosuggestions nvm fasd tmux)
+plugins=(grunt git zsh-completions zsh-autosuggestions nvm fasd tmux brew)
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
@@ -56,12 +56,8 @@ alias vimconfig="vim $DOTFILES/.vimrc"
 
 alias fs="foreman start"
 
-alias gn="git number --column"
-alias ga="git number add"
-alias vn="git number -c vim"
-
-alias ws='webstorm'
-alias wstorm='webstorm'
+alias ws='~/.bin/wstorm.js'
+alias wstorm="~/.bin/wstorm.js"
 
 # On Mac, please `brew install coreutils`
 if [ "$(uname)" = "Darwin" ]; then
@@ -107,14 +103,11 @@ export RUBYGEMS_GEMDEPS=_
 ### === NVM ===
 
 # git clone https://github.com/creationix/nvm ~/.nvm
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 # Copy the actual nvm node to system folder
 alias nvmcopysystem="n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local"
-
-# Node packages installed by Yarn
-# export PATH="$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # automatically switch to the supported node version whenever entering a directory that contains an .nvmrc file
 # place this after nvm initialization!
@@ -143,12 +136,12 @@ load-nvmrc
 ### === PYENV ===
 
 # curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-export PYENV_ROOT="${HOME}/.pyenv"
-if [ -d "${PYENV_ROOT}" ]; then
-  export PATH="${PYENV_ROOT}/bin:$PATH"
-  eval "$(pyenv init -)"
-  # eval "$(pyenv virtualenv-init -)"
-fi
+# export PYENV_ROOT="${HOME}/.pyenv"
+# if [ -d "${PYENV_ROOT}" ]; then
+#   export PATH="${PYENV_ROOT}/bin:$PATH"
+#   eval "$(pyenv init -)"
+#   # eval "$(pyenv virtualenv-init -)"
+# fi
 
 # Binding Alt+left and Alt+right jumping words
 # bindkey -e
@@ -163,5 +156,3 @@ fi
 # nvim Ctrl-H fix
 # infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.$TERM.ti
 # tic ~/.$TERM.ti
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
