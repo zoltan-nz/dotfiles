@@ -9,7 +9,7 @@ Update submodules
 git submodule update --recursive --remote
 ```
 
-Symlink all the files:
+Symlink the following files:
 ```
 .bin
 

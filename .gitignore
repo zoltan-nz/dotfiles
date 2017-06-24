@@ -7,3 +7,4 @@ doc
 !.vim/bundle/Vundle.vim
 .vim/view
 *.ti
+yarn.lock
