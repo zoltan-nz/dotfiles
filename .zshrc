@@ -56,9 +56,6 @@ alias vimconfig="vim $DOTFILES/.vimrc"
 
 alias fs="foreman start"
 
-alias ws='~/.bin/wstorm.js'
-alias wstorm="~/.bin/wstorm.js"
-
 # On Mac, please `brew install coreutils`
 if [ "$(uname)" = "Darwin" ]; then
   alias ls="gls --color -ah --group-directories-first --sort=extension"

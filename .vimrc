@@ -2,9 +2,6 @@
 " Zoltan's vim config
 
 set nocompatible          " Must be first line
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
 
 let mapleader=","
 
@@ -15,10 +12,9 @@ set omnifunc=syntaxcomplete#Complete
 " LEADER
 """""""""
 
-" Update ctags
-noremap <Leader>T :!tag-generator<CR>
 " Switch between two files
 nnoremap <Leader>g :e#<CR>
+
 " Save file
 noremap <Leader>s :update<CR>
 
@@ -30,7 +26,7 @@ noremap <Leader>s :update<CR>
 syntax enable
 set background=dark
 let g:solarized_termcolors=256 " Need this for iTerm, otherwise colors would be mixed
-colorscheme solarized
+colorscheme Tomorrow-Night
 
 set list " Shows a dot when typed
 
@@ -40,25 +36,11 @@ if has('gui_running')
   set guioptions+=c "Stop opening dialogs
 endif
 
-function! s:initialize_powerline() abort
-  if !has('nvim')
-    let major_version = pyenv#python#get_internal_major_version()
-    python3 from powerline.vim import setup as powerline_setup
-    python3 powerline_setup()
-    python3 del powerline_setup
-  endif
-endfunction
-
-augroup vim_pyenv_custom_augroup
-  autocmd! *
-  autocmd User vim-pyenv-activate-post   call s:initialize_powerline()
-  autocmd User vim-pyenv-deactivate-post call s:jedi_auto_force_py_version()
-augroup END
-
 " set cursorline " Highlight current line
 " Change cursorline highlight when enter insert mode
 au InsertEnter * set cursorline
 au InsertLeave * set nocursorline
+
 set number     " Show line numbers
 set relativenumber
 set showcmd    " Show command in bottom bar
@@ -260,71 +242,6 @@ endif
 set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
 
-" ============
-"    CTRL-P
-" ============
-
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 1
-let g:ctrlp_working_path_mode = 1
-
-" Ignore files in CtrlP
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-let g:ctrlp_custom_ignore = {
-      \ 'dir': '\v[\/](node_modules|bower_components|target|dist)|(\.(swp|ico|git|svn))$',
-      \ 'file': '\v\.(exe|so|dll)$',
-      \ 'link': 'some_bad_symbolic_links',
-      \ }
-
-let g:ctrlp_prompt_mappings = {
-      \ 'PrtBS()':              ['<bs>', '<c-]>'],
-      \ 'PrtDelete()':          ['<del>'],
-      \ 'PrtDeleteWord()':      ['<c-w>'],
-      \ 'PrtClear()':           ['<c-u>'],
-      \ 'PrtSelectMove("j")':   ['<c-j>', '<down>'],
-      \ 'PrtSelectMove("k")':   ['<c-k>', '<up>'],
-      \ 'PrtSelectMove("t")':   ['<Home>', '<kHome>'],
-      \ 'PrtSelectMove("b")':   ['<End>', '<kEnd>'],
-      \ 'PrtSelectMove("u")':   ['<PageUp>', '<kPageUp>'],
-      \ 'PrtSelectMove("d")':   ['<PageDown>', '<kPageDown>'],
-      \ 'PrtHistory(-1)':       ['<c-n>'],
-      \ 'PrtHistory(1)':        ['<c-p>'],
-      \ 'AcceptSelection("e")': ['<cr>', '<2-LeftMouse>'],
-      \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-s>'],
-      \ 'AcceptSelection("t")': ['<c-t>'],
-      \ 'AcceptSelection("v")': ['<c-v>', '<RightMouse>'],
-      \ 'ToggleFocus()':        ['<s-tab>'],
-      \ 'ToggleRegex()':        ['<c-r>'],
-      \ 'ToggleByFname()':      ['<c-d>'],
-      \ 'ToggleType(1)':        ['<c-f>', '<c-up>'],
-      \ 'ToggleType(-1)':       ['<c-b>', '<c-down>'],
-      \ 'PrtExpandDir()':       ['<tab>'],
-      \ 'PrtInsert("c")':       ['<MiddleMouse>', '<insert>'],
-      \ 'PrtInsert()':          ['<c-\>'],
-      \ 'PrtCurStart()':        ['<c-a>'],
-      \ 'PrtCurEnd()':          ['<c-e>'],
-      \ 'PrtCurLeft()':         ['<c-h>', '<left>', '<c-^>'],
-      \ 'PrtCurRight()':        ['<c-l>', '<right>'],
-      \ 'PrtClearCache()':      ['<F5>'],
-      \ 'PrtDeleteEnt()':       ['<F7>'],
-      \ 'CreateNewFile()':      ['<c-y>'],
-      \ 'MarkToOpen()':         ['<c-z>'],
-      \ 'OpenMulti()':          ['<c-o>'],
-      \ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
-      \ }
-
-" ===========
-"    EMMET
-" ===========
-
-
-" Enable just for html/css/hbs
-let g:user_emmet_install_global=0
-autocmd FileType html,css,hbs EmmetInstall
-
-imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
-
 " toggle between number and relativenumber
 function! ToggleNumber()
   if(&relativenumber == 1)
@@ -346,22 +263,6 @@ function! <SID>StripTrailingWhitespaces()
   call
   cursor(l, c)
 endfunction
-
-" NERDTree
-map <leader>n :NERDTreeFind<cr>
-map <leader>nn :NERDTreeToggle<cr>
-map <C-n> :NERDTreeToggle<CR>
-" Show hidden file as default
-let g:NERDTreeShowHidden=1
-" Ignore
-let NERDTreeIgnore=['\.git[[dir]]', '\.idea[[dir]]']
-let NERDTreeHijackNetrw=1
-
-" Show NERDTree automatically
-autocmd VimEnter * NERDTree | wincmd p
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | wincmd p | endif
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Setup shortcuts for jumping between windows
 map <C-h> <C-w>h
@@ -388,109 +289,11 @@ let g:javascript_enable_domhtmlcss = 1
 " mustache abbreviation on
 let g:mustache_abbreviations = 1
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_python_exec = 'python3'
-
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-" Airline
-" https://github.com/bling/vim-airline
-" https://github.com/vim-airline/vim-airline-themes
-let g:airline#extensions#tabline#enabled = 1
-
-" NERDCommenter
-" https://github.com/scrooloose/nerdcommenter
-" Add spaces after comment delimiters by default
-let g:NERDSpaceDelims = 1
-
-" Use compact syntax for prettified multi-line comments
-let g:NERDCompactSexyComs = 1
-
-" Align line-wise comment delimiters flush left instead of following code
-" indentation
-let g:NERDDefaultAlign = 'left'
-
-" Allow commenting and inverting empty lines (useful when commenting a region)
-let g:NERDCommentEmptyLines = 1
-
-" Enable trimming of trailing whitespace when uncommenting
-let g:NERDTrimTrailingWhitespace = 1
-
-" Toggle comments with CTRL-C
-map <C-c> :call NERDComment(0, "toggle")<CR>
-
-" Rails vim
-
-" Use deoplete.
-if has('nvim')
-  let g:deoplete#enable_at_startup = 1
-  if !exists('g:deoplete#omni#input_patterns')
-    let g:deoplete#omni#input_patterns = {}
-  endif
-endif
-
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-if !has('nvim')
-  " Use neocomplete.
-  let g:neocomplete#enable_at_startup = 1
-  " Use smartcase.
-  let g:neocomplete#enable_smart_case = 1
-  " Set minimum syntax keyword length.
-  let g:neocomplete#sources#syntax#min_keyword_length = 2
-  let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-  " Define dictionary.
-  let g:neocomplete#sources#dictionary#dictionaries = {
-        \ 'default' : '',
-        \ 'vimshell' : $HOME.'/.vimshell_hist',
-        \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-  " Define keyword.
-  if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-  endif
-  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-  " Plugin key-mappings.
-  inoremap <expr><C-g>     neocomplete#undo_completion()
-  inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-  " Recommended key-mappings.
-  " <C-h>, <BS>: close popup and delete backword char.
-  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-  " Close popup by <Space>.
-  "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-  " AutoComplPop like behavior.
-  "let g:neocomplete#enable_auto_select = 1
-
-  " Shell like behavior(not recommended).
-  "set completeopt+=longest
-  "let g:neocomplete#enable_auto_select = 1
-  "let g:neocomplete#disable_auto_complete = 1
-  "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-  " Enable heavy omni completion.
-  if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-  endif
-  "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-  "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-  "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-  " For perlomni.vim setting.
-  " https://github.com/c9s/perlomni.vim
-  let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-endif
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -498,12 +301,6 @@ autocmd FileType hbs,html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType js,es6.js,javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-let g:syntastic_javascript_checkers = ['eslint']
-
-" TERN
-let g:tern_show_argument_hints = 'on_hold'
-let g:tern_show_signature_in_pum = 1
 
 autocmd FileType javascript setlocal omnifunc=tern#Complete
 autocmd FileType javascript nnoremap <silent> <buffer> gb :TernDef<CR>
@@ -516,16 +313,6 @@ function! s:my_cr_function()
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-
-let g:ycm_collect_identifiers_from_tags_files = 1
-
-autocmd BufWritePost *
-      \ if filereadable('tags') |
-      \   call system('ctags -a '.expand('%')) |
-      \ endif
-
-" Map TagbarToggle
-noremap <Leader>m :TagbarToggle<CR>
 
 " open file under cursor, source: https://github.com/amix/open_file_under_cursor.vim
 " ----- Emulate 'gf' but recognize :line format -----
