@@ -8,3 +8,4 @@ doc
 .vim/view
 *.ti
 yarn.lock
+.netrwhist
