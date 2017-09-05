@@ -289,10 +289,6 @@ let g:javascript_enable_domhtmlcss = 1
 " mustache abbreviation on
 let g:mustache_abbreviations = 1
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Enable omni completion.

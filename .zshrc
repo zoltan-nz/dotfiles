@@ -23,7 +23,7 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
 # --- ZSH PLUGINS ---
 
-plugins=(grunt git zsh-completions zsh-autosuggestions nvm fasd tmux brew)
+plugins=(git zsh-completions zsh-autosuggestions fasd tmux docker)
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
@@ -104,11 +104,11 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 # Copy the actual nvm node to system folder
-alias nvmcopysystem="n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local"
+# alias nvmcopysystem="n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local"
 
 # automatically switch to the supported node version whenever entering a directory that contains an .nvmrc file
 # place this after nvm initialization!
-autoload -U add-zsh-hook
+# autoload -U add-zsh-hook
 load-nvmrc() {
   local node_version="$(nvm version)"
   local nvmrc_path="$(nvm_find_nvmrc)"
@@ -126,9 +126,9 @@ load-nvmrc() {
     nvm use default
   fi
 }
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
 
+# add-zsh-hook chpwd load-nvmrc
+load-nvmrc
 
 ### === PYENV ===
 
@@ -150,6 +150,6 @@ load-nvmrc
 #   bindkey '^[[1;3C' forward-word
 # fi
 
-# nvim Ctrl-H fix
+
 # infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.$TERM.ti
 # tic ~/.$TERM.ti
