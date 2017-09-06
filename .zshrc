@@ -97,6 +97,7 @@ if [ -d "${RBENV_ROOT}" ]; then
 fi
 
 export RUBYGEMS_GEMDEPS=_
+
 ### === NVM ===
 
 # git clone https://github.com/creationix/nvm ~/.nvm
@@ -106,7 +107,7 @@ export NVM_DIR="$HOME/.nvm"
 # Copy the actual nvm node to system folder
 # alias nvmcopysystem="n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local"
 
-# automatically switch to the supported node version whenever entering a directory that contains an .nvmrc file
+# Automatically switch to the supported node version whenever entering a directory that contains an .nvmrc file
 # place this after nvm initialization!
 # autoload -U add-zsh-hook
 load-nvmrc() {
