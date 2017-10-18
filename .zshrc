@@ -23,7 +23,7 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
 # --- ZSH PLUGINS ---
 
-plugins=(git zsh-completions zsh-autosuggestions fasd tmux docker)
+plugins=(git zsh-completions zsh-autosuggestions fasd tmux docker go)
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
@@ -141,6 +141,11 @@ load-nvmrc
 #   # eval "$(pyenv virtualenv-init -)"
 # fi
 
+### === GOLANG ===
+
+export PATH=$PATH:$HOME/.brew/opt/go/libexec/bin
+export GOPATH=$HOME/projects
+
 # Binding Alt+left and Alt+right jumping words
 # bindkey -e
 # if [ "$TERM" =~ "^xterm" ]; then
@@ -150,7 +155,6 @@ load-nvmrc
 #   bindkey '^[[1;3D' backward-word
 #   bindkey '^[[1;3C' forward-word
 # fi
-
 
 # infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.$TERM.ti
 # tic ~/.$TERM.ti
