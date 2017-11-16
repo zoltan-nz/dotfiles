@@ -26,7 +26,7 @@ noremap <Leader>s :update<CR>
 syntax enable
 set background=dark
 let g:solarized_termcolors=256 " Need this for iTerm, otherwise colors would be mixed
-colorscheme Tomorrow-Night
+" colorscheme Tomorrow-Night
 
 set list " Shows a dot when typed
 
