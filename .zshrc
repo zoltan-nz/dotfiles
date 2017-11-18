@@ -143,7 +143,7 @@ load-nvmrc
 
 ### === GOLANG ===
 
-export GOPATH=$HOME
+export GOPATH=$HOME/projects/go
 export PATH=$PATH:$HOME/.brew/opt/go/libexec/bin:$GOPATH/bin
 
 # Binding Alt+left and Alt+right jumping words
