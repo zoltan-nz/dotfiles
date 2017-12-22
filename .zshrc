@@ -134,12 +134,12 @@ load-nvmrc
 ### === PYENV ===
 
 # curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-# export PYENV_ROOT="${HOME}/.pyenv"
-# if [ -d "${PYENV_ROOT}" ]; then
-#   export PATH="${PYENV_ROOT}/bin:$PATH"
-#   eval "$(pyenv init -)"
-#   # eval "$(pyenv virtualenv-init -)"
-# fi
+export PYENV_ROOT="${HOME}/.pyenv"
+if [ -d "${PYENV_ROOT}" ]; then
+  export PATH="${PYENV_ROOT}/bin:$PATH"
+  eval "$(pyenv init -)"
+  # eval "$(pyenv virtualenv-init -)"
+fi
 
 ### === GOLANG ===
 
