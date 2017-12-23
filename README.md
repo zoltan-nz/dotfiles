@@ -22,9 +22,9 @@ $ ~/.brew/bin/brew zsh coreutils
 5. Symlink the following files:
 
 ```
-$ ln -s ~/projects/dotfiles/.bin ~/.bin && 
+$ ln -s ~/projects/dotfiles/.bin ~/.bin &&
 ln -s ~/projects/dotfiles/.bin ~/.bin &&
-ln -s ~/projects/dotfiles/.vimrc ~/.vimrc && 
+ln -s ~/projects/dotfiles/.vimrc ~/.vimrc &&
 ln -s ~/projects/dotfiles/.vimrc.bundles ~/.vimrc.bundles &&
 ln -s ~/projects/dotfiles/.zshrc ~/.zshrc &&
 ln -s ~/projects/dotfiles/.gemrc ~/.gemrc &&
@@ -49,4 +49,12 @@ $ nvm install 8
 
 9. Install iTerm2 themes
 
-10. Install rbenv and pyenv 
+10. Setup ruby environment
+
+* rbenv
+
+11. Setup python environment
+
+* pyenv
+
+12. Setup go environment
