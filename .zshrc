@@ -88,7 +88,7 @@ export HOMEBREW_GITHUB_API_TOKEN=$HOMEBREW_GITHUB_API_TOKEN
 
 ### ==== RBENV ====
 
-# curl https://raw.githubusercontent.com/fesplugas/rbenv-installer/master/bin/rbenv-installer | bash
+# git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 # git clone https://github.com/sstephenson/ruby-build ~/.rbenv/plugins/ruby-build
 export RBENV_ROOT="${HOME}/.rbenv"
 if [ -d "${RBENV_ROOT}" ]; then
