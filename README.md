@@ -1,25 +1,43 @@
-### Installation
+### Setup a mac with dotfiles
 
-1. Clone this project
+1. Install XCode.
+
+2. Setup git.
+
+```
+$ git config --global user.name ''
+$ git config --global user.email ''
+$ git config --global core.excludesfile ~/.gitignore
+```
+
+3. [Setup ssh keys](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
+
+
+4. Clone this repository in `~/projects/dotfiles`
 
 ```
 $ git clone git@github.com:zoltan-nz/dotfiles.git ~/projects/dotfiles --recurse-submodules
 ```
 
-2. Update submodules
+5. Update submodules
 
 ```
 $ git submodule update --recursive --remote
 ```
 
-3. Clone brew in ~/.brew
-4. Install zsh, coreutils, tmux, fasd
+6. Clone brew in ~/.brew
 
 ```
-$ ~/.brew/bin/brew zsh coreutils
+$ git clone git@github.com:Homebrew/brew.git ~/.brew
 ```
 
-5. Symlink the following files:
+7. Install zsh, coreutils, tmux, fasd
+
+```
+$ ~/.brew/bin/brew zsh coreutils tmux fasd
+```
+
+8. Symlink the following files:
 
 ```
 $ ln -s ~/projects/dotfiles/.bin ~/.bin &&
@@ -33,28 +51,26 @@ ln -s ~/projects/dotfiles/.tmux.util ~/.tmux.util &&
 cp ~/projects/dotfiles/.zshrc.local ~/.zshrc.local
 ```
 
-6. Clone .nvm
+9. Clone .nvm
 
 ```
 $ git clone https://github.com/creationix/nvm.git ~/.nvm
 ```
 
-7. Install Node.js
+10. Install Node.js
 
 ```
-$ nvm install 8
+$ ~/.nvm/nvm install 8
 ```
 
-8. Install powerline fonts (drag and drop)
+11. Install `Powerline` fonts (drag and drop)
 
-9. Install iTerm2 themes
+12. Install [iTerm2](https://www.iterm2.com/) `iTerm2` themes
 
-10. Setup ruby environment
+13. Install [Spectacle](https://www.spectacleapp.com/)
 
-* rbenv
+14. Setup ruby environment with `rbenv`
 
-11. Setup python environment
+15. Setup python environment with `pyenv`
 
-* pyenv
-
-12. Setup go environment
+16. Setup go environment
