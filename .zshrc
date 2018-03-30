@@ -23,7 +23,7 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
 # --- ZSH PLUGINS ---
 
-plugins=(git zsh-completions zsh-autosuggestions fasd tmux docker go)
+plugins=(git zsh-completions zsh-autosuggestions fasd tmux docker go kubectl zsh completion)
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
@@ -82,6 +82,8 @@ alias x="exit"
 ### === HOMEBREW ===
 
 # Install homebrew in your home folder ~/.brew
+# brew install zsh-completions
+fpath=(/Users/$USER/.brew/share/zsh-completions $fpath)
 
 # export HOMEBREW_CASK_OPTS="--caskroom=$HOME/.brew/caskroom --binarydir=$HOME/.bin"
 export HOMEBREW_GITHUB_API_TOKEN=$HOMEBREW_GITHUB_API_TOKEN
@@ -138,7 +140,7 @@ export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
   export PATH="${PYENV_ROOT}/bin:$PATH"
   eval "$(pyenv init -)"
-  # eval "$(pyenv virtualenv-init -)"
+  eval "$(pyenv virtualenv-init -)"
 fi
 
 ### === GOLANG ===
@@ -158,3 +160,16 @@ export PATH=$PATH:$HOME/.brew/opt/go/libexec/bin:$GOPATH/bin
 
 # infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.$TERM.ti
 # tic ~/.$TERM.ti
+#
+
+### === JENV ===
+# Check steps here: https://stackoverflow.com/questions/26252591/mac-os-x-and-multiple-java-versions/47699905#47699905
+# brew install jenv
+# brew tap caskroom/versions
+# brew cask search java
+
+export JENV_ROOT="${HOME}/.jenv"
+if [ -d "${JENV_ROOT}" ]; then
+  export PATH="${JENV_ROOT}/bin:$PATH"
+  eval "$(jenv init -)"
+fi
