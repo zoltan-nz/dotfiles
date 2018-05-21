@@ -5,7 +5,7 @@
 [ -s ~/.zshrc.local ] && source ~/.zshrc.local
 DOTFILES=${DOTFILES:-$HOME/projects/dotfiles}
 
-export PATH="$HOME/.bin:$HOME/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+export PATH="/Applications/Docker.app/Contents/Resources/bin:$HOME/.bin:$HOME/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
 ########################
 # --- ZSH SETTINGS --- #
