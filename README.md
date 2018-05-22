@@ -34,7 +34,7 @@ $ git clone git@github.com:Homebrew/brew.git ~/.brew
 7. Install zsh, coreutils, tmux, fasd
 
 ```
-$ ~/.brew/bin/brew zsh coreutils tmux fasd
+$ ~/.brew/bin/brew zsh coreutils tmux fasd mc rbenv pyenv jenv ruby-build
 ```
 
 8. Symlink the following files:
