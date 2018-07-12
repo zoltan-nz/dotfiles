@@ -9,3 +9,4 @@ doc
 *.ti
 yarn.lock
 .netrwhist
+.vscode
