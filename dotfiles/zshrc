@@ -1,5 +1,5 @@
 # IMPORTANT!
-# Copy ./.zshrc.local to ~/.zshrc.local and setup your environment variables
+# Copy ./dotfiles/zshrc.local.template to ~/.zshrc.local and setup your environment variables
 
 # Import your local profile file
 [ -s ~/.zshrc.local ] && source ~/.zshrc.local
@@ -7,12 +7,10 @@ DOTFILES=${DOTFILES:-$HOME/projects/dotfiles}
 
 export PATH="/Applications/Docker.app/Contents/Resources/bin:$HOME/.bin:$HOME/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
-########################
-# --- ZSH SETTINGS --- #
-########################
+### ===  ZSH SETTINGS ===
 
-export ZSH=$DOTFILES/zsh/oh-my-zsh
-export ZSH_CUSTOM=$DOTFILES/zsh/custom
+export ZSH=$DOTFILES/submodules/zsh/oh-my-zsh
+export ZSH_CUSTOM=$DOTFILES/submodules/zsh/custom
 
 ZSH_THEME=${LOCAL_ZSH_THEME:-agnoster}
 HYPHEN_INSENSITIVE="true"
@@ -20,8 +18,6 @@ DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
-
-# --- ZSH PLUGINS ---
 
 plugins=(git zsh-completions zsh-autosuggestions fasd tmux docker go kubectl zsh completion)
 
@@ -39,22 +35,13 @@ source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # https://github.com/zsh-users/zsh-history-substring-search
 source $ZSH_CUSTOM/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-# --- ZSH Completions plugin ---
-
-# https://github.com/zsh-users/zsh-completions
-# autoload -U compinit && compinit
-
-######################
-#        ALIAS       #
-######################
+### === ALIAS ===
 
 # This must have for a proper color support in old gnome-terminal!!! And don't change global TERM!!!
 alias tmux="TERM=xterm-256color tmux attach || tmux new"
 
-alias zshconfig="vim $DOTFILES/.zshrc"
-alias vimconfig="vim $DOTFILES/.vimrc"
-
-alias fs="foreman start"
+alias zshconfig="vim $DOTFILES/dotfiles/zshrc"
+alias vimconfig="vim $DOTFILES/dotfiles/vimrc"
 
 # On Mac, please `brew install coreutils`
 if [ "$(uname)" = "Darwin" ]; then
@@ -68,8 +55,6 @@ fi
 # Vim with v; f installed by fasd
 alias v="f -e vim"
 alias gv="fasd -e mvim"
-
-alias gsa="git submodule add "
 
 alias c="clear"
 alias x="exit"
@@ -88,7 +73,7 @@ fpath=(/Users/$USER/.brew/share/zsh-completions $fpath)
 # export HOMEBREW_CASK_OPTS="--caskroom=$HOME/.brew/caskroom --binarydir=$HOME/.bin"
 export HOMEBREW_GITHUB_API_TOKEN=$HOMEBREW_GITHUB_API_TOKEN
 
-### ==== RBENV ====
+### === RBENV ===
 
 # git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 # git clone https://github.com/sstephenson/ruby-build ~/.rbenv/plugins/ruby-build
@@ -98,17 +83,12 @@ if [ -d "${RBENV_ROOT}" ]; then
   eval "$(rbenv init -)"
 fi
 
-export RUBYGEMS_GEMDEPS=_
-
 ### === NVM ===
 
 # git clone https://github.com/creationix/nvm ~/.nvm
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-# Copy the actual nvm node to system folder
-# alias nvmcopysystem="n=$(which node);n=${n%/bin/node}; chmod -R 755 $n/bin/*; sudo cp -r $n/{bin,lib,share} /usr/local"
 
 # Automatically switch to the supported node version whenever entering a directory that contains an .nvmrc file
 # place this after nvm initialization!
@@ -149,6 +129,8 @@ fi
 export GOPATH=$HOME/projects/go
 export PATH=$PATH:$HOME/.brew/opt/go/libexec/bin:$GOPATH/bin
 
+### === BASH hack ===
+
 # Binding Alt+left and Alt+right jumping words
 # bindkey -e
 # if [ "$TERM" =~ "^xterm" ]; then
@@ -161,7 +143,6 @@ export PATH=$PATH:$HOME/.brew/opt/go/libexec/bin:$GOPATH/bin
 
 # infocmp $TERM | sed 's/kbs=^[hH]/kbs=\\177/' > ~/.$TERM.ti
 # tic ~/.$TERM.ti
-#
 
 ### === JENV ===
 # Check steps here: https://stackoverflow.com/questions/26252591/mac-os-x-and-multiple-java-versions/47699905#47699905
@@ -174,3 +155,9 @@ if [ -d "${JENV_ROOT}" ]; then
   export PATH="${JENV_ROOT}/bin:$PATH"
   eval "$(jenv init -)"
 fi
+
+### === SDKMAN ===
+# curl -s https://get.sdkman.io | bash
+
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
