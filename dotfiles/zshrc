@@ -19,7 +19,7 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
-plugins=(git zsh-completions zsh-autosuggestions fasd tmux docker go kubectl zsh completion)
+plugins=(git zsh-completions zsh-autosuggestions fasd tmux docker go kubectl zsh completion npm)
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
