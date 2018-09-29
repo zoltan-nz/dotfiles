@@ -28,3 +28,6 @@
 [submodule "submodules/zsh/custom/zsh-completions"]
 	path = submodules/zsh/custom/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions
+[submodule "submodules/zsh/custom/themes/spaceship-prompt"]
+	path = submodules/zsh/custom/themes/spaceship-prompt
+	url = https://github.com/denysdovhan/spaceship-prompt.git

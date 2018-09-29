@@ -1,0 +1,1 @@
+/Users/zoltan/projects/dotfiles/submodules/zsh/custom/themes/spaceship-prompt/spaceship.zsh
