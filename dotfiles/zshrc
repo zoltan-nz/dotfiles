@@ -19,7 +19,8 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
-plugins=(git zsh-completions zsh-autosuggestions fasd tmux docker go kubectl zsh completion npm)
+# Temporary plugins: docker go kubectl java mvn 
+plugins=(git zsh-completions zsh-autosuggestions fasd tmux zsh completion npm yarn)
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
@@ -89,6 +90,10 @@ fi
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Add yarn bin
+
+export PATH=$PATH:$HOME/.yarn/bin
 
 # Automatically switch to the supported node version whenever entering a directory that contains an .nvmrc file
 # place this after nvm initialization!

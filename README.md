@@ -9,6 +9,7 @@
 git config --global user.name ''
 git config --global user.email ''
 git config --global core.excludesfile ~/.gitignore
+git config --global pager.branch false
 ```
 
 - [Setup ssh keys](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
