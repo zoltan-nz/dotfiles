@@ -34,7 +34,7 @@ git clone git@github.com:Homebrew/brew.git ~/.brew
 - Install `zsh`, `coreutils`, `tmux`, `fasd`, `mc`, `rbenv`, `pyenv`, `ruby-build`, `golang`
 
 ```bash
-~/.brew/bin/brew install zsh coreutils tmux fasd mc rbenv pyenv jenv ruby-build golang
+~/.brew/bin/brew install zsh coreutils tmux htop fasd mc rbenv pyenv jenv ruby-build golang zlib
 ```
 
 - Symlink the following files:
@@ -72,6 +72,14 @@ git clone https://github.com/creationix/nvm.git ~/.nvm
 - Setup `python` environment with `pyenv`
 - Setup `go` environment
 
+## Install .Net Core
+
+```
+brew tap caskroom/cask
+brew cask install dotnet-sdk
+brew cask install visual-studio-code
+```
+
 ## Setup Shell Session Limits on Mac
 
 Source: [Shell Session Limit - Stackoverflow](https://unix.stackexchange.com/questions/108174/how-to-persistently-control-maximum-system-resource-consumption-on-mac?answertab=votes#tab-top)
@@ -108,4 +116,16 @@ sudo vim /Library/LaunchDaemons/limit.maxfiles.plist
     <false/>
   </dict>
 </plist>
+```
+
+### macOS startup folders
+
+```
+/Library/StartUpItems
+/Library/LaunchDaemons
+/Library/LaunchAgents
+/System/Library/StartupItems
+/System/Library/LaunchDaemons
+/System/Library/LaunchAgents
+~/Library/LaunchAgents
 ```

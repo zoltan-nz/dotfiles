@@ -10,3 +10,4 @@ doc
 yarn.lock
 .netrwhist
 .vscode
+.DS_Store
