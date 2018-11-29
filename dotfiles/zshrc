@@ -20,7 +20,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
 # Temporary plugins: docker go kubectl java mvn
-plugins=(git zsh-completions zsh-autosuggestions fasd tmux zsh completion npm yarn)
+plugins=(git zsh-completions zsh-autosuggestions fasd tmux zsh completion npm yarn docker go kubectl)
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
@@ -78,6 +78,7 @@ export HOMEBREW_GITHUB_API_TOKEN=$HOMEBREW_GITHUB_API_TOKEN
 
 # git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 # git clone https://github.com/sstephenson/ruby-build ~/.rbenv/plugins/ruby-build
+# RUBY_CONFIGURE_OPTS=--with-readline-dir=`brew --prefix readline` rbenv install 2.6.1
 export RBENV_ROOT="${HOME}/.rbenv"
 if [ -d "${RBENV_ROOT}" ]; then
   export PATH="${RBENV_ROOT}/bin:${PATH}"
@@ -93,7 +94,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # Add yarn bin
 
-export PATH=$PATH:$HOME/.yarn/bin
+export PATH=$HOME/.yarn/bin:$PATH
 
 # Automatically switch to the supported node version whenever entering a directory that contains an .nvmrc file
 # place this after nvm initialization!
@@ -247,3 +248,4 @@ _npm_completion
 ## DOTNET ##
 
 export PATH=$PATH:/usr/local/share/dotnet
+export PATH=$HOME/.bin:$PATH
