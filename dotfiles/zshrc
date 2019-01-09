@@ -1,3 +1,7 @@
+## Debug zsh speed
+# time zsh -i -c exit
+# zmodload zsh/zprof
+
 # IMPORTANT!
 # Copy ./dotfiles/zshrc.local.template to ~/.zshrc.local and setup your environment variables
 
@@ -5,7 +9,7 @@
 [ -s ~/.zshrc.local ] && source ~/.zshrc.local
 DOTFILES=${DOTFILES:-$HOME/projects/dotfiles}
 
-export PATH="/Applications/Docker.app/Contents/Resources/bin:$HOME/.bin:$HOME/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+export PATH="/Applications/Docker.app/Contents/Resources/bin:$HOME/.bin:$HOME/.brew/bin:$HOME/.brew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
 ### ===  ZSH SETTINGS ===
 
@@ -19,8 +23,9 @@ COMPLETION_WAITING_DOTS="true"
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
-# Temporary plugins: docker go kubectl java mvn
-plugins=(git zsh-completions zsh-autosuggestions fasd tmux zsh completion npm yarn docker go kubectl)
+# Temporary plugins: docker go kubectl mvn
+plugins=(git osx zsh-autosuggestions fasd docker docker-compose zsh-completions)
+autoload -U compinit && compinit
 
 # Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
@@ -45,10 +50,10 @@ alias zshconfig="vim $DOTFILES/dotfiles/zshrc"
 alias vimconfig="vim $DOTFILES/dotfiles/vimrc"
 
 # On Mac, please `brew install coreutils`
-if [ "$(uname)" = "Darwin" ]; then
+if [[ "$(uname)" = "Darwin" ]]; then
   alias ls="gls --color -ah --group-directories-first --sort=extension"
   alias lsa="gls --color -lah --group-directories-first --sort=extension"
-elif [ "$(expr substr $(uname -s) 1 5)" = "Linux" ]; then
+elif [[ "$(expr substr $(uname -s) 1 5)" = "Linux" ]]; then
   # On Linux
   alias ls="ls --color -h --group-directories-first"
 fi
@@ -63,7 +68,7 @@ alias x="exit"
 # alias markd="(pid=\`cat /tmp/grip.pid\`;kill $pid;grip > /dev/null 2>1  &;echo $! > /tmp/grip.pid;open http://localhost:6419)"
 
 # Load local alias file if exists
-[ -s "$HOME/.alias" ] && source ~/.alias
+[[ -s "$HOME/.alias" ]] && source ~/.alias
 
 ### === HOMEBREW ===
 
@@ -89,36 +94,42 @@ fi
 
 # git clone https://github.com/creationix/nvm ~/.nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" --no-use # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# NVM add a few seconds of initialization when a new terminal is opened. For this reason NVM is turned off as default.
+# Using one of the following command activate it.
+alias node='unalias node ; unalias npm ; nvm use default ; node $@'
+alias npm='unalias node ; unalias npm ; nvm use default ; npm $@'
+alias n='node -v'
 
 # Add yarn bin
 
-export PATH=$HOME/.yarn/bin:$PATH
+export PATH=$PATH:$HOME/.yarn/bin
 
 # Automatically switch to the supported node version whenever entering a directory that contains an .nvmrc file
 # place this after nvm initialization!
 # autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
+# load-nvmrc() {
+#   local node_version="$(nvm version)"
+#   local nvmrc_path="$(nvm_find_nvmrc)"
 
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+#   if [ -n "$nvmrc_path" ]; then
+#     local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
 
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
+#     if [ "$nvmrc_node_version" = "N/A" ]; then
+#       nvm install
+#     elif [ "$nvmrc_node_version" != "$node_version" ]; then
+#       nvm use
+#     fi
+#   elif [ "$node_version" != "$(nvm version default)" ]; then
+#     echo "Reverting to nvm default version"
+#     nvm use default
+#   fi
+# }
 
 # add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+# load-nvmrc
 
 ### === PYENV ===
 
@@ -170,18 +181,18 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 ## NODE / NPM completion scripts
 
-_node_complete() {
-  local cur_word options
-  cur_word="${COMP_WORDS[COMP_CWORD]}"
-  if [[ "${cur_word}" == -* ]] ; then
-    COMPREPLY=( $(compgen -W '--track-heap-objects --abort-on-uncaught-exception --napi-modules --redirect-warnings --max-old-space-size --perf-basic-prof --no-warnings --trace-event-file-pattern --check --preserve-symlinks --perf-prof --inspect-port --print --trace-deprecation --inspect-brk --expose_http2 --trace-sync-io --tls-cipher-list --no-force-async-hooks-checks --inspect --eval --loader --pending-deprecation --experimental-worker --expose-http2 --use-bundled-ca --stack-trace-limit --debug-brk --title --experimental-repl-await --debug --no-deprecation --prof-process --throw-deprecation [has_eval_string] --trace-warnings --expose-internals --use-openssl-ca --v8-options --preserve-symlinks-main --interactive --inspect-brk-node --icu-data-dir --require --version --experimental-vm-modules --completion-bash --help --zero-fill-buffers --v8-pool-size [ssl_openssl_cert_store] --security-reverts --experimental-modules --openssl-config --trace-event-categories --debug-port --prof-process --debug= -p -pe -v --inspect-brk= -i --print <arg> --inspect= --debug-brk= -e --inspect-brk-node= -c -h -r --trace-events-enabled' -- "${cur_word}") )
-    return 0
-  else
-    COMPREPLY=( $(compgen -f "${cur_word}") )
-    return 0
-  fi
-}
-_node_complete
+# _node_complete() {
+#   local cur_word options
+#   cur_word="${COMP_WORDS[COMP_CWORD]}"
+#   if [[ "${cur_word}" == -* ]] ; then
+#     COMPREPLY=( $(compgen -W '--track-heap-objects --abort-on-uncaught-exception --napi-modules --redirect-warnings --max-old-space-size --perf-basic-prof --no-warnings --trace-event-file-pattern --check --preserve-symlinks --perf-prof --inspect-port --print --trace-deprecation --inspect-brk --expose_http2 --trace-sync-io --tls-cipher-list --no-force-async-hooks-checks --inspect --eval --loader --pending-deprecation --experimental-worker --expose-http2 --use-bundled-ca --stack-trace-limit --debug-brk --title --experimental-repl-await --debug --no-deprecation --prof-process --throw-deprecation [has_eval_string] --trace-warnings --expose-internals --use-openssl-ca --v8-options --preserve-symlinks-main --interactive --inspect-brk-node --icu-data-dir --require --version --experimental-vm-modules --completion-bash --help --zero-fill-buffers --v8-pool-size [ssl_openssl_cert_store] --security-reverts --experimental-modules --openssl-config --trace-event-categories --debug-port --prof-process --debug= -p -pe -v --inspect-brk= -i --print <arg> --inspect= --debug-brk= -e --inspect-brk-node= -c -h -r --trace-events-enabled' -- "${cur_word}") )
+#     return 0
+#   else
+#     COMPREPLY=( $(compgen -f "${cur_word}") )
+#     return 0
+#   fi
+# }
+# _node_complete
 
 ###-begin-npm-completion-###
 #
@@ -191,61 +202,67 @@ _node_complete
 # Or, maybe: npm completion > /usr/local/etc/bash_completion.d/npm
 #
 
-if type complete &>/dev/null; then
-  _npm_completion () {
-    local words cword
-    if type _get_comp_words_by_ref &>/dev/null; then
-      _get_comp_words_by_ref -n = -n @ -n : -w words -i cword
-    else
-      cword="$COMP_CWORD"
-      words=("${COMP_WORDS[@]}")
-    fi
+# if type complete &>/dev/null; then
+#   _npm_completion () {
+#     local words cword
+#     if type _get_comp_words_by_ref &>/dev/null; then
+#       _get_comp_words_by_ref -n = -n @ -n : -w words -i cword
+#     else
+#       cword="$COMP_CWORD"
+#       words=("${COMP_WORDS[@]}")
+#     fi
 
-    local si="$IFS"
-    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
-                           COMP_LINE="$COMP_LINE" \
-                           COMP_POINT="$COMP_POINT" \
-                           npm completion -- "${words[@]}" \
-                           2>/dev/null)) || return $?
-    IFS="$si"
-    if type __ltrim_colon_completions &>/dev/null; then
-      __ltrim_colon_completions "${words[cword]}"
-    fi
-  }
-  complete -o default -F _npm_completion npm
-elif type compdef &>/dev/null; then
-  _npm_completion() {
-    local si=$IFS
-    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
-                 COMP_LINE=$BUFFER \
-                 COMP_POINT=0 \
-                 npm completion -- "${words[@]}" \
-                 2>/dev/null)
-    IFS=$si
-  }
-  compdef _npm_completion npm
-elif type compctl &>/dev/null; then
-  _npm_completion () {
-    local cword line point words si
-    read -Ac words
-    read -cn cword
-    let cword-=1
-    read -l line
-    read -ln point
-    si="$IFS"
-    IFS=$'\n' reply=($(COMP_CWORD="$cword" \
-                       COMP_LINE="$line" \
-                       COMP_POINT="$point" \
-                       npm completion -- "${words[@]}" \
-                       2>/dev/null)) || return $?
-    IFS="$si"
-  }
-  compctl -K _npm_completion npm
-fi
-###-end-npm-completion-###
-_npm_completion
+#     local si="$IFS"
+#     IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
+#                            COMP_LINE="$COMP_LINE" \
+#                            COMP_POINT="$COMP_POINT" \
+#                            npm completion -- "${words[@]}" \
+#                            2>/dev/null)) || return $?
+#     IFS="$si"
+#     if type __ltrim_colon_completions &>/dev/null; then
+#       __ltrim_colon_completions "${words[cword]}"
+#     fi
+#   }
+#   complete -o default -F _npm_completion npm
+# elif type compdef &>/dev/null; then
+#   _npm_completion() {
+#     local si=$IFS
+#     compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+#                  COMP_LINE=$BUFFER \
+#                  COMP_POINT=0 \
+#                  npm completion -- "${words[@]}" \
+#                  2>/dev/null)
+#     IFS=$si
+#   }
+#   compdef _npm_completion npm
+# elif type compctl &>/dev/null; then
+#   _npm_completion () {
+#     local cword line point words si
+#     read -Ac words
+#     read -cn cword
+#     let cword-=1
+#     read -l line
+#     read -ln point
+#     si="$IFS"
+#     IFS=$'\n' reply=($(COMP_CWORD="$cword" \
+#                        COMP_LINE="$line" \
+#                        COMP_POINT="$point" \
+#                        npm completion -- "${words[@]}" \
+#                        2>/dev/null)) || return $?
+#     IFS="$si"
+#   }
+#   compctl -K _npm_completion npm
+# fi
+# ###-end-npm-completion-###
+# _npm_completion
 
 ## DOTNET ##
 
 export PATH=$PATH:/usr/local/share/dotnet
-export PATH=$HOME/.bin:$PATH
+
+## MORE PATH ##
+
+export NODE_PATH="$NVM_BIN"
+
+# Uncomment the following when you turn on the performance test in the first line
+# zprof
