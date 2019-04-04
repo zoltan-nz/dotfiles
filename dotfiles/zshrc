@@ -29,7 +29,7 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 ### === PLUGINS ===
 
 # Temporary plugins: docker go kubectl mvn
-plugins=(git osx zsh-autosuggestions fasd docker docker-compose zsh-completions kubectl)
+plugins=(gitfast osx zsh-autosuggestions fasd docker docker-compose zsh-completions kubectl yarn pyenv)
 autoload -U compinit && compinit
 
 # Comments for plugins
@@ -72,6 +72,8 @@ alias gv="fasd -e mvim"
 alias c="clear"
 alias x="exit"
 alias n="node -v"
+alias y="yarn"
+alias nr="npm run"
 
 # alias markd="(pid=\`cat /tmp/grip.pid\`;kill $pid;grip > /dev/null 2>1  &;echo $! > /tmp/grip.pid;open http://localhost:6419)"
 
@@ -121,7 +123,9 @@ if [ -d "${RBENV_ROOT}" ]; then
 fi
 
 ### === PYENV ===
-# curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+# Install pyenv and pyenv-virtualenv
+# curl https://pyenv.run | zsh
+# pip install pipenv
 
 export PYENV_ROOT="${HOME}/.pyenv"
 if [ -d "${PYENV_ROOT}" ]; then
