@@ -29,7 +29,7 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 ### === PLUGINS ===
 
 # Temporary plugins: docker go kubectl mvn
-plugins=(gitfast osx zsh-autosuggestions fasd docker docker-compose zsh-completions kubectl yarn pyenv)
+plugins=(gitfast osx zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions kubectl yarn pyenv rbenv)
 autoload -U compinit && compinit
 
 # Comments for plugins
@@ -144,6 +144,19 @@ export PATH=$PATH:$HOME/.brew/opt/go/libexec/bin:$GOPATH/bin
 
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+### === FZF ===
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='fd --type f'
+
+### === SQLITE ===
+
+export PATH=$HOME/.brew/opt/sqlite/bin:$PATH
+
+# The following exports because of pyenv
+export LDFLAGS="-L$HOME/.brew/opt/zlib/lib -L$HOME/.brew/opt/sqlite/lib"
+export CPPFLAGS="-I$HOME/.brew/opt/zlib/include -I$HOME/.brew/opt/sqlite/include"
 
 # Uncomment the following when you turn on the performance test in the first line
 # zprof

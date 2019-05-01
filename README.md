@@ -2,8 +2,14 @@
 
 ## MacOS Setup
 
+- Install `Chrome`.
+- Install `JetBrains ToolBox`.
+- Install `Visual Studio Code`.
+- Install `Spectacle`.
+- Install `iTerm`.
 - Install `XCode`.
-- Setup `git`.
+
+- Setup `git`:
 
 ```bash
 git config --global user.name ''
@@ -31,10 +37,10 @@ git submodule update --recursive --remote
 git clone git@github.com:Homebrew/brew.git ~/.brew
 ```
 
-- Install `zsh`, `coreutils`, `tmux`, `fasd`, `mc`, `rbenv`, `pyenv`, `ruby-build`, `golang`
+- Install `zsh`, `coreutils`, `tmux`, `fd`, `fasd`, `mc`
 
 ```bash
-~/.brew/bin/brew install zsh coreutils tmux htop fasd mc rbenv pyenv jenv ruby-build golang zlib
+~/.brew/bin/brew install zsh coreutils tmux htop fasd mc zlib
 ```
 
 - Symlink the following files:
@@ -47,7 +53,44 @@ ln -s ~/projects/dotfiles/dotfiles/tmux.conf ~/.tmux.conf &&
 cp ~/projects/dotfiles/dotfiles/zshrc.local.template ~/.zshrc.local
 ```
 
-- Clone .nvm
+- Setup default shell in System Preferences -> Users and Groups -> Authenticate -> Right click on user name -> Advance Options... -> change the Login shell to `/bin/zsh`
+
+- Install `Powerline` fonts: drag and drop from `submodules/fonts/powerline` and `submodules/fonts/Menlo-for-Powerline` fonts in Mac `Font Book` Application.
+
+- Install [iTerm2](https://www.iterm2.com/) and add your theme from `submodules/iTerm2-Color-Schemes`.
+
+- Clone fzf
+
+```
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+```
+
+- Install Python
+
+https://github.com/pyenv/pyenv-installer
+
+!! Run `brew info zlib` and `brew info sqlite` to get the environmental variable setup scripts for compilers.
+
+```bash
+$ curl https://pyenv.run | bash
+```
+
+- Install Ruby
+
+```bash
+$ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+$ git clone https://github.com/sstephenson/ruby-build ~/.rbenv/plugins/ruby-build
+$ RUBY_CONFIGURE_OPTS=--with-readline-dir=`brew --prefix readline` rbenv install 2.6.3
+```
+
+- Install Go
+
+```
+brew install golang
+```
+
+- Install Node with .nvm
 
 ```bash
 git clone https://github.com/creationix/nvm.git ~/.nvm
@@ -56,17 +99,16 @@ git clone https://github.com/creationix/nvm.git ~/.nvm
 - Install Node.js first time:
 
 ```bash
-~/.nvm/nvm install 10 --latest-npm
+~/.nvm/nvm install 12 --latest-npm
 ```
 
 - Update Node.js:
 
 ```bash
-~/.nvm/nvm install 10 --reinstall-packages-from=10 --latest-npm
+~/.nvm/nvm install 12 --reinstall-packages-from=10 --latest-npm
 ```
 
-- Install `Powerline` fonts: drag and drop from `submodules/fonts/powerline` and `submodules/fonts/Menlo-for-Powerline` fonts in Mac `Font Book` Application.
-- Install [iTerm2](https://www.iterm2.com/) and add your theme from `submodules/iTerm2-Color-Schemes`.
+
 - Install [Spectacle](https://www.spectacleapp.com/)
 - Setup `ruby` environment with `rbenv`
 - Setup `python` environment with `pyenv`
@@ -129,3 +171,5 @@ sudo vim /Library/LaunchDaemons/limit.maxfiles.plist
 /System/Library/LaunchAgents
 ~/Library/LaunchAgents
 ```
+
+## DNSMasq and loopalias

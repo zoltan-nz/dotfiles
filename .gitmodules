@@ -16,9 +16,6 @@
 [submodule "submodules/fonts/Menlo-for-Powerline"]
 	path = submodules/fonts/Menlo-for-Powerline
 	url = https://github.com/abertsch/Menlo-for-Powerline
-[submodule "submodules/fonts/google-fonts"]
-	path = submodules/fonts/google-fonts
-	url = https://github.com/google/fonts.git
 [submodule "submodules/fonts/FiraCode"]
 	path = submodules/fonts/FiraCode
 	url = https://github.com/tonsky/FiraCode
