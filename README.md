@@ -173,3 +173,12 @@ sudo vim /Library/LaunchDaemons/limit.maxfiles.plist
 ```
 
 ## DNSMasq and loopalias
+
+TODO
+
+https://github.com/zoltan-nz/playing-with-gitlab#setup-dnsmasq-with-loopback-alias
+
+## Diff So Fancy
+
+https://github.com/so-fancy/diff-so-fancy
+
