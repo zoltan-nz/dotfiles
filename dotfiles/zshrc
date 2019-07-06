@@ -12,7 +12,7 @@ DOTFILES=${DOTFILES:-$HOME/projects/dotfiles}
 
 ### === THE PATH ===
 
-export PATH="/Applications/Docker.app/Contents/Resources/bin:$HOME/.bin:$HOME/.brew/bin:$HOME/.brew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+export PATH="$HOME/.bin:/Applications/Docker.app/Contents/Resources/bin:$HOME/.brew/bin:$HOME/.brew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
 ### === ZSH SETTINGS ===
 
@@ -158,14 +158,13 @@ export PATH=$HOME/.brew/opt/sqlite/bin:$PATH
 export LDFLAGS="-L$HOME/.brew/opt/zlib/lib -L$HOME/.brew/opt/sqlite/lib"
 export CPPFLAGS="-I$HOME/.brew/opt/zlib/include -I$HOME/.brew/opt/sqlite/include"
 
-# Uncomment the following when you turn on the performance test in the first line
-# zprof
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/zoltan/.google-cloud-sdk/path.zsh.inc' ]; then . '/Users/zoltan/.google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/zoltan/.google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/zoltan/.google-cloud-sdk/completion.zsh.inc'; fi
+
+# Uncomment the following when you turn on the performance test in the first line
+# zprof
