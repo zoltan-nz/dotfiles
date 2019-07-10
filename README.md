@@ -40,7 +40,7 @@ git clone git@github.com:Homebrew/brew.git ~/.brew
 - Install `zsh`, `coreutils`, `tmux`, `fd`, `fasd`, `mc`
 
 ```bash
-~/.brew/bin/brew install zsh coreutils tmux htop fasd mc zlib
+~/.brew/bin/brew install zsh coreutils tmux htop fasd mc zlib gettext && ~/.brew/bin/brew link --force gettext
 ```
 
 - Symlink the following files:
