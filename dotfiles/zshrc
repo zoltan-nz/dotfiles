@@ -28,6 +28,11 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
 ### === PLUGINS ===
 
+# Import completion functions from brew packages
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
 # Temporary plugins: docker go kubectl mvn
 plugins=(gitfast git osx zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions kubectl yarn pyenv rbenv kubectl mvn docker)
 autoload -U compinit && compinit
@@ -37,6 +42,7 @@ autoload -U compinit && compinit
 # zsh-autosuggestions - git://github.com/zsh-users/zsh-autosuggestions
 # httpie - https://github.com/jkbrzt/httpie
 # fasd - https://github.com/clvv/fasd
+# !!!! Don't forget to run `rm ~/.zcompdump*` sometimes... ;)
 
 source ${ZSH}/oh-my-zsh.sh
 
