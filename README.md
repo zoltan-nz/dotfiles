@@ -1,153 +1,122 @@
 # Zoltan's Dotfiles
 
-## MacOS Setup
+## macOS Setup
 
-- Install `Chrome`.
-- Install `JetBrains ToolBox`.
-- Install `Visual Studio Code`.
-- Install `Spectacle`.
-- Install `iTerm`.
-- Install `XCode`.
+### Install softwares
 
-- Setup `git`:
+- [`Chrome`](https://www.google.com/chrome/)
+- [`JetBrains ToolBox`](https://www.jetbrains.com/toolbox-app/)
+- [`Visual Studio Code`](https://code.visualstudio.com/)
+- [`Spectacle`](https://www.spectacleapp.com/)
+- [`iTerm2`](https://www.iterm2.com/)
+- [`XCode`](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
+
+### Setup git
 
 ```bash
-git config --global user.name ''
-git config --global user.email ''
+git config --global user.name 'Your Name'
+git config --global user.email 'your@email.address'
 git config --global core.excludesfile ~/.gitignore
 git config --global pager.branch false
+echo ".idea\n.DS_Store\nnode_modules" > ~/.gitignore
 ```
 
+### Setup ssh
+
 - [Setup ssh keys](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/)
-- Clone this repository in `~/projects/dotfiles`
+- Add to [GitHub](https://github.com), [GitLab](https://gitlab.com), [Bitbucket](https://bitbucket.com)
 
 ```bash
+pbcopy < ~/.ssh/id_rsa.pub
+```
+
+### Install brew and additional packages
+
+```bash
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+
+Install `fasd`, `mc`, `xz`, `rbenv`, `pyenv`, `go`, `htop`.
+
+```
+brew install fasd mc xz rbenv pyenv go htop
+```
+
+### Setup dotfiles in your home folder
+
+Clone this repository in `~/projects/dotfiles`
+
+```bash
+mkdir ~/projects
 git clone git@github.com:zoltan-nz/dotfiles.git ~/projects/dotfiles --recurse-submodules
 ```
 
-- Update submodules
+Update submodules
 
 ```bash
+cd ~/projects/dotfiles
 git submodule update --recursive --remote
 ```
 
-- Clone brew in ~/.brew
-
-```bash
-git clone git@github.com:Homebrew/brew.git ~/.brew
-```
-
-- Install `zsh`, `coreutils`, `tmux`, `fd`, `fasd`, `mc`
-
-```bash
-~/.brew/bin/brew install zsh coreutils tmux htop fasd mc zlib gettext && ~/.brew/bin/brew link --force gettext
-```
-
-- Symlink the following files:
+Symlink the following files:
 
 ```bash
 ln -s ~/projects/dotfiles/dotfiles/vimrc ~/.vimrc &&
 ln -s ~/projects/dotfiles/dotfiles/zshrc ~/.zshrc &&
 ln -s ~/projects/dotfiles/dotfiles/gemrc ~/.gemrc &&
-ln -s ~/projects/dotfiles/dotfiles/tmux.conf ~/.tmux.conf &&
 cp ~/projects/dotfiles/dotfiles/zshrc.local.template ~/.zshrc.local
 ```
 
-- Setup default shell in System Preferences -> Users and Groups -> Authenticate -> Right click on user name -> Advance Options... -> change the Login shell to `/bin/zsh`
+Zsh is the default shell in macOS Catalina, so this step can be skipped. In previous macOS versions change the default shell to `/bin/zsh` manually. System Preferences > Users and Groups > Authenticate > Right click on user name > Advance Options. Change the login shell to `/bin/zsh`.
 
-- Install `Powerline` fonts: drag and drop from `submodules/fonts/powerline` and `submodules/fonts/Menlo-for-Powerline` fonts in Mac `Font Book` Application.
+### Install fonts
 
-- Install [iTerm2](https://www.iterm2.com/) and add your theme from `submodules/iTerm2-Color-Schemes`.
+Drag and drop fonts files in Font Book.
 
-- Clone fzf
+### Install `fzf`
 
-```
+What is `fzf`? [A command-line fuzzy finder](https://github.com/junegunn/fzf).
+
+```bash
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
 
-- Install Python
-
-https://github.com/pyenv/pyenv-installer
-
-!! Run `brew info zlib` and `brew info sqlite` to get the environmental variable setup scripts for compilers.
+### Install Python 3.8
 
 ```bash
-$ curl https://pyenv.run | bash
+pyenv install --list
+pyenv install 3.8.0
+pip install --upgrade pip
+pip install pipenv poetry grip
 ```
 
-Prerequisites on Ubuntu ([source](https://github.com/pyenv/pyenv/wiki/common-build-problems)):
+- [Pipenv](https://pipenv.kennethreitz.org/en/latest/)
+- [Poetry](https://poetry.eustace.io/)
+- [Grip](https://github.com/joeyespo/grip)
+
+### Install Ruby 2.6.5
 
 ```bash
-$ sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
-libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
-xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+rbenv install --list
+rbenv install 2.6.5
 ```
 
-- Install Ruby
+### Install Node.js with .nvm
 
-```bash
-$ git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-$ git clone https://github.com/sstephenson/ruby-build ~/.rbenv/plugins/ruby-build
-$ RUBY_CONFIGURE_OPTS=--with-readline-dir=`brew --prefix readline` rbenv install 2.6.3
-```
+Follow the best tutorial about [Installing Node.js with Yarn](https://yoember.com/nodejs/the-best-way-to-install-node-js-with-yarn/).
 
-- Install Go
+### Setup Shell Session Limits on Mac
 
-```
-brew install golang
-```
-
-- Install Node with .nvm
-
-```bash
-git clone https://github.com/creationix/nvm.git ~/.nvm
-```
-
-- Install Node.js first time:
-
-```bash
-~/.nvm/nvm install 12 --latest-npm
-```
-
-- Update Node.js:
-
-```bash
-~/.nvm/nvm install 12 --reinstall-packages-from=10 --latest-npm
-```
-
-
-- Install [Spectacle](https://www.spectacleapp.com/)
-- Setup `ruby` environment with `rbenv`
-- Setup `python` environment with `pyenv`
-- Setup `go` environment
-
-## Install .Net Core
-
-```
-brew tap caskroom/cask
-brew cask install dotnet-sdk
-brew cask install visual-studio-code
-```
-
-## Setup Shell Session Limits on Mac
-
-Source: [Shell Session Limit - Stackoverflow](https://unix.stackexchange.com/questions/108174/how-to-persistently-control-maximum-system-resource-consumption-on-mac?answertab=votes#tab-top)
-
-Temporary solution is using `ulimit`.
-
-Permanent solution is creating a `LaunchDaemon`.
+- Source: [Shell Session Limit - Stackoverflow](https://unix.stackexchange.com/questions/108174/how-to-persistently-control-maximum-system-resource-consumption-on-mac?answertab=votes#tab-top)
+- Temporary solution is using `ulimit`.
+- Permanent solution is creating a `LaunchDaemon`.
 
 ```shell
-sudo touch /Library/LaunchDaemons/limit.maxfiles.plist
-sudo chown root:wheel /Library/LaunchDaemons/limit.maxfiles.plist
-sudo vim /Library/LaunchDaemons/limit.maxfiles.plist
-```
-
-```xml
+<<EOF | sudo tee /Library/LaunchDaemons/limit.maxfiles.plist > /dev/null && sudo chown root:wheel /Library/LaunchDaemons/limit.maxfiles.plist
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
-        "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        "http://www.apple.com/DTDs/PropertyList-1.0.dtd"\>
 <plist version="1.0">
   <dict>
     <key>Label</key>
@@ -166,11 +135,38 @@ sudo vim /Library/LaunchDaemons/limit.maxfiles.plist
     <false/>
   </dict>
 </plist>
+EOF
 ```
+
+### Optional setup
+
+#### Use `diff-so-fancy` for formatting `git diff` output
+
+[Diff So Fancy repository](https://github.com/so-fancy/diff-so-fancy)
+
+```bash
+yarn global add diff-so-fancy && git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+```
+
+#### DNSMasq and loopalias
+
+DNSMasq and loopalias in more detail: https://github.com/zoltan-nz/playing-with-gitlab#setup-dnsmasq-with-loopback-alias
+
+## Ubuntu specific setup
+
+Prerequisites on Ubuntu for installing Python ([source](https://github.com/pyenv/pyenv/wiki/common-build-problems)).
+
+```bash
+sudo apt-get install -y make build-essential libssl-dev zlib1g-dev libbz2-dev \
+libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
+xz-utils tk-dev libffi-dev liblzma-dev python-openssl git
+```
+
+## Notes
 
 ### macOS startup folders
 
-```
+```text
 /Library/StartUpItems
 /Library/LaunchDaemons
 /Library/LaunchAgents
@@ -179,14 +175,3 @@ sudo vim /Library/LaunchDaemons/limit.maxfiles.plist
 /System/Library/LaunchAgents
 ~/Library/LaunchAgents
 ```
-
-## DNSMasq and loopalias
-
-TODO
-
-https://github.com/zoltan-nz/playing-with-gitlab#setup-dnsmasq-with-loopback-alias
-
-## Diff So Fancy
-
-https://github.com/so-fancy/diff-so-fancy
-
