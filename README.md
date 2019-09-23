@@ -1,5 +1,27 @@
 # Zoltan's Dotfiles
 
+- [Zoltan's Dotfiles](#zoltans-dotfiles)
+  - [macOS Setup](#macos-setup)
+    - [Install softwares](#install-softwares)
+    - [Setup git](#setup-git)
+    - [Setup ssh](#setup-ssh)
+    - [Install brew and additional packages](#install-brew-and-additional-packages)
+    - [Setup dotfiles in your home folder](#setup-dotfiles-in-your-home-folder)
+    - [Install fonts](#install-fonts)
+    - [Install `fzf`](#install-fzf)
+    - [Install Python 3.8](#install-python-38)
+    - [Install Ruby 2.6.5](#install-ruby-265)
+    - [Install Node.js with .nvm](#install-nodejs-with-nvm)
+    - [Install SDK-MAN for Java support](#install-sdk-man-for-java-support)
+    - [Setup Shell Session Limits on Mac](#setup-shell-session-limits-on-mac)
+    - [Optional setup](#optional-setup)
+      - [Use `diff-so-fancy` for formatting `git diff` output](#use-diff-so-fancy-for-formatting-git-diff-output)
+      - [DNSMasq and loopalias](#dnsmasq-and-loopalias)
+      - [Google Cloud SDK](#google-cloud-sdk)
+  - [Ubuntu specific setup](#ubuntu-specific-setup)
+  - [Notes](#notes)
+    - [macOS startup folders](#macos-startup-folders)
+
 ## macOS Setup
 
 ### Install softwares
@@ -106,6 +128,14 @@ rbenv install 2.6.5
 
 Follow the best tutorial about [Installing Node.js with Yarn](https://yoember.com/nodejs/the-best-way-to-install-node-js-with-yarn/).
 
+### Install SDK-MAN for Java support
+
+<https://sdkman.io/>
+
+```bash
+curl -s https://get.sdkman.io | zsh
+```
+
 ### Setup Shell Session Limits on Mac
 
 - Source: [Shell Session Limit - Stackoverflow](https://unix.stackexchange.com/questions/108174/how-to-persistently-control-maximum-system-resource-consumption-on-mac?answertab=votes#tab-top)
@@ -151,6 +181,12 @@ yarn global add diff-so-fancy && git config --global core.pager "diff-so-fancy |
 #### DNSMasq and loopalias
 
 DNSMasq and loopalias in more detail: https://github.com/zoltan-nz/playing-with-gitlab#setup-dnsmasq-with-loopback-alias
+
+#### Google Cloud SDK
+
+```bash
+brew cask install google-cloud-sdk
+```
 
 ## Ubuntu specific setup
 

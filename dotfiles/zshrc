@@ -1,7 +1,7 @@
 ### === DEBUG ===
 # Run the following command to see how fast/slow your zsh initialization
 # time zsh -i -c exit
-# Uncomment the next line and the last line
+# Uncomment the next line and the last line of this file.
 # zmodload zsh/zprof
 
 ### === INITIAL SETUP - IMPORTANT! ===
@@ -9,10 +9,6 @@
 # Import your local profile file
 [[ -s ~/.zshrc.local ]] && source ~/.zshrc.local
 DOTFILES=${DOTFILES:-$HOME/projects/dotfiles}
-
-### === THE PATH ===
-
-export PATH="$HOME/.bin:/Applications/Docker.app/Contents/Resources/bin:$HOME/.brew/bin:$HOME/.brew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
 ### === ZSH SETTINGS ===
 
@@ -28,21 +24,19 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 
 ### === PLUGINS ===
 
-# Import completion functions from brew packages
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-fi
-
-# Temporary plugins: docker go kubectl mvn
-plugins=(gitfast git osx zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions kubectl yarn pyenv rbenv kubectl mvn docker)
-autoload -U compinit && compinit
-
-# Comments for plugins
 # zsh-completions - https://github.com/zsh-users/zsh-completions
 # zsh-autosuggestions - git://github.com/zsh-users/zsh-autosuggestions
 # httpie - https://github.com/jkbrzt/httpie
 # fasd - https://github.com/clvv/fasd
 # !!!! Don't forget to run `rm ~/.zcompdump*` sometimes... ;)
+
+# Import completion functions from brew packages
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+plugins=(gitfast git osx zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions kubectl yarn npm pyenv rbenv kubectl mvn go)
+autoload -U compinit && compinit
 
 source ${ZSH}/oh-my-zsh.sh
 
@@ -55,25 +49,10 @@ source ${ZSH_CUSTOM}/plugins/zsh-history-substring-search/zsh-history-substring-
 ### === ALIASES ===
 
 # This must have for a proper color support in old gnome-terminal!!! And don't change global TERM!!!
-alias tmux="TERM=xterm-256color tmux attach || tmux new"
-
-alias zshconfig="vim $DOTFILES/dotfiles/zshrc"
-alias vimconfig="vim $DOTFILES/dotfiles/vimrc"
-
-alias of="lsof -nP +c 15 | grep LISTEN"
-
-# On Mac, please `brew install coreutils`
-if [[ "$(uname)" = "Darwin" ]]; then
-  alias ls="gls --color -ah --group-directories-first --sort=extension"
-  alias lsa="gls --color -lah --group-directories-first --sort=extension"
-elif [[ "$(expr substr $(uname -s) 1 5)" = "Linux" ]]; then
-  # On Linux
-  alias ls="ls --color -h --group-directories-first"
-fi
-
-# Vim with v; f installed by fasd
-alias v="f -e vim"
-alias gv="fasd -e mvim"
+# alias tmux="TERM=xterm-256color tmux attach || tmux new"
+# alias zshconfig="vim $DOTFILES/dotfiles/zshrc"
+# alias vimconfig="vim $DOTFILES/dotfiles/vimrc"
+# alias of="lsof -nP +c 15 | grep LISTEN"
 
 alias c="clear"
 alias x="exit"
@@ -81,19 +60,11 @@ alias n="node -v"
 alias y="yarn"
 alias nr="npm run"
 
-# alias markd="(pid=\`cat /tmp/grip.pid\`;kill $pid;grip > /dev/null 2>1  &;echo $! > /tmp/grip.pid;open http://localhost:6419)"
+# Install grip with `pip install grip`
+alias markd="grip"
 
 # Load local alias file if exists
 [[ -s "$HOME/.alias" ]] && source ~/.alias
-
-### === HOMEBREW ===
-
-# Install homebrew in your home folder ~/.brew
-# brew install zsh-completions
-fpath=(/Users/$USER/.brew/share/zsh-completions $fpath)
-
-# export HOMEBREW_CASK_OPTS="--caskroom=$HOME/.brew/caskroom --binarydir=$HOME/.bin"
-export HOMEBREW_GITHUB_API_TOKEN=${HOMEBREW_GITHUB_API_TOKEN}
 
 ### === NODEJS ===
 # NodeJS support with NVM, nvm slows down initialization hence lazy loaded
@@ -114,37 +85,8 @@ for cmd in "${NODE_GLOBALS[@]}"; do
     eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
 done
 
-# Add yarn bin
+# Add yarn bin to PATH
 export PATH=$PATH:$HOME/.yarn/bin
-
-### === RUBY - RBENV ===
-
-# git clone https://github.com/rbenv/rbenv.git ~/.rbenv
-# git clone https://github.com/sstephenson/ruby-build ~/.rbenv/plugins/ruby-build
-# RUBY_CONFIGURE_OPTS=--with-readline-dir=`brew --prefix readline` rbenv install 2.6.1
-export RBENV_ROOT="${HOME}/.rbenv"
-if [ -d "${RBENV_ROOT}" ]; then
-  export PATH="${RBENV_ROOT}/bin:${PATH}"
-  eval "$(rbenv init -)"
-fi
-
-### === PYTHON - PYENV ===
-# Install pyenv and pyenv-virtualenv
-# curl https://pyenv.run | zsh
-# pip install pipenv
-
-export PYENV_ROOT="${HOME}/.pyenv"
-if [ -d "${PYENV_ROOT}" ]; then
-  export PATH="${PYENV_ROOT}/bin:$PATH"
-  eval "$(pyenv init -)"
-  eval "$(pyenv virtualenv-init -)"
-fi
-
-### === GOLANG ===
-# brew install golang
-
-export GOPATH=$HOME/projects/go
-export PATH=$PATH:$HOME/.brew/opt/go/libexec/bin:$GOPATH/bin
 
 ### === JAVA - SDKMAN ===
 # curl -s https://get.sdkman.io | bash
@@ -157,27 +99,19 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --type f'
 
-### === SQLITE ===
-
-export PATH=$HOME/.brew/opt/sqlite/bin:$PATH
-
-# The following exports because of pyenv
-export LDFLAGS="-L$HOME/.brew/opt/zlib/lib -L$HOME/.brew/opt/sqlite/lib"
-export CPPFLAGS="-I$HOME/.brew/opt/zlib/include -I$HOME/.brew/opt/sqlite/include"
-
 ### === ITERM ===
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 ### === GOOGLE CLOUD SDK ===
-# Install Google Cloud SDK with The Installer, instead of brew
-# curl https://sdk.cloud.google.com | bash
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f "$HOME/.brew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/.brew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"; fi
+if [ -f "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc" ]; then . "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f "$HOME/.brew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/.brew/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"; fi
+if [ -f "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc" ]; then . "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"; fi
 
+# Kubectl autocompletion!
 eval "$(kubectl completion zsh)"
 
 # Uncomment the following when you turn on the performance test in the first line
