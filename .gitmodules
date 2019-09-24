@@ -27,4 +27,4 @@
 	url = https://github.com/zsh-users/zsh-completions
 [submodule "submodules/fonts/victor-mono"]
 	path = submodules/fonts/victor-mono
-	url = git@github.com:rubjo/victor-mono.git
+	url = https://github.com/rubjo/victor-mono.git
