@@ -67,26 +67,9 @@ alias markd="grip"
 [[ -s "$HOME/.alias" ]] && source ~/.alias
 
 ### === NODEJS ===
-# NodeJS support with NVM, nvm slows down initialization hence lazy loaded
-# git clone https://github.com/creationix/nvm ~/.nvm
-
-# The following few lines setup lazyloading for node global commands
-declare -a NODE_GLOBALS_NPM=(`find $HOME/.nvm/versions/node -maxdepth 3 -type l -wholename '*/bin/*'`)
-declare -a NODE_GLOBALS_YARN=(`find $HOME/.yarn/bin -maxdepth 3 -type l -wholename '*/bin/*'`)
-declare -a NODE_GLOBALS=(`echo ${NODE_GLOBALS_NPM} ${NODE_GLOBALS_YARN} | xargs -n1 basename | sort | uniq`)
-NODE_GLOBALS+=("node")
-NODE_GLOBALS+=("nvm")
-load_nvm () {
-    export NVM_DIR=~/.nvm
-    [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"
-    export NODE_PATH="$NVM_BIN"
-}
-for cmd in "${NODE_GLOBALS[@]}"; do
-    eval "${cmd}(){ unset -f ${NODE_GLOBALS}; load_nvm; ${cmd} \$@ }"
-done
-
-# Add yarn bin to PATH
-export PATH=$PATH:$HOME/.yarn/bin
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ### === JAVA - SDKMAN ===
 # curl -s https://get.sdkman.io | bash
