@@ -35,7 +35,7 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
-plugins=(gitfast git osx zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions kubectl yarn npm pyenv rbenv kubectl mvn go)
+plugins=(gitfast git osx zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions kubectl nvm yarn npm pyenv rbenv kubectl mvn go)
 autoload -U compinit && compinit
 
 source ${ZSH}/oh-my-zsh.sh
@@ -69,7 +69,6 @@ alias markd="grip"
 ### === NODEJS ===
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 ### === JAVA - SDKMAN ===
 # curl -s https://get.sdkman.io | bash
