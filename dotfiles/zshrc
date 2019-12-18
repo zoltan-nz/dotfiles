@@ -53,6 +53,7 @@ source ${ZSH_CUSTOM}/plugins/zsh-history-substring-search/zsh-history-substring-
 # alias zshconfig="vim $DOTFILES/dotfiles/zshrc"
 # alias vimconfig="vim $DOTFILES/dotfiles/vimrc"
 # alias of="lsof -nP +c 15 | grep LISTEN"
+alias ls="gls -lhaFG --almost-all --group-directories-first --color --no-group --human-readable --classify"
 
 alias c="clear"
 alias x="exit"
