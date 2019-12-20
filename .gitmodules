@@ -28,3 +28,6 @@
 [submodule "submodules/fonts/victor-mono"]
 	path = submodules/fonts/victor-mono
 	url = https://github.com/rubjo/victor-mono.git
+[submodule "submodules/zsh/custom/themes/pure"]
+	path = submodules/zsh/custom/themes/pure
+	url = https://github.com/sindresorhus/pure.git

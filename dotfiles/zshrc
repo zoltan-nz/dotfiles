@@ -15,7 +15,7 @@ DOTFILES=${DOTFILES:-$HOME/projects/dotfiles}
 export ZSH=$DOTFILES/submodules/zsh/oh-my-zsh
 export ZSH_CUSTOM=$DOTFILES/submodules/zsh/custom
 
-ZSH_THEME=${LOCAL_ZSH_THEME:-agnoster}
+# ZSH_THEME=${LOCAL_ZSH_THEME:-pure}
 HYPHEN_INSENSITIVE="true"
 DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
@@ -37,6 +37,11 @@ fi
 
 plugins=(gitfast git osx zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions kubectl nvm yarn npm pyenv rbenv kubectl mvn go)
 autoload -U compinit && compinit
+
+# Pure Prompt: https://github.com/sindresorhus/pure
+fpath+=("$ZSH_CUSTOM/themes/pure")
+autoload -U promptinit; promptinit
+prompt pure
 
 source ${ZSH}/oh-my-zsh.sh
 
