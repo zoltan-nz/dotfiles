@@ -20,3 +20,8 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[pull]
+	rebase = true
+[alias]
+	please = push --force-with-lease
+	graph = log --graph --all --decorat

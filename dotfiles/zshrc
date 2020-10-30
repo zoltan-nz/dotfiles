@@ -35,7 +35,7 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
-plugins=(gitfast git osx zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions kubectl nvm yarn npm pyenv rbenv kubectl mvn golang)
+plugins=(gitfast git osx zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions kubectl yarn npm pyenv rbenv kubectl mvn golang)
 autoload -U compinit && compinit
 
 # Pure Prompt: https://github.com/sindresorhus/pure
@@ -73,8 +73,13 @@ alias markd="grip"
 [[ -s "$HOME/.alias" ]] && source ~/.alias
 
 ### === NODEJS ===
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# OR: nvm
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# EITHER fnm, https://github.com/Schniz/fnm
+# brew install Schniz/tap/fnm
+eval "$(fnm env --multi)"
 
 ### === JAVA - SDKMAN ===
 # curl -s https://get.sdkman.io | bash
