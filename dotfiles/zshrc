@@ -79,7 +79,7 @@ alias markd="grip"
 
 # EITHER fnm, https://github.com/Schniz/fnm
 # brew install Schniz/tap/fnm
-eval "$(fnm env --multi)"
+eval "$(fnm env)"
 
 ### === JAVA - SDKMAN ===
 # curl -s https://get.sdkman.io | bash
