@@ -61,7 +61,7 @@ pbcopy < ~/.ssh/id_rsa.pub
 Install `fasd`, `mc`, `xz`, `rbenv`, `pyenv`, `go`, `htop`.
 
 ```
-brew install fasd mc xz rbenv pyenv go htop
+brew install fasd mc xz rbenv pyenv go htop coreutils
 ```
 
 ### Setup dotfiles in your home folder
