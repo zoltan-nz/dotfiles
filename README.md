@@ -9,11 +9,14 @@
     - [Setup dotfiles in your home folder](#setup-dotfiles-in-your-home-folder)
     - [Install fonts](#install-fonts)
     - [Install `fzf`](#install-fzf)
-    - [Install Python 3.8](#install-python-38)
-    - [Install Ruby 2.6.5](#install-ruby-265)
-    - [Install Node.js with .nvm](#install-nodejs-with-nvm)
-    - [Install SDK-MAN for Java support](#install-sdk-man-for-java-support)
-    - [Setup Shell Session Limits on Mac](#setup-shell-session-limits-on-mac)
+    - [Language support](#language-support)
+      - [Install Python](#install-python)
+      - [Install Ruby](#install-ruby)
+      - [Install Rust](#install-rust)
+      - [Install Node.js with fnm](#install-nodejs-with-fnm)
+      - [Install Deno](#install-deno)
+      - [Install SDK-MAN for Java support](#install-sdk-man-for-java-support)
+      - [Setup Shell Session Limits on Mac](#setup-shell-session-limits-on-mac)
     - [Optional setup](#optional-setup)
       - [Use `diff-so-fancy` for formatting `git diff` output](#use-diff-so-fancy-for-formatting-git-diff-output)
       - [DNSMasq and loopalias](#dnsmasq-and-loopalias)
@@ -58,10 +61,10 @@ pbcopy < ~/.ssh/id_rsa.pub
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-Install `fasd`, `mc`, `xz`, `rbenv`, `pyenv`, `go`, `htop`.
+Install `fasd`, `mc`, `xz`, `rbenv`, `pyenv`, `go`, `htop`, `coreutils`, `fnm`
 
 ```
-brew install fasd mc xz rbenv pyenv go htop coreutils
+brew install fasd mc xz rbenv pyenv go htop coreutils fnm
 ```
 
 ### Setup dotfiles in your home folder
@@ -104,11 +107,14 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
 ```
 
-### Install Python 3.8
+### Language support
+
+#### Install Python
 
 ```bash
 pyenv install --list
-pyenv install 3.8.0
+pyenv install 3.9.0
+pyenv global 3.9.0
 pip install --upgrade pip
 pip install pipenv poetry grip
 ```
@@ -117,26 +123,51 @@ pip install pipenv poetry grip
 - [Poetry](https://poetry.eustace.io/)
 - [Grip](https://github.com/joeyespo/grip)
 
-### Install Ruby 2.6.5
+#### Install Ruby
 
 ```bash
 rbenv install --list
-rbenv install 2.6.5
+rbenv install 3.0.0
+rbenv global 3.0.0
 ```
 
-### Install Node.js with .nvm
+#### Install Rust
+
+- [Rust installation](https://doc.rust-lang.org/book/ch01-01-installation.html)
+
+```
+curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
+```
+
+#### Install Node.js with fnm
 
 Follow the best tutorial about [Installing Node.js with Yarn](https://yoember.com/nodejs/the-best-way-to-install-node-js-with-yarn/).
 
-### Install SDK-MAN for Java support
+```
+fnm list-remote
+fnm install 15.5.0
+fnm use 15.5.0
+fnm default 15.5.0
+```
+
+#### Install Deno
+
+- [Deno installation](https://deno.land/manual/getting_started/installation)
+
+```
+cargo install deno
+```
+
+#### Install SDK-MAN for Java support
 
 <https://sdkman.io/>
 
 ```bash
 curl -s https://get.sdkman.io | zsh
+sdk install java 15.0.1.j9-adpt
 ```
 
-### Setup Shell Session Limits on Mac
+#### Setup Shell Session Limits on Mac
 
 - Source: [Shell Session Limit - Stackoverflow](https://unix.stackexchange.com/questions/108174/how-to-persistently-control-maximum-system-resource-consumption-on-mac?answertab=votes#tab-top)
 - Temporary solution is using `ulimit`.
