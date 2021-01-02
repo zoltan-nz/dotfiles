@@ -20,7 +20,6 @@
     - [Optional setup](#optional-setup)
       - [Use `diff-so-fancy` for formatting `git diff` output](#use-diff-so-fancy-for-formatting-git-diff-output)
       - [DNSMasq and loopalias](#dnsmasq-and-loopalias)
-      - [Google Cloud SDK](#google-cloud-sdk)
   - [Ubuntu specific setup](#ubuntu-specific-setup)
   - [Notes](#notes)
     - [macOS startup folders](#macos-startup-folders)
@@ -212,12 +211,6 @@ yarn global add diff-so-fancy && git config --global core.pager "diff-so-fancy |
 #### DNSMasq and loopalias
 
 DNSMasq and loopalias in more detail: https://github.com/zoltan-nz/playing-with-gitlab#setup-dnsmasq-with-loopback-alias
-
-#### Google Cloud SDK
-
-```bash
-brew cask install google-cloud-sdk
-```
 
 ## Ubuntu specific setup
 
