@@ -30,6 +30,9 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 # fasd - https://github.com/clvv/fasd
 # !!!! Don't forget to run `rm ~/.zcompdump*` sometimes... ;)
 
+# Realistic git branch autocompletion
+export GIT_COMPLETION_CHECKOUT_NO_GUESS=1
+
 # Import completion functions from brew packages
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
@@ -115,3 +118,4 @@ if [ -f "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/comp
 
 # Uncomment the following when you turn on the performance test in the first line
 # zprof
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
