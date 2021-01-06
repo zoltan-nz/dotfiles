@@ -31,3 +31,6 @@
 [submodule "submodules/zsh/custom/themes/pure"]
 	path = submodules/zsh/custom/themes/pure
 	url = https://github.com/sindresorhus/pure.git
+[submodule "submodules/zsh/custom/plugins/zsh-lerna"]
+	path = submodules/zsh/custom/plugins/zsh-lerna
+	url = https://github.com/favware/zsh-lerna
