@@ -38,7 +38,9 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
-plugins=(gitfast git macos zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions yarn npm pyenv rbenv mvn golang zsh-lerna kubectl rustup)
+fpath+=("$DOTFILES/submodules/zsh/custom/plugins")
+
+plugins=(gitfast git macos zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions yarn npm pyenv rbenv mvn golang zsh-lerna kubectl rustup cargo)
 autoload -U compinit && compinit
 
 # Pure Prompt: https://github.com/sindresorhus/pure
@@ -67,10 +69,12 @@ alias c="clear"
 alias x="exit"
 alias n="node -v"
 alias y="yarn"
-alias nr="npm run"
 
 # Install grip with `pip install grip`
 alias markd="grip"
+
+# Get my ip
+alias myip="curl ifconfig.me"
 
 # Load local alias file if exists
 [[ -s "$HOME/.alias" ]] && source ~/.alias
