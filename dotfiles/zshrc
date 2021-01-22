@@ -40,7 +40,7 @@ fi
 
 fpath+=("$DOTFILES/submodules/zsh/custom/plugins")
 
-plugins=(gitfast git macos zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions yarn npm pyenv rbenv mvn golang zsh-lerna kubectl rustup cargo)
+plugins=(gitfast git macos zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions yarn npm pyenv rbenv mvn golang zsh-lerna kubectl rust)
 autoload -U compinit && compinit
 
 # Pure Prompt: https://github.com/sindresorhus/pure
