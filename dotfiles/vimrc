@@ -24,6 +24,7 @@ noremap <Leader>s :update<CR>
 
 " Color - sensible implements
 syntax enable
+set synmaxcol=1024 " Speed up huge files
 set background=dark
 let g:solarized_termcolors=256 " Need this for iTerm, otherwise colors would be mixed
 " colorscheme Tomorrow-Night
