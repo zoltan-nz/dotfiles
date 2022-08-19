@@ -33,6 +33,9 @@ ZSH_AUTOSUGGEST_STRATEGY="match_prev_cmd"
 # Realistic git branch autocompletion
 export GIT_COMPLETION_CHECKOUT_NO_GUESS=1
 
+# Brew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Import completion functions from brew packages
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
