@@ -43,7 +43,7 @@ fi
 
 fpath+=("$DOTFILES/submodules/zsh/custom/plugins")
 
-plugins=(gitfast git macos zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions yarn npm pyenv rbenv mvn golang zsh-lerna rust tmux)
+plugins=(gitfast git macos zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions yarn npm pyenv rbenv mvn golang zsh-lerna rust tmux terraform kubectl)
 autoload -U compinit && compinit
 
 # Pure Prompt: https://github.com/sindresorhus/pure
@@ -85,13 +85,14 @@ alias myip="curl ifconfig.me"
 # For Node.js environment management install
 # fnm, https://github.com/Schniz/fnm
 # brew install fnm
-eval "$(fnm env --use-on-cd)"
+# eval "$(fnm env --use-on-cd)"
+eval "$(fnm env)"
 
 ### === JAVA - SDKMAN ===
 # curl -s https://get.sdkman.io | bash
 
-# export SDKMAN_DIR="$HOME/.sdkman"
-# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 ### === PYTHON ===
 export PYENV_ROOT="$HOME/.pyenv"
