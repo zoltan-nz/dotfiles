@@ -43,6 +43,11 @@ fi
 
 fpath+=("$DOTFILES/submodules/zsh/custom/plugins")
 
+### === PYTHON ===
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
 plugins=(gitfast git macos zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions yarn npm pyenv rbenv mvn golang zsh-lerna rust tmux terraform kubectl)
 autoload -U compinit && compinit
 
@@ -93,11 +98,6 @@ eval "$(fnm env)"
 
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-### === PYTHON ===
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
 
 # Setup PYTHON env variable for node-gyp
 command -v pyenv >/dev/null 2>&1 && export PYTHON="$(pyenv which python)" && export NODE_GYP_FORCE_PYTHON=${PYTHON}
