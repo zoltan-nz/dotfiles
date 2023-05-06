@@ -31,7 +31,7 @@
 - [`Chrome`](https://www.google.com/chrome/)
 - [`JetBrains ToolBox`](https://www.jetbrains.com/toolbox-app/)
 - [`Visual Studio Code`](https://code.visualstudio.com/)
-- [`Spectacle`](https://www.spectacleapp.com/)
+- [`Rectangle`](https://rectangleapp.com/)
 - [`iTerm2`](https://www.iterm2.com/)
 - [`XCode`](https://apps.apple.com/us/app/xcode/id497799835?mt=12)
 
@@ -60,10 +60,10 @@ pbcopy < ~/.ssh/id_rsa.pub
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-Install `fasd`, `mc`, `xz`, `rbenv`, `pyenv`, `go`, `htop`, `coreutils`, `fnm`
+Install `fasd`, `mc`, `xz`, `rbenv`, `pyenv`, `go`, `htop`, `coreutils`, `fnm`, `fsf`, `tmux`
 
 ```
-brew install fasd mc xz rbenv pyenv go htop coreutils fnm
+brew install fasd mc xz rbenv pyenv go htop coreutils fnm fsf tmux
 ```
 
 ### Setup dotfiles in your home folder

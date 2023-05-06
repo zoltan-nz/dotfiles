@@ -77,6 +77,7 @@ alias c="clear"
 alias x="exit"
 alias n="node -v"
 alias y="yarn"
+alias p="pnpm"
 
 # Install grip with `pip install grip`
 alias markd="grip"
@@ -90,8 +91,8 @@ alias myip="curl ifconfig.me"
 # For Node.js environment management install
 # fnm, https://github.com/Schniz/fnm
 # brew install fnm
-# eval "$(fnm env --use-on-cd)"
-eval "$(fnm env)"
+eval "$(fnm env --use-on-cd)"
+# eval "$(fnm env)"
 
 ### === JAVA - SDKMAN ===
 # curl -s https://get.sdkman.io | bash
@@ -127,3 +128,18 @@ export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
 
 # Uncomment the following when you turn on the performance test in the first line
 # zprof
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# asdf
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+# Github Copilot Alias
+eval "$(github-copilot-cli alias -- "$0")"
