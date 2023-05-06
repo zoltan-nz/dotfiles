@@ -200,6 +200,12 @@ EOF
 
 ### Optional setup
 
+#### Fix holding down a key not repeating problem in macOS
+
+```bash
+defaults write -g ApplePressAndHoldEnabled -bool false
+```
+
 #### Use `diff-so-fancy` for formatting `git diff` output
 
 [Diff So Fancy repository](https://github.com/so-fancy/diff-so-fancy)
