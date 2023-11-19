@@ -48,7 +48,7 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-plugins=(gitfast git macos zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions yarn npm pyenv rbenv mvn golang zsh-lerna rust tmux terraform kubectl)
+plugins=(gitfast git macos zsh-autosuggestions fzf z fasd docker docker-compose zsh-completions yarn npm pyenv rbenv mvn golang rust tmux terraform kubectl rails rake aws zsh-sdkman gradle)
 autoload -U compinit && compinit
 
 # Pure Prompt: https://github.com/sindresorhus/pure
@@ -88,6 +88,9 @@ alias myip="curl ifconfig.me"
 # Load local alias file if exists
 [[ -s "$HOME/.alias" ]] && source ~/.alias
 
+# asdf
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
 # For Node.js environment management install
 # fnm, https://github.com/Schniz/fnm
 # brew install fnm
@@ -102,6 +105,11 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # Setup PYTHON env variable for node-gyp
 command -v pyenv >/dev/null 2>&1 && export PYTHON="$(pyenv which python)" && export NODE_GYP_FORCE_PYTHON=${PYTHON}
+
+### === ERLANG ===
+# brew install wget
+# Clone and run https://github.com/robisonsantos/evm
+source /Users/zoltan/.evm/scripts/evm
 
 ### === FZF ===
 
@@ -138,8 +146,10 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# asdf
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # Github Copilot Alias
 eval "$(github-copilot-cli alias -- "$0")"
+
+# brew install direnv
+eval "$(direnv hook zsh)"
+

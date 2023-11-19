@@ -34,3 +34,6 @@
 [submodule "submodules/zsh/custom/plugins/zsh-lerna"]
 	path = submodules/zsh/custom/plugins/zsh-lerna
 	url = https://github.com/favware/zsh-lerna
+[submodule "submodules/zsh/custom/plugins/zsh-sdkman"]
+	path = submodules/zsh/custom/plugins/zsh-sdkman
+	url = https://github.com/matthieusb/zsh-sdkman.git

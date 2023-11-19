@@ -60,10 +60,12 @@ pbcopy < ~/.ssh/id_rsa.pub
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-Install `fasd`, `mc`, `xz`, `rbenv`, `pyenv`, `go`, `htop`, `coreutils`, `fnm`, `fsf`, `tmux`
+Install `fasd`, `mc`, `xz`, `rbenv`, `pyenv`, `go`, `htop`, `coreutils`, `fnm`, `fsf`, `tmux`, `direnv`
 
 ```
-brew install fasd mc xz rbenv pyenv go htop coreutils fnm fsf tmux
+brew install fasd mc xz rbenv pyenv go htop coreutils fnm fsf tmux direnv
+brew tap homebrew/cask-fonts
+brew install --cask font-victor-mono
 ```
 
 ### Setup dotfiles in your home folder
