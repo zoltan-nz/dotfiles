@@ -402,3 +402,4 @@ endif
 " Record macro: qa -> record in register 'a', finish with type q again.
 " Repeate macro: @a
 
+set rtp+=/opt/homebrew/opt/fzf
