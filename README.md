@@ -60,10 +60,10 @@ pbcopy < ~/.ssh/id_rsa.pub
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 ```
 
-Install `fasd`, `mc`, `xz`, `rbenv`, `pyenv`, `go`, `htop`, `coreutils`, `fnm`, `fsf`, `tmux`, `direnv`
+Install `mc`, `xz`, `rbenv`, `pyenv`, `go`, `htop`, `coreutils`, `fnm`, `fsf`, `tmux`, `direnv`, `zoxide`
 
 ```
-brew install fasd mc xz rbenv pyenv go htop coreutils fnm fsf tmux direnv
+brew install mc xz rbenv pyenv go htop coreutils fnm fsf tmux direnv zoxide
 brew tap homebrew/cask-fonts
 brew install --cask font-victor-mono
 ```
@@ -95,6 +95,14 @@ cp ~/projects/dotfiles/dotfiles/zshrc.local.template ~/.zshrc.local
 
 Zsh is the default shell in macOS Catalina, so this step can be skipped. In previous macOS versions change the default shell to `/bin/zsh` manually. System Preferences > Users and Groups > Authenticate > Right click on user name > Advance Options. Change the login shell to `/bin/zsh`.
 
+### Install zoxide
+
+Zoxide is for replacing `fasd`.
+
+```bash
+brew install zoxide
+```
+
 ### Install fonts
 
 Drag and drop fonts files in Font Book.
@@ -112,17 +120,17 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 #### Install Python
 
-```bash
-pyenv install --list
-pyenv install 3.9.0
-pyenv global 3.9.0
-pip install --upgrade pip
-pip install pipenv poetry grip
+Use `uv`
+
+https://docs.astral.sh/uv/getting-started/installation/
+
+```
+curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-- [Pipenv](https://pipenv.kennethreitz.org/en/latest/)
-- [Poetry](https://poetry.eustace.io/)
-- [Grip](https://github.com/joeyespo/grip)
+```
+uv python install
+```
 
 #### Install Ruby
 
