@@ -54,18 +54,11 @@ echo ".idea\n.DS_Store\nnode_modules" > ~/.gitignore
 pbcopy < ~/.ssh/id_rsa.pub
 ```
 
-### Install brew and additional packages
+### Install brew and mise
 
 ```bash
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-```
-
-Install `mc`, `xz`, `rbenv`, `pyenv`, `go`, `htop`, `coreutils`, `fnm`, `fsf`, `tmux`, `direnv`, `zoxide`
-
-```
-brew install mc xz rbenv pyenv go htop coreutils fnm fsf tmux direnv zoxide
-brew tap homebrew/cask-fonts
-brew install --cask font-victor-mono
+brew install mise htop font-victor-mono
 ```
 
 ### Setup dotfiles in your home folder
@@ -95,85 +88,25 @@ cp ~/projects/dotfiles/dotfiles/zshrc.local.template ~/.zshrc.local
 
 Zsh is the default shell in macOS Catalina, so this step can be skipped. In previous macOS versions change the default shell to `/bin/zsh` manually. System Preferences > Users and Groups > Authenticate > Right click on user name > Advance Options. Change the login shell to `/bin/zsh`.
 
-### Install zoxide
-
-Zoxide is for replacing `fasd`.
-
-```bash
-brew install zoxide
-```
-
 ### Install fonts
 
 Drag and drop fonts files in Font Book.
 
-### Install `fzf`
-
-What is `fzf`? [A command-line fuzzy finder](https://github.com/junegunn/fzf).
-
-```bash
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
-```
-
 ### Language support
 
-#### Install Python
+Use `brew` to install `mise`, and with `mise` we can install all the tools and languages.
 
-Use `uv`
-
-https://docs.astral.sh/uv/getting-started/installation/
+### Mise
 
 ```
-curl -LsSf https://astral.sh/uv/install.sh | sh
+brew install mise
 ```
 
-```
-uv python install
-```
-
-#### Install Ruby
-
-```bash
-rbenv install --list
-rbenv install 3.0.0
-rbenv global 3.0.0
-```
-
-#### Install Rust
-
-- [Rust installation](https://doc.rust-lang.org/book/ch01-01-installation.html)
+Install latest language support:
 
 ```
-curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
-```
-
-#### Install Node.js with fnm
-
-Follow the best tutorial about [Installing Node.js with Yarn](https://yoember.com/nodejs/the-best-way-to-install-node-js-with-yarn/).
-
-```
-fnm list-remote
-fnm install 15.5.0
-fnm use 15.5.0
-fnm default 15.5.0
-```
-
-#### Install Deno
-
-- [Deno installation](https://deno.land/manual/getting_started/installation)
-
-```
-cargo install deno
-```
-
-#### Install SDK-MAN for Java support
-
-<https://sdkman.io/>
-
-```bash
-curl -s https://get.sdkman.io | zsh
-sdk install java 15.0.1.j9-adpt
+mise install fzf go java node pnpm python rust zoxide uv
+mise use -g fzf go java node pnpm python rust zoxide uv
 ```
 
 #### Setup Shell Session Limits on Mac

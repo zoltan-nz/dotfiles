@@ -43,15 +43,7 @@ fi
 
 fpath+=("$DOTFILES/submodules/zsh/custom/plugins")
 
-### === PYTHON ===
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-
-### === RUBY ===
-eval "$(rbenv init - zsh)"
-
-plugins=(gitfast git macos zsh-autosuggestions fzf z fasd zsh-completions yarn npm pyenv virtualenv rbenv mvn golang rust tmux terraform kubectl rails rake aws zsh-sdkman gradle asdf)
+plugins=(gitfast git macos zsh-autosuggestions z zsh-completions yarn npm virtualenv mvn golang rust terraform kubectl rails rake aws zsh-sdkman gradle mise fzf)
 autoload -U compinit && compinit
 
 # Pure Prompt: https://github.com/sindresorhus/pure
@@ -95,32 +87,6 @@ alias myip="curl ifconfig.me"
 # Load local alias file if exists
 [[ -s "$HOME/.alias" ]] && source ~/.alias
 
-
-# For Node.js environment management install
-# fnm, https://github.com/Schniz/fnm
-# brew install fnm
-eval "$(fnm env --use-on-cd)"
-# eval "$(fnm env)"
-
-### === JAVA - SDKMAN ===
-# curl -s https://get.sdkman.io | bash
-
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# Setup PYTHON env variable for node-gyp
-command -v pyenv >/dev/null 2>&1 && export PYTHON="$(pyenv which python)" && export NODE_GYP_FORCE_PYTHON=${PYTHON}
-
-### === ERLANG ===
-# brew install wget
-# Clone and run https://github.com/robisonsantos/evm
-source /Users/zoltan/.evm/scripts/evm
-
-### === FZF ===
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export FZF_DEFAULT_COMMAND='fd --type f'
-
 ### === ITERM ===
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -136,11 +102,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # Kubectl autocompletion!
 # eval "$(kubectl completion zsh)"
 
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export PATH="/opt/homebrew/opt/sqlite/bin:$PATH"
-
-# Uncomment the following when you turn on the performance test in the first line
-# zprof
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # pnpm
@@ -151,15 +113,9 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# Uncomment the following when you turn on the performance test in the first line
+# zprof
+eval "$(mise activate zsh)"
 
-# brew install direnv
-eval "$(direnv hook zsh)"
-
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status virtualenv)
-
-eval "$(github-copilot-cli alias -- "??")"
-source /Users/zoltan/.evm/scripts/evm
-test -s "$HOME/.kiex/scripts/kiex" && source "$HOME/.kiex/scripts/kiex"
-
-
-. "$HOME/.local/bin/env"
+# Zoxide
+eval "$(zoxide init zsh)"
